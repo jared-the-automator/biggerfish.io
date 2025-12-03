@@ -110,6 +110,7 @@ ul {
 .navbar-brand {
   color: var(--white);
   display: flex;
+  align-items: center;
 }
 
 .nav-menu {
