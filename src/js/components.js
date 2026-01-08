@@ -15,10 +15,15 @@ function initializeHeader() {
             const targetId = this.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Use precise window scrolling to avoid snap alignment quirks
+                const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                const headerOffset = 0; // Adjust if header becomes sticky/fixed in future
+
+                window.scrollTo({
+                    top: elementPosition - headerOffset,
+                    behavior: 'smooth'
                 });
+
                 // Optional: Update URL without jumping
                 history.pushState(null, null, '#' + targetId);
             }
