@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Overview: The Outcome Engineer | Bigger Fish</title>
+</head>
+
+<body class="blueprint-grid">
+    <div id="header-container"></div>
+
+    <main class="system-overview-container">
+        <!-- Page Header -->
+        <header class="overview-header">
+            <h1>SYSTEM OVERVIEW: THE OUTCOME ENGINEER</h1>
+            <p class="subhead">Concept & Logic Brief</p>
+        </header>
+
+        <!-- Section 1: The Value Proposition -->
+        <section class="overview-section">
+            <h2>1. The Plain English Value: Why do I need this?</h2>
+            <p>The most common question we get is, "My reservation platform already collects feedback. Why is this
+                better?"</p>
+            <p style="margin-top: 1rem;">The answer is simple: <strong>Traffic.</strong></p>
+            <p style="margin-top: 1rem;">When a guest searches for a place to eat, they use Google, not a reservation
+                app. A 5-star review inside OpenTable or Resy is invisible to that search traffic—it helps the platform,
+                not you.</p>
+            <p style="margin-top: 1rem;"><strong>The Risk:</strong> A single 1-star review acts as a massive drag on
+                your rating. Mathematically, it often takes twelve 5-star reviews to neutralize the average damage of
+                one 1-star review.</p>
+            <p style="margin-top: 1rem;"><strong>The Solution:</strong> This system filters the stream. It pushes your
+                happy guests to Google (where they drive revenue) and diverts unhappy guests to a private channel (where
+                you can fix the problem).</p>
+        </section>
+
+        <!-- Section 2: The Workflow -->
+        <section class="overview-section">
+            <h2>2. The Workflow</h2>
+            <img src="./images/outcome_engineer.webp" alt="Workflow Logic Diagram" class="workflow-image">
+            <p>The system operates in the background. If using the real-time tier, the only staff action required is the
+                standard operational step of closing the table in the terminal.</p>
+
+            <ul class="workflow-steps-list">
+                <li><strong>Step 1 (The Trigger):</strong> The guest departs.</li>
+                <li><strong>Step 2 (The Contact):</strong> The system sends a plain-text, personal email from the GM
+                    asking: "Did you enjoy your experience with us?"</li>
+                <li><strong>Step 3 (The Filter):</strong><br>
+                    <span style="display: block; margin-top: 0.5rem; padding-left: 1rem;">
+                        <a href="#" style="color: #9FFCDF; text-decoration: none;">Link A (Positive):</a> "Yes" clicks
+                        redirect to Google Reviews (Public).<br>
+                        <a href="#" style="color: #9FFCDF; text-decoration: none;">Link B (Negative):</a> "No" clicks
+                        redirect to a Private Feedback Form (Management Alert).
+                    </span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 3: Ingestion Tiers & Pricing -->
+        <section class="overview-section">
+            <h2>3. Ingestion Tiers & Pricing</h2>
+            <div class="pricing-cards-grid">
+                <!-- Card A -->
+                <div class="pricing-card">
+                    <h3>Option A: Real-Time Ingestion (The Standard)</h3>
+                    <span class="pricing-cost">$0.10 / reservation</span>
+                    <p class="pricing-details"><strong>Best for:</strong> SevenRooms, Toast, Tock.
+                        <strong>Mechanism:</strong> Direct API / Webhook.
+                        <strong>Speed:</strong> Instant (Immediate deployment upon table close).
+                    </p>
+                </div>
+                <!-- Card B -->
+                <div class="pricing-card">
+                    <h3>Option B: Universal Ingestion (The Bridge)</h3>
+                    <span class="pricing-cost">$0.06 / reservation</span>
+                    <p class="pricing-details"><strong>Best for:</strong> Resy, Basic OpenTable, Legacy POS.
+                        <strong>Mechanism:</strong> Proprietary Email Parsing.
+                        <strong>Speed:</strong> Next Day (Deployed the morning following the visit).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Visibility & Billing -->
+        <section class="overview-section">
+            <h2>4. Visibility & Billing Logic</h2>
+            <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                <li style="margin-bottom: 1rem;"><strong>The Sentiment Dashboard:</strong> We deploy a live Google
+                    Looker Studio Dashboard that tracks your sentiment trends, feedback volume, and 'save rate'
+                    (negative reviews caught before they went public).</li>
+                <li style="margin-bottom: 1rem;"><strong>Usage-Based:</strong> You are only billed for reservations
+                    processed by the system.</li>
+                <li style="margin-bottom: 1rem;"><strong>Walk-Ins:</strong> Walk-in guests are not billed unless your
+                    staff captures their email address and attaches it to a profile.</li>
+                <li><strong>Non-Responsive Guests:</strong> The usage fee applies to every reservation processed with a
+                    valid email. The cost covers the digital work required to ingest, parse, and verify data.</li>
+            </ul>
+        </section>
+
+        <!-- Section 5: Implementation -->
+        <section class="overview-section">
+            <h2>5. Implementation Fees & Timeline</h2>
+            <p><strong>Fee:</strong> $599.00 (One-time). Covers architecture setup, domain authentication, dashboard
+                build, and logic configuration.</p>
+            <p style="margin-top: 1rem;"><strong>Timeline (48 Hours):</strong><br>
+                Day 1: System access & domain authentication.<br>
+                Day 2: Logic test and Go Live.</p>
+        </section>
+
+        <!-- Final CTA -->
+        <div class="overview-cta">
+            <a href="https://calendar.app.google/YRT8AaYAMYoTmQ2w9" class="cta-engineer"
+                style="background: #9FFCDF; color: #000; border: none; font-weight: bold; padding: 1.2rem 3rem; border-radius: 4px; text-decoration: none; text-transform: uppercase; font-size: 1.25rem;">BOOK
+                DEPLOYMENT CALL</a>
+        </div>
+
+    </main>
+
+    <div id="footer-container"></div>
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

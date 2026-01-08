@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal | Bigger Fish</title>
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/jareds-radical-site-fc1a91.webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Specific Styles for Login Page */
+        body.blueprint-grid {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(31, 39, 27, 0.95);
+            border: 1px solid #1C6E8C;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(28, 110, 140, 0.2);
+            padding: 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-header h1 {
+            color: #FFFFFF;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .login-header p {
+            color: #64748B;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: #94A3B8;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #0F172A;
+            border: 1px solid #334155;
+            color: #FFFFFF;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #1C6E8C;
+        }
+
+        .auth-button {
+            width: 100%;
+            background: #9FFCDF;
+            color: #1F271B;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .auth-button:hover {
+            opacity: 0.9;
+        }
+
+        .auth-button:disabled {
+            background: #475569;
+            color: #94A3B8;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #EF4444;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            min-height: 1.35em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+        }
+
+        .forgot-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: #64748B;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: #94A3B8;
+        }
+    </style>
+</head>
+
+<body class="blueprint-grid">
+
+    <div id="header-container"></div>
+
+    <main class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>CLIENT DOCK</h1>
+                <p>Welcome aboard.</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleAuth(event)">
+                <div class="form-group">
+                    <label class="form-label">Client ID</label>
+                    <input type="text" class="form-input" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Access Key</label>
+                    <input type="password" class="form-input" required autocomplete="off">
+                </div>
+
+                <button type="submit" id="authButton" class="auth-button">AUTHENTICATE</button>
+            </form>
+
+            <div id="errorMessage" class="error-message">Access denied. Invalid credentials.</div>
+
+            <a href="#" class="forgot-link">Forgot Credentials?</a>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67339475dd12184feaa4384a"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script type="module" src="./main.js"></script>
+    <script>
+        function handleAuth(event) {
+            event.preventDefault();
+
+            const btn = document.getElementById('authButton');
+            const errorMsg = document.getElementById('errorMessage');
+
+            // Reset state
+            errorMsg.classList.remove('visible');
+
+            // Loading state
+            btn.innerText = "VERIFYING...";
+            btn.disabled = true;
+
+            // Simulate API latency
+            setTimeout(() => {
+                // Show Error
+                errorMsg.innerText = "Access denied. Invalid credentials.";
+                errorMsg.classList.add('visible');
+
+                // Reset Button
+                btn.innerText = "AUTHENTICATE";
+                btn.disabled = false;
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

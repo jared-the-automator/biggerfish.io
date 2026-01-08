@@ -1,0 +1,30 @@
+nohup: ignoring input
+
+> biggerfish-website@1.0.0 dev
+> vite
+
+Re-optimizing dependencies because lockfile has changed
+
+  VITE v5.4.19  ready in 1073 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+7:17:30 AM [vite] page reload diagnostic-tool.html
+7:18:59 AM [vite] page reload diagnostic-tool.html
+7:26:48 AM [vite] page reload diagnostic-tool.html
+7:45:10 AM [vite] page reload diagnostic-tool.html
+7:45:21 AM [vite] page reload diagnostic-tool.html
+7:45:41 AM [vite] page reload diagnostic-tool.html
+8:00:20 AM [vite] vite.config.js changed, restarting server...
+8:00:20 AM [vite] server restarted.
+8:00:29 AM [vite] page reload diagnostic-tool.html
+nohup: ignoring input
+
+> biggerfish-website@1.0.0 dev
+> vite
+
+
+  VITE v5.4.19  ready in 312 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
