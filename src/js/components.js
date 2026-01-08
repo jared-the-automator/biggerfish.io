@@ -1,5 +1,11 @@
 // Component loader for header and footer
 document.addEventListener('DOMContentLoaded', function () {
+    // Force scroll to top on refresh
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Header logic (dropdowns, scrolling)
     initializeHeader();
 });
