@@ -5,10 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Overview: The Outcome Engineer | Bigger Fish</title>
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/jareds-radical-site-fc1a91.webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body class="blueprint-grid">
-    <div id="header-container"></div>
+    <nav class="header">
+        <a href="index.html" class="header-brand">
+            <img src="images/biggerfish-logo.png" loading="lazy" width="40" alt="Bigger Fish Logo" class="brand-logo">
+            <div class="brand-text">
+                <div class="brand-name">Bigger Fish Intelligent Automation</div>
+            </div>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html#why" class="nav-link">Why?</a></li>
+            <li><a href="index.html#how" class="nav-link">How</a></li>
+            <li class="nav-item-dropdown">
+                <a href="index.html#what" class="nav-link">What</a>
+                <div class="nav-dropdown-content">
+                    <a href="index.html#what" class="dropdown-link">Custom Web Applications</a>
+                    <a href="outcome-engineer.html" class="dropdown-link outcome">Outcome Engineer</a>
+                </div>
+            </li>
+            <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
+                    rel="noopener noreferrer">When?</a></li>
+        </ul>
+    </nav>
 
     <main class="system-overview-container">
         <!-- Page Header -->
@@ -116,7 +141,24 @@
 
     </main>
 
-    <div id="footer-container"></div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-company">Bigger Fish Intelligent Automation</div>
+                <div class="footer-tagline">Smart Systems for Hard Work</div>
+            </div>
+            <div class="footer-links">
+                <a href="login.html" class="footer-link">Client Login</a>
+                <span class="footer-separator">|</span>
+                <a href="privacy-policy.html" class="footer-link">Privacy</a>
+                <span class="footer-separator">|</span>
+                <a href="terms-conditions.html" class="footer-link">Terms</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            Copyright © 2025 Bigger Fish Intelligent Automation
+        </div>
+    </footer>
     <script type="module" src="./main.js"></script>
 </body>
 
