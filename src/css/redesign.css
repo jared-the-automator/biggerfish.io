@@ -8,18 +8,20 @@
     --white: #FFFFFF;
 }
 
-/* Snap Scroll Container */
+/* Snap Scroll Container - Renamed to Main Container logic but keeping class for back-compat */
 .snap-container {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    /* height: 100vh;  Removed to allow natural document flow */
+    /* overflow-y: scroll; Removed */
+    /* scroll-snap-type: y mandatory; Removed */
     scroll-behavior: smooth;
+    min-height: 100vh;
 }
 
 .snap-section {
     min-height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    /* Keep full height sections for visual impact */
+    /* scroll-snap-align: start; Removed */
+    /* scroll-snap-stop: always; Removed */
     display: flex;
     flex-direction: column;
     justify-content: center;
