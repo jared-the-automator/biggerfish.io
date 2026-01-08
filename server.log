@@ -1,0 +1,33 @@
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (14) from ../../.env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Server running on port 3000
+Test API: http://localhost:3000/api/get-blueprint?recordId=...
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (14) from ../../.env -- tip: ⚙️  enable debug logging with { debug: true }
+Server running on port 3000
+Test API: http://localhost:3000/api/get-blueprint?recordId=...
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+Server running on port 3000
+Test API: http://localhost:3000/api/get-blueprint?recordId=...
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+Server running on port 3000
+Test API: http://localhost:3000/api/get-blueprint?recordId=...
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+Server running on port 3000
+Test API: http://localhost:3000/api/get-blueprint?recordId=...
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: ⚙️  enable debug logging with { debug: true }
+Server running on port 3001
+Test API: http://localhost:3001/api/get-blueprint?recordId=...
+[Request] POST /api/verify-passcode
+[Auth] Received: '123456' | Expected: '123456'
+[Request] POST /api/save-blueprint
+nohup: ignoring input
+[dotenv@17.2.3] injecting env (0) from ../../../../.env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+Server running on port 3001
+Test API: http://localhost:3001/api/get-blueprint?recordId=...

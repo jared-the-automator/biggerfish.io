@@ -1,12 +1,12 @@
+import { glob } from 'glob';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import { glob } from 'glob';
 
 // Automatically find all HTML files in the src directory
 const htmlFiles = glob.sync('src/*.html').reduce((acc, file) => {
-    const name = file.split('/').pop().split('.').shift();
-    acc[name] = resolve(__dirname, file);
-    return acc;
+  const name = file.split('/').pop().split('.').shift();
+  acc[name] = resolve(__dirname, file);
+  return acc;
 }, {});
 
 export default defineConfig({
@@ -18,4 +18,9 @@ export default defineConfig({
       input: htmlFiles, // Tell Vite to process all of your HTML pages
     },
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:3001'
+    }
+  }
 });

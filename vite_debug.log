@@ -1,0 +1,28 @@
+nohup: ignoring input
+
+> biggerfish-website@1.0.0 dev
+> vite
+
+
+  VITE v5.4.19  ready in 774 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+8:05:17 PM [vite] page reload index.html
+8:35:10 PM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+8:35:30 PM [vite] page reload js/components.js
+8:41:07 PM [vite] page reload index.html
+8:41:19 PM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+8:45:10 PM [vite] page reload index.html
+8:45:24 PM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+8:56:21 PM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+7:43:50 AM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+7:44:14 AM [vite] page reload privacy-policy.html
+7:44:24 AM [vite] page reload terms-conditions.html
+7:44:39 AM [vite] page reload outcome-engineer.html
+8:30:58 AM [vite] hmr update /css/redesign.css, /css/redesign.css?direct
+8:31:23 AM [vite] page reload privacy-policy.html
+8:31:35 AM [vite] page reload terms-conditions.html
+8:31:56 AM [vite] page reload outcome-engineer.html
+8:54:40 AM [vite] page reload terms-conditions.html
+9:02:50 AM [vite] page reload terms-conditions.html

@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systems Diagnostic Generator | Bigger Fish</title>
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css" rel="stylesheet" type="text/css">
+    <link href="css/tailwind.css" rel="stylesheet" type="text/css">
+
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+
+        /* Expanded Landscape Ratio: 14 / 10.8 = 1.296 (Maintaining 11x8.5 ratio approximately) */
+        .page-container {
+            width: auto;
+            max-width: 100%;
+            min-height: 10.8in;
+            margin: 2rem;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        @media print {
+            @page {
+                size: letter landscape;
+                margin: 0;
+            }
+
+            body {
+                background: none;
+                padding-top: 0 !important;
+            }
+
+            .page-container {
+                margin: 0;
+                box-shadow: none;
+                width: 14in !important;
+                min-width: 14in !important;
+                /* Use zoom for correct print pagination on Chrome/WebKit */
+                zoom: 0.8;
+                min-height: 100vh;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                overflow: hidden;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Simplified View (Read Only / Linked) */
+        .simplified-view .no-print,
+        .simplified-view #header-container,
+        .simplified-view header {
+            display: none !important;
+        }
+
+        .simplified-view body {
+            padding-top: 0 !important;
+            background-color: #f3f4f6;
+            /* Keep background or make white? Keeping gray makes the sheet pop */
+        }
+
+        .simplified-view .page-container {
+            margin: 2rem auto;
+            /* Center it */
+        }
+
+        .simplified-visible {
+            display: none;
+        }
+
+        .simplified-view .simplified-visible {
+            display: block !important;
+        }
+
+        .editable {
+            background: transparent;
+            border: 1px solid transparent;
+            width: 100%;
+            resize: none;
+            outline: none;
+            transition: border-color 0.2s;
+            padding: 2px 4px;
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        .editable:hover,
+        .editable:focus {
+            border-color: #d1d5db;
+        }
+
+        input.editable {
+            font-weight: 700;
+        }
+
+        /* Placeholder for contenteditable */
+        [contenteditable]:empty:before {
+            content: attr(data-placeholder);
+            color: #9ca3af;
+            cursor: text;
+        }
+
+        .editable-multiline {
+            min-height: 1.2rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Mermaid styling */
+        .mermaid-container {
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            /* Align left */
+        }
+
+        @media print {
+            .logic-input {
+                display: none !important;
+            }
+
+            .mermaid-container {
+                display: flex !important;
+            }
+        }
+
+        .column-header {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #000;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .field-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: #374151;
+            margin-bottom: 0.15rem;
+            display: block;
+        }
+
+        /* Specific Column Backgrounds */
+        .col-current {
+            background-color: #f9f5ff;
+            /* Purple tint */
+        }
+
+        .col-future {
+            background-color: #ffffff;
+        }
+
+        .col-execution {
+            background-color: #f0fffb;
+            /* Mint tint */
+        }
+
+        .blueprint-grid {
+            height: 100%;
+        }
+
+        /* Pricing Card Styling */
+        .pricing-card {
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #540D6E;
+            background: white;
+            padding: 0.4rem 0.6rem 0.55rem 0.6rem;
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateX(4px);
+        }
+
+        /* Dynamic List Styling */
+        .blueprint-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+            margin-bottom: 0.25rem;
+            list-style: none;
+            width: 100%;
+            position: relative;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .blueprint-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .blueprint-list-item .remove-btn {
+            position: absolute;
+            right: 0.25rem;
+            top: 0.25rem;
+            opacity: 0;
+            cursor: pointer;
+            color: #ef4444;
+            font-size: 0.75rem;
+        }
+
+        .blueprint-list-item:hover .remove-btn {
+            opacity: 1;
+        }
+
+        .add-btn {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1C6E8C;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Service Row Specifics */
+        .service-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            padding: 2px 0;
+        }
+
+        .service-row.client-pays {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .service-row:hover {
+            cursor: pointer;
+            background-color: #f3f4f6;
+            border-radius: 4px;
+        }
+
+        .service-row * {
+            user-select: none;
+        }
+
+        .service-qty {
+            width: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        .service-dropdown {
+            width: 100%;
+            font-size: 0.85rem;
+            padding: 4px;
+            border: 1px solid #1C6E8C;
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #1C6E8C !important;
+            background-color: #f0f9ff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+            min-width: 190px;
+            height: auto;
+            min-height: 26px;
+            line-height: normal;
+            opacity: 1;
+            display: block;
+        }
+
+        /* Builder Node Styling */
+        .logic-node {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            /* Pill shape matching buttons */
+            border: 1px solid currentColor;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s ease;
+            margin-right: 0.125rem;
+            position: relative;
+        }
+
+
+
+        .logic-arrow {
+            display: inline-block;
+            color: #1C6E8C;
+            font-weight: bold;
+            margin: 0 0.125rem;
+            font-size: 1.2rem;
+            vertical-align: middle;
+            user-select: none;
+        }
+
+        .pathway-container {
+            min-height: 2.5rem;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            /* Match padding */
+            border: 1px dashed #cbd5e1;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            transition: border-color 0.2s;
+        }
+
+        .pathway-container.active {
+            border-color: #1C6E8C;
+            background-color: #f0f9ff;
+            border-style: solid;
+        }
+
+        .service-category button {
+            transition: transform 0.1s;
+        }
+
+        .service-category button:active {
+            transform: scale(0.98);
+        }
+
+        @media print {
+            .pathway-container {
+                border: none !important;
+                background: none !important;
+                padding: 0;
+            }
+
+            .no-print-pdf {
+                display: none !important;
+            }
+
+            /* Ensure colors print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            mermaid.initialize({
+                startOnLoad: false, // We manually render
+                theme: 'base',
+                themeVariables: {
+                    primaryColor: '#e0f2f1', // Light Mint
+                    primaryBorderColor: '#1C6E8C', // Teal
+                    lineColor: '#1C6E8C', // Teal Arrows
+                    fontFamily: 'Outfit',
+                    edgeLabelBackground: '#ffffff',
+                    tertiaryColor: '#f0f9ff'
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="bg-gray-100 relative">
+    <!-- Passcode Overlay -->
+    <div id="passcode-overlay" class="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center">
+        <div class="max-w-md w-full px-6 text-center">
+            <div class="mb-6">
+                <!-- Optional Logo/Icon -->
+                <svg class="w-16 h-16 mx-auto text-[#540D6E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                    </path>
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-[#540D6E] mb-4">RESTRICTED ACCESS</h2>
+            <p class="mb-8 text-gray-600">Please enter the admin passcode to access this tool.</p>
+            <input type="password" id="admin-passcode-input"
+                class="w-full text-center text-2xl p-3 border-2 border-gray-300 rounded-lg mb-4 focus:border-[#540D6E] focus:outline-none"
+                placeholder="Enter Passcode">
+            <button onclick="verifyAccess()"
+                class="w-full bg-[#540D6E] text-[#9FFCDF] font-bold text-xl py-3 rounded-lg hover:opacity-90 transition-opacity">
+                UNLOCK SYSTEM
+            </button>
+            <p id="access-error" class="text-red-500 mt-4 hidden font-bold">Incorrect Passcode</p>
+        </div>
+    </div>
+
+
+    <div id="header-container" class="print:hidden"></div>
+
+    <div class="pt-20 print:pt-0">
+
+
+        <main class="page-container">
+            <!-- Header (Moved Inside) -->
+            <div class="no-print px-8 py-6 flex justify-between items-center border-b border-gray-200">
+                <h1 class="font-bold text-xl uppercase">Systems Diagnostic Generator</h1>
+                <div class="flex gap-4">
+                    <button onclick="saveToURL()"
+                        class="bg-[#9FFCDF] text-[#540D6E] px-6 py-2 rounded-full font-bold uppercase hover:opacity-90 transition-opacity">
+                        Generate Link
+                    </button>
+                    <button onclick="window.print()"
+                        class="bg-[#540D6E] text-[#9FFCDF] px-6 py-2 rounded-full font-bold uppercase hover:bg-opacity-90 transition-colors">
+                        Export to PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metadata Row -->
+            <div class="px-8 py-4 border-b border-gray-200 grid grid-cols-3 gap-8">
+                <div>
+                    <span class="field-label">Client Name</span>
+                    <input type="text" class="editable text-xl font-bold" value="" placeholder="Enter Client Name">
+                </div>
+                <div>
+                    <span class="field-label">Date</span>
+                    <input type="text" class="editable text-xl font-bold" value="2026-01-01" placeholder="YYYY-MM-DD">
+                </div>
+                <div>
+                    <span class="field-label">Status</span>
+                    <input type="text" class="editable text-xl font-bold" value="Draft" placeholder="Project Status">
+                </div>
+            </div>
+
+            <!-- Main 3-Column Grid -->
+            <div class="blueprint-grid flex flex-1">
+
+                <!-- Col 1: Current State -->
+                <section class="w-1/4 col-current px-5 py-6 border-r border-gray-200">
+                    <h2 class="column-header text-xl">Current State</h2>
+
+                    <div class="mb-6">
+                        <span class="field-label text-teal-900">Bottlenecks</span>
+                        <div id="bottlenecks-list" class="dynamic-list"></div>
+                        <div class="add-btn no-print" onclick="addItem('bottlenecks-list', 'Add a bottleneck...')">
+                            <span>[+] Add Item</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <span class="field-label text-teal-900">Root Causes</span>
+                        <div id="root-causes-list" class="dynamic-list"></div>
+                        <div class="add-btn no-print" onclick="addItem('root-causes-list', 'Add a root cause...')">
+                            <span>[+] Add Item</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <span class="field-label text-teal-900">Cost of Inefficiency</span>
+                            <div id="cost-list" class="dynamic-list"></div>
+
+                            <button class="add-btn no-print w-full mt-2 block text-left" onclick="addCostItem()">
+                                <span>[+] Add Item</span>
+                            </button>
+
+                            <!-- Total Cost of Inefficiency Summary -->
+                            <div class="mt-4 pt-2 border-t-2 border-gray-900 flex justify-between items-center pr-1">
+                                <span class="text-base font-bold text-gray-900 uppercase">Total Cost of
+                                    Inefficiencies</span>
+                                <span id="tci-display" class="text-base font-bold text-gray-900 text-right">$0</span>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- Col 2: The Solution -->
+                <section class="w-1/2 col-future px-5 py-6 border-r border-gray-200 relative flex flex-col">
+                    <h2 class="column-header text-xl">The Solution</h2>
+
+                    <div class="flex-1 grid gap-x-6" style="grid-template-columns: 190px 1fr;">
+                        <!-- Left Sub-column: Service Categories -->
+                        <div id="service-grid-left" class="space-y-4 min-w-[190px]">
+                            <!-- Dynamically populated categories -->
+                        </div>
+
+                        <!-- Right Sub-column: Logic Pathways -->
+                        <div id="solution-right-col" class="w-full">
+                            <span class="field-label text-teal-900 w-full mb-2 block">Proposed Logic Pathways</span>
+
+                            <div id="logic-pathways-list" class="dynamic-list w-full space-y-4">
+                            </div>
+                            <div class="add-btn no-print mt-4" onclick="addLogicPathway()">
+                                <span>[+] Add Pathway</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto mb-2">
+                        <div class="bg-teal-50 border-2 border-teal-200 rounded-lg px-4 py-[9px] text-center">
+                            <p
+                                class="text-[0.8rem] font-medium text-[#9ca3af] uppercase tracking-tight whitespace-nowrap">
+                                (*) INDICATES CLIENT-PAID SUBSCRIPTION; EXCLUDED FROM MANAGED SERVICES.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Col 3: Execution & Investment -->
+                <section class="w-1/4 col-execution px-5 py-6">
+                    <h2 class="column-header text-xl">Execution & Investment</h2>
+
+                    <div class="mb-6">
+                        <span class="field-label text-teal-900">Project Timeline</span>
+                        <div id="timeline-list" class="dynamic-list"></div>
+                        <div class="add-btn no-print" onclick="addItem('timeline-list', 'Add a milestone...', '⬢')">
+                            <span>[+] Add Milestone</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <span class="field-label text-teal-900">Payback Period</span>
+                        <div id="payback-period-display" class="text-base font-bold border-b border-teal-100 py-1">N/A
+                        </div>
+                    </div>
+
+                    <!-- Aligned Build and OpEx row -->
+                    <div class="mb-3 grid grid-cols-2 gap-4 border-b-2 border-purple-200 pb-2">
+                        <div>
+                            <span class="field-label text-purple-900 !mb-0 uppercase">Client-Managed Build</span>
+                            <input type="text" id="total-value" class="editable text-base font-bold" value="$0"
+                                oninput="updateValue(this)" onblur="formatInput(this)">
+                        </div>
+                        <div class="text-right">
+                            <span class="field-label text-gray-500 !mb-0 uppercase">Est. Monthly OpEx</span>
+                            <span id="base-opex-display" class="editable text-base font-bold block mt-1">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="pricing-calculator space-y-3">
+                        <!-- Maintenance Card -->
+                        <div class="pricing-card">
+                            <div class="mb-1">
+                                <span class="field-label !mb-0 text-purple-900 uppercase">The Operator</span>
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <div class="flex flex-col items-start">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">Upfront Build</span>
+                                    <span id="upfront-a" class="text-base font-bold">$8,000</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase whitespace-nowrap">Monthly
+                                        Retainer</span>
+                                    <span id="monthly-a" class="text-base font-bold">$0</span>
+                                </div>
+                                <div class="flex flex-col items-end text-right">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">% TCI</span>
+                                    <span id="tci-pct-a" class="text-base font-bold text-purple-700">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Growth Card -->
+                        <div class="pricing-card">
+                            <div class="mb-1">
+                                <span class="field-label !mb-0 text-purple-900 uppercase">The Fabricator</span>
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <div class="flex flex-col items-start">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">Upfront Build</span>
+                                    <span id="upfront-b" class="text-base font-bold">$6,000</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase whitespace-nowrap">Monthly
+                                        Retainer</span>
+                                    <span id="monthly-b" class="text-base font-bold">$0</span>
+                                </div>
+                                <div class="flex flex-col items-end text-right">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">% TCI</span>
+                                    <span id="tci-pct-b" class="text-base font-bold text-purple-700">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Investment Card -->
+                        <div class="pricing-card">
+                            <div class="mb-1">
+                                <span class="field-label !mb-0 text-purple-900 uppercase">The Architect</span>
+                            </div>
+                            <div class="flex justify-between items-start">
+                                <div class="flex flex-col items-start">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">Upfront Build</span>
+                                    <span id="upfront-c" class="text-base font-bold">$4,000</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase whitespace-nowrap">Monthly
+                                        Retainer</span>
+                                    <span id="monthly-c" class="text-base font-bold">$0</span>
+                                </div>
+                                <div class="flex flex-col items-end text-right">
+                                    <span class="field-label text-gray-500 !mb-0 uppercase">% TCI</span>
+                                    <span id="tci-pct-c" class="text-base font-bold text-purple-700">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer -->
+            <div class="px-8 py-3 bg-black text-white text-[10px] flex justify-between items-center no-print">
+                <span>Bigger Fish Intelligent Automation &copy; 2024</span>
+                <div class="flex items-center gap-4">
+                    <span>INTERNAL USE ONLY: Systems Blueprint v2.0</span>
+                </div>
+            </div>
+            <div class="hidden print:block p-2 border-t border-gray-200 text-[10px] text-gray-400 text-center">
+                Bigger Fish | betterfish.io | Confidential Systems Diagnostic
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const SERVICES_DB = {
+            "Core Database": [
+                { id: "airtable", name: "Airtable", cost: 20, unit: "seat", clientPays: false },
+                { id: "smartsuite", name: "SmartSuite", cost: 25, unit: "seat", clientPays: false }
+            ],
+            "Automation": [
+                { id: "make", name: "Make", cost: 10.59, unit: "mo", clientPays: false },
+                { id: "zapier", name: "Zapier", cost: 29.99, unit: "mo", clientPays: false }
+            ],
+            "Interfaces/Apps": [
+                { id: "softr", name: "Softr", cost: 65, unit: "mo", clientPays: false },
+                { id: "glide", name: "Glide", cost: 99, unit: "mo", clientPays: false }
+            ],
+            "LLM / AI": [
+                { id: "gemini", name: "Gemini (G-Suite)", cost: 24, unit: "seat", clientPays: true },
+                { id: "openai", name: "OpenAI", cost: 20, unit: "mo", clientPays: false },
+                { id: "elevenlabs", name: "ElevenLabs", cost: 22, unit: "mo", clientPays: false },
+                { id: "anthropic", name: "Anthropic", cost: 20, unit: "mo", clientPays: false }
+            ],
+            "Docs & Forms": [
+                { id: "pandadoc", name: "PandaDoc", cost: 19, unit: "seat", clientPays: false },
+                { id: "docusign", name: "DocuSign", cost: 25, unit: "seat", clientPays: false },
+                { id: "tally", name: "Tally", cost: 29, unit: "mo", clientPays: false },
+                { id: "typeform", name: "Typeform", cost: 50, unit: "mo", clientPays: false }
+            ],
+            "Voice/Text": [
+                { id: "twilio", name: "Twilio", cost: 1.15, unit: "mo", clientPays: false },
+                { id: "ringcentral", name: "RingCentral", cost: 30, unit: "seat", clientPays: false }
+            ],
+            "Internal Comms": [
+                { id: "slack", name: "Slack", cost: 8.75, unit: "seat", clientPays: true },
+                { id: "teams", name: "Microsoft Teams", cost: 6, unit: "seat", clientPays: true }
+            ],
+            "Office Suite": [
+                { id: "google", name: "Google Workspace", cost: 24, unit: "seat", clientPays: true },
+                { id: "m365", name: "Microsoft 365", cost: 12.50, unit: "seat", clientPays: true }
+            ],
+            "Finance": [
+                { id: "qbo", name: "QuickBooks Online", cost: 90, unit: "mo", clientPays: true },
+                { id: "xero", name: "Xero", cost: 30, unit: "mo", clientPays: true },
+                { id: "stripe", name: "Stripe", cost: 0, unit: "tx", clientPays: true }
+            ]
+        };
+
+        const selections = {};
+
+        const CATEGORY_COLORS = {
+            "Core Database": "bg-emerald-100 text-emerald-900 border-emerald-300",
+            "Automation": "bg-blue-100 text-blue-900 border-blue-300",
+            "Interfaces/Apps": "bg-purple-100 text-purple-900 border-purple-300",
+            "LLM / AI": "bg-yellow-100 text-yellow-900 border-yellow-300",
+            "Docs & Forms": "bg-orange-100 text-orange-900 border-orange-300",
+            "Voice/Text": "bg-pink-100 text-pink-900 border-pink-300",
+            "Internal Comms": "bg-gray-100 text-gray-900 border-gray-300",
+            "Office Suite": "bg-gray-200 text-gray-800 border-gray-400",
+            "Finance": "bg-gray-300 text-gray-900 border-gray-500"
+        };
+
+        const CATEGORY_BG_COLORS = {
+            "Core Database": "#d1fae5",
+            "Automation": "#dbeafe",
+            "Interfaces/Apps": "#f3e8ff", // Lilac
+            "LLM / AI": "#fef9c3", // Yellow
+            "Docs & Forms": "#ffedd5", // Orange
+            "Voice/Text": "#fce7f3", // Pink
+            "Internal Comms": "#f3f4f6", // Gray 100
+            "Office Suite": "#e5e7eb", // Gray 200
+            "Finance": "#d1d5db"  // Gray 300
+        };
+
+        let activePathwayContainer = null;
+
+        function initServiceGrid() {
+            const leftCol = document.getElementById('service-grid-left');
+            leftCol.innerHTML = '';
+
+            // Default active pathway to the first one available
+            const firstContainer = document.querySelector('.pathway-container');
+            if (firstContainer) setActivePathway(firstContainer);
+
+            Object.keys(SERVICES_DB).forEach(category => {
+                selections[category] = new Set();
+                const catDiv = document.createElement('div');
+                catDiv.className = 'service-category';
+                catDiv.dataset.category = category; // For sorting
+                // Inline background style for the dropdown header to match
+                const bgCol = CATEGORY_BG_COLORS[category] || '#f0f9ff';
+
+                catDiv.innerHTML = `
+                    <div class="category-header-static simplified-visible font-bold p-2 mb-1 rounded text-center text-sm uppercase tracking-wide text-gray-800" style="background-color: ${bgCol};">${category}</div>
+                    <select class="service-dropdown no-print" style="background-color: ${bgCol} !important; border-color: transparent;" onchange="handleServiceSelect(this, '${category}')">
+                        <option value="">${category}</option>
+                        ${SERVICES_DB[category].map(s => {
+                    return `<option value="${s.id}">${s.name}${s.clientPays ? ' *' : ''}</option>`;
+                }).join('')}
+                        <option value="new">New...</option>
+                    </select>
+                    <div id="list-${category.replace(/\W/g, '')}" class="service-rows"></div>
+                `;
+                leftCol.appendChild(catDiv);
+            });
+        }
+
+        function setActivePathway(el) {
+            // Remove active from all
+            document.querySelectorAll('.pathway-container').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            activePathwayContainer = el;
+        }
+
+        function addItem(listId, placeholder, bullet = '•') {
+            const list = document.getElementById(listId);
+            if (!list) return;
+
+            const item = document.createElement('div');
+            item.className = 'blueprint-list-item';
+            item.innerHTML = `
+                <span class="text-teal-900 flex-shrink-0" style="line-height: 1.5rem;">${bullet}</span>
+                <div contenteditable="true" class="editable text-base editable-multiline flex-grow" 
+                     data-placeholder="${placeholder}"></div>
+                <span class="remove-btn no-print px-1" onclick="this.parentElement.remove()">✕</span>
+            `;
+            list.appendChild(item);
+
+            const editable = item.querySelector('.editable');
+            if (editable) editable.focus();
+        }
+
+        function addLogicPathway() {
+            const list = document.getElementById('logic-pathways-list');
+            const item = document.createElement('div');
+            item.className = 'blueprint-list-item items-start';
+            item.innerHTML = `
+                <span class="text-teal-700 flex-shrink-0 mt-3" style="line-height: 1.5rem;">•</span>
+                <div class="flex-grow flex flex-col gap-2 w-full overflow-hidden">
+                    <div class="pathway-container active" onclick="setActivePathway(this)"></div>
+                    <div contenteditable="true" class="editable text-base text-gray-500 italic editable-multiline" data-placeholder="Explain in plain English..."></div>
+                </div>
+                <span class="remove-btn no-print px-1" onclick="this.parentElement.remove()">✕</span>
+            `;
+            list.appendChild(item);
+            // set this new one as active
+            setActivePathway(item.querySelector('.pathway-container'));
+        }
+
+        function addLogicNode(serviceName, category) {
+            if (!activePathwayContainer) {
+                // If no active, try to find first or create one?
+                // Fallback to first
+                activePathwayContainer = document.querySelector('.pathway-container');
+                if (!activePathwayContainer) return; // Should not happen with default logic
+            }
+
+            // Check if not empty, if so add arrow first
+            if (activePathwayContainer.children.length > 0) {
+                const arrow = document.createElement('span');
+                arrow.className = 'logic-arrow';
+                arrow.innerHTML = '→';
+                activePathwayContainer.appendChild(arrow);
+            }
+
+            const node = document.createElement('div');
+            // Get color classes
+            const colorClass = CATEGORY_COLORS[category] || "bg-gray-100 text-gray-900 border-gray-300";
+            // Get border color for underline
+            const borderColor = colorClass.match(/border-(\w+-\d+)/) ? colorClass.match(/border-(\w+-\d+)/)[1] : 'gray-300';
+
+            node.className = `logic-node ${colorClass}`;
+            node.innerHTML = `${serviceName}<span contenteditable="true" class="ml-1 opacity-70 font-normal focus:outline-none min-w-[20px] empty:hidden" data-placeholder="" onclick="event.stopPropagation()"></span>`;
+
+            // Prevent Enter from creating new line
+            const span = node.querySelector('span');
+            span.onkeydown = function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.blur();
+                }
+            };
+
+            // Interaction Handlers
+            node.onclick = function (e) { removeNode(this); };
+            node.oncontextmenu = function (e) { modifyNode(e, this); };
+
+            activePathwayContainer.appendChild(node);
+        }
+
+        function removeNode(node) {
+            const container = node.parentElement;
+            node.remove();
+            cleanArrows(container);
+        }
+
+        function modifyNode(e, node) {
+            e.preventDefault(); // Stop context menu
+            const span = node.querySelector('span[contenteditable]');
+            if (span) {
+                // Force visibility if it was hidden by helpful CSS
+                span.style.display = 'inline-block';
+                span.focus();
+
+                // Add blur listener to re-hide if empty
+                // We use a named function or just re-assign to avoid duplicate listeners piling up if we reused nodes (though we generally destroy them)
+                span.onblur = function () {
+                    if (!this.textContent.trim()) {
+                        this.style.display = ''; // Revert to CSS (empty:hidden)
+                    }
+                };
+
+                // Move cursor to end
+                const range = document.createRange();
+                const sel = window.getSelection();
+                try {
+                    range.selectNodeContents(span);
+                    range.collapse(false);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } catch (err) {
+                    console.warn("Could not set cursor range", err);
+                }
+            }
+        }
+
+        function cleanArrows(container) {
+            if (!container) return;
+            const children = Array.from(container.children);
+
+            // 1. Remove arrows at start
+            if (children.length > 0 && children[0].classList.contains('logic-arrow')) {
+                children[0].remove();
+            }
+
+            // 2. Remove arrows at end
+            const last = container.lastElementChild;
+            if (last && last.classList.contains('logic-arrow')) {
+                last.remove();
+            }
+
+            // 3. Remove double arrows
+            // Re-query children after potential removals
+            let currentChildren = Array.from(container.children);
+            for (let i = 0; i < currentChildren.length - 1; i++) {
+                const curr = currentChildren[i];
+                const next = currentChildren[i + 1];
+                if (curr.classList.contains('logic-arrow') && next.classList.contains('logic-arrow')) {
+                    curr.remove();
+                }
+            }
+        }
+
+
+
+        function handleServiceSelect(select, category) {
+            const val = select.value;
+            if (!val) return;
+
+            const listId = `list-${category.replace(/\W/g, '')}`;
+            const list = document.getElementById(listId);
+
+            if (val === 'new') {
+                addCustomRow(list);
+                select.value = "";
+                return;
+            }
+
+            const service = SERVICES_DB[category].find(s => s.id === val);
+
+            // Toggle in list
+            if (selections[category].has(val)) {
+                // REMOVE service
+                selections[category].delete(val);
+                const row = list.querySelector(`.service-row[data-id="${val}"]`);
+                if (row) row.remove();
+            } else {
+                // ADD service
+                selections[category].add(val);
+                addServiceRow(list, service, category);
+                // logic node is NOT added automatically
+            }
+
+            select.value = ""; // Reset
+            updateDropdownUI(select, category);
+            calculateROI();
+            reorderServiceGrid();
+        }
+
+        function addServiceRow(list, service, category) {
+            const row = document.createElement('div');
+            row.className = `service-row ${service.clientPays ? 'client-pays' : ''}`;
+            row.dataset.cost = service.cost;
+            row.dataset.clientPays = service.clientPays;
+            row.dataset.id = service.id;
+
+            // Add click listener to duplicate to logic
+            row.onclick = (e) => {
+                // Ignore if input clicked
+                if (e.target.tagName === 'INPUT') return;
+                addLogicNode(service.name, category || findCategoryOfService(service.id));
+            };
+
+            row.innerHTML = `
+                <span class="flex-grow font-semibold text-sm">${service.name}${service.clientPays ? '*' : ''}</span>
+                <input type="number" class="service-qty" value="1" min="1" oninput="calculateROI()">
+            `;
+            list.appendChild(row);
+        }
+
+        function findCategoryOfService(id) {
+            for (const [cat, services] of Object.entries(SERVICES_DB)) {
+                if (services.find(s => s.id === id)) return cat;
+            }
+            return "Unknown";
+        }
+
+        // ---------------------------------------------------------
+        // (Old Add Item/Mermaid Code Removed)
+        // ---------------------------------------------------------
+
+        // ---------------------------------------------------------
+        // Calculations & Utilities
+        // ---------------------------------------------------------
+
+        function parseCurrency(str) {
+            return parseFloat(String(str).replace(/[^0-9.-]+/g, "")) || 0;
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+        function formatInput(input) {
+            input.value = formatCurrency(parseCurrency(input.value));
+            calculateROI();
+        }
+
+        function updateCost(input) {
+            calculateROI();
+        }
+
+        function updateValue(input) {
+            calculateROI();
+        }
+
+        function calculateEfficiencyCost() {
+            let total = 0;
+            const inputs = document.querySelectorAll('.cost-input');
+            inputs.forEach(input => {
+                total += parseCurrency(input.value);
+            });
+            const display = document.getElementById('tci-display');
+            if (display) display.innerText = formatCurrency(total);
+            return total;
+        }
+
+        /* 
+         * FORMULAS RESTATED (v2 - Updated per User Request):
+         * 1. Total Cost of Inefficiency (TCI) = Sum of all manual "Cost" items.
+         * 2. Total SaaS Cost = Sum of (Cost * Qty) for Managed Services (excluding Client-Paid).
+         * 3. API Scale Factor = Max($50, TCI * 0.05).
+         * 4. Base OpEx = Total SaaS Cost + API Scale Factor.
+         * 5. Partner Retainers:
+         *    - Maintenance: Base OpEx * 1.25
+         *    - Growth: Base OpEx * 1.50
+         *    - Investment: Base OpEx * 1.75
+         * 6. Payback Period = Client Managed Build Cost / TCI.
+         * 7. Partner % TCI = (Monthly Retainer / TCI) * 100.
+         */
+
+        function updateDropdownUI(select, category) {
+            // Updates dropdown options to indicate which services are already selected
+            if (!select) return;
+            const selectedSet = selections[category];
+            Array.from(select.options).forEach(option => {
+                if (option.value === 'new' || option.value === '') return;
+                const baseText = option.text.replace(' ✓', '');
+
+                if (selectedSet.has(option.value)) {
+                    option.disabled = false; // Allow clicking to remove
+                    option.text = baseText + ' ✓';
+                } else {
+                    option.disabled = false;
+                    option.text = baseText;
+                }
+            });
+        }
+
+        function calculateROI() {
+            // 1. Calculate Total Inefficiency (Monthly)
+            const monthlyInefficiency = calculateEfficiencyCost();
+
+            // 2. Calculate Total SaaS Cost (Managed Services only)
+            let totalSaaSCost = 0;
+            document.querySelectorAll('.service-row').forEach(row => {
+                if (row.dataset.clientPays === 'true') return;
+
+                const cost = parseFloat(row.dataset.cost) || 0;
+                const qtyInput = row.querySelector('.service-qty');
+                const qty = qtyInput ? (parseFloat(qtyInput.value) || 1) : 1;
+                totalSaaSCost += cost * qty;
+            });
+
+            // 3. API Scale Factor (5% of TCI)
+            // Only apply if there are managed services
+            const apiScaleFactor = totalSaaSCost > 0 ? (monthlyInefficiency * 0.05) : 0;
+
+            // 4. Base OpEx
+            const baseMonthlyOpEx = totalSaaSCost + apiScaleFactor;
+
+            // Display Base OpEx
+            const opexDisplay = document.getElementById('base-opex-display');
+            if (opexDisplay) opexDisplay.innerText = formatCurrency(baseMonthlyOpEx);
+
+            // 5. Client Managed Build Cost
+            const buildInput = document.getElementById('total-value');
+            const buildCost = buildInput ? parseCurrency(buildInput.value) : 5000;
+
+            // 6. Calculate Payback Period (Build Cost / TCI)
+            const paybackDisplay = document.getElementById('payback-period-display');
+            if (paybackDisplay) {
+                if (monthlyInefficiency <= 0) {
+                    paybackDisplay.innerText = "N/A";
+                } else {
+                    const months = buildCost / monthlyInefficiency;
+                    paybackDisplay.innerText = months < 0.1 ? "< 0.1 Months" : `${months.toFixed(1)} Months`;
+                }
+            }
+
+            // 7. Update Partner Retainers, Upfront Build & % TCI
+            const partners = [
+                { suffix: 'a', retainerMult: 1.40, upfrontMult: 0.8 }, // Maintenance
+                { suffix: 'b', retainerMult: 1.80, upfrontMult: 0.6 }, // Growth
+                { suffix: 'c', retainerMult: 2.20, upfrontMult: 0.4 }  // Investment
+            ];
+
+            partners.forEach(p => {
+                const retainerEl = document.getElementById(`monthly-${p.suffix}`);
+                const upfrontEl = document.getElementById(`upfront-${p.suffix}`);
+                const tciPctEl = document.getElementById(`tci-pct-${p.suffix}`);
+
+                if (retainerEl && tciPctEl && upfrontEl) {
+                    // Update Retainer
+                    const monthlyRetainer = baseMonthlyOpEx * p.retainerMult;
+                    retainerEl.innerText = formatCurrency(monthlyRetainer);
+
+                    // Update Upfront Build Cost
+                    const upfrontCost = buildCost * p.upfrontMult;
+                    upfrontEl.innerText = formatCurrency(upfrontCost);
+
+                    // % TCI Calculation
+                    if (monthlyInefficiency > 0) {
+                        const pct = (monthlyRetainer / monthlyInefficiency) * 100;
+                        tciPctEl.innerText = pct.toFixed(0) + '%';
+                    } else {
+                        tciPctEl.innerText = 'N/A';
+                    }
+                }
+            });
+        }
+
+        function addCostItem() {
+            const list = document.getElementById('cost-list');
+            const item = document.createElement('div');
+            item.className = 'blueprint-list-item items-center';
+            item.innerHTML = `
+                <div contenteditable="true" class="editable text-base flex-grow" data-placeholder="Label (e.g. Manual Entry)"></div>
+                <input type="text" class="editable text-base w-24 text-right cost-input font-bold" value="$0" oninput="updateCost(this)" onblur="formatInput(this)">
+                <span class="remove-btn no-print px-1" onclick="this.parentElement.remove(); calculateROI();">✕</span>
+            `;
+            list.appendChild(item);
+            item.querySelector('[contenteditable]').focus();
+        }
+
+        // Pre-populate default services
+        // Pre-populate default services REMOVED to prevent overwriting URL load
+        // and to give a clean slate. 
+        // If defaults are needed, they should only trigger if URL is empty.
+        // For now, removing as per user workflow of "clean or restored".
+
+        // Check for URL data on load
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Check for simplified view
+
+
+            initServiceGrid(); // Initialize grid first
+            assignDefaultIds(); // Then assign IDs
+            await loadFromURL(); // Finally load from URL if present
+
+            checkAccess(); // Enforce Page Protection
+
+            // Allow Enter key
+            document.getElementById('admin-passcode-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') verifyAccess();
+            });
+
+            // Check for simplified view LAST
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('simplified') === 'true') {
+                document.body.classList.add('simplified-view');
+                const pt20 = document.querySelector('.pt-20');
+                if (pt20) pt20.classList.remove('pt-20');
+
+                // Enforce Read-Only
+                document.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
+                document.querySelectorAll('[contenteditable]').forEach(el => {
+                    el.contentEditable = "false";
+                });
+                // Disable interactions
+                document.querySelectorAll('.pathway-container, .service-row, .remove-btn').forEach(el => {
+                    el.style.pointerEvents = "none";
+                });
+            }
+        });
+
+        function assignDefaultIds() {
+            // Assigns unique IDs to editable fields if they don't have one, 
+            // ensuring consistency between save and load.
+            document.querySelectorAll('input.editable, div.editable, textarea.editable').forEach((el, i) => {
+                if (!el.id) {
+                    el.id = `input-${i}`;
+                }
+            });
+        }
+
+        function exitSimplified() {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('simplified');
+            window.location.href = url.toString();
+        }
+
+        async function saveToURL() {
+            // Unify Data Gathering
+            const data = {
+                inputs: {},
+                selections: {},
+                lists: {
+                    bottlenecks: getListItems('bottlenecks-list'),
+                    rootCauses: getListItems('root-causes-list'),
+                    timeline: getListItems('timeline-list'),
+                    costs: getCostListItems()
+                },
+                pathways: getLogicPathways()
+            };
+
+            // Gather Inputs
+            document.querySelectorAll('input.editable, div.editable, textarea.editable').forEach(el => {
+                if (el.id) {
+                    const val = (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') ? el.value : (el.innerText || el.value);
+                    data.inputs[el.id] = val;
+                }
+            });
+            const totalVal = document.getElementById('total-value');
+            if (totalVal) data.inputs['total-value'] = totalVal.value;
+
+            // Gather Selections
+            Object.keys(selections).forEach(cat => {
+                data.selections[cat] = Array.from(selections[cat]);
+            });
+
+            const json = JSON.stringify(data);
+
+            // Feedback Prep
+            const btn = document.querySelector('button[onclick="saveToURL()"]');
+            const originalText = btn.innerText;
+            const originalClasses = btn.className;
+
+            // Auth (Passcode)
+            const storedPasscode = localStorage.getItem('admin_passcode');
+            let passcode = storedPasscode;
+            if (!passcode) {
+                passcode = prompt("Enter Admin Passcode (Verification Required):");
+                if (!passcode) return;
+            }
+
+            btn.innerText = "SAVING...";
+
+            try {
+                // Prepare Payload
+                const clientName = data.inputs['input-0'] || 'Untitled Blueprint';
+                const today = new Date().toISOString().split('T')[0];
+                const airtablePayload = { fields: { "Name": clientName, "Content": json, "Date": today } };
+
+                // Post to Proxy
+                const resp = await fetch('/api/save-blueprint', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ passcode: passcode, payload: airtablePayload })
+                });
+
+                if (resp.status === 401) {
+                    alert("Incorrect Passcode.");
+                    localStorage.removeItem('admin_passcode');
+                    btn.innerText = originalText;
+                    return;
+                }
+
+                if (!resp.ok) throw new Error(await resp.text());
+                const record = await resp.json();
+
+                // Link Generation
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('recordId', record.id);
+                newUrl.searchParams.set('simplified', 'true');
+                newUrl.hash = '';
+
+                await navigator.clipboard.writeText(newUrl.toString());
+
+                // Feedback: Purple on White with Border
+                btn.innerText = "LINK COPIED!";
+                btn.className = "bg-white text-[#540D6E] border-2 border-[#540D6E] px-6 py-2 rounded-full font-bold uppercase transition-all";
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.className = originalClasses;
+                }, 2000);
+
+                // Update Browser URL (Stay in Edit Mode)
+                const browserUrl = new URL(window.location.href);
+                browserUrl.searchParams.set('recordId', record.id);
+                browserUrl.searchParams.delete('simplified');
+                browserUrl.hash = '';
+                history.pushState(null, null, browserUrl.toString());
+
+            } catch (err) {
+                console.error(err);
+                alert("Save Failed: " + err.message);
+                btn.innerText = originalText;
+            }
+        }
+
+        function restoreState(data) {
+            if (data.inputs) {
+                Object.entries(data.inputs).forEach(([id, val]) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = val;
+                        else el.innerText = val;
+                    }
+                });
+            }
+            if (data.selections) {
+                Object.entries(data.selections).forEach(([cat, items]) => {
+                    selections[cat] = new Set();
+                    const listId = `list-${cat.replace(/\W/g, '')}`;
+                    const list = document.getElementById(listId);
+                    if (list) list.innerHTML = '';
+                    const select = Array.from(document.querySelectorAll('.service-dropdown')).find(s => s.options[0].text === cat);
+                    if (select && items.length > 0) {
+                        items.forEach(itemId => {
+                            if (!selections[cat].has(itemId)) {
+                                select.value = itemId;
+                                handleServiceSelect(select, cat);
+                            }
+                        });
+                    }
+                });
+            }
+            if (data.lists) {
+                restoreList('bottlenecks-list', data.lists.bottlenecks);
+                restoreList('root-causes-list', data.lists.rootCauses);
+                restoreList('timeline-list', data.lists.timeline, '⬢');
+                restoreCostList('cost-list', data.lists.costs);
+            }
+            if (data.pathways) restoreLogicPathways(data.pathways);
+            calculateROI();
+            reorderServiceGrid();
+        }
+
+        async function loadFromURL() {
+            const url = new URL(window.location.href);
+            const recordId = url.searchParams.get('recordId');
+
+            if (recordId) {
+                try {
+                    const resp = await fetch(`/api/get-blueprint?recordId=${recordId}`);
+                    if (!resp.ok) throw new Error("API Fetch Failed");
+                    const record = await resp.json();
+                    if (record.fields && record.fields.Content) {
+                        restoreState(JSON.parse(record.fields.Content));
+                    }
+                } catch (e) {
+                    console.error("Cloud Error", e);
+                    alert("Failed to load Cloud Blueprint. Please check the ID.");
+                }
+                return;
+            }
+
+            if (!url.hash) return;
+            try {
+                let encoded = url.hash.substring(1);
+                if (!encoded) return;
+                let json;
+                try { json = decodeURIComponent(atob(encoded)); } catch (e) { json = atob(encoded); }
+                if (json) restoreState(JSON.parse(json));
+            } catch (e) { console.error(e); }
+        }
+
+        async function saveToCloud() {
+            // Re-gather data
+            const data = {
+                inputs: {},
+                selections: {},
+                lists: {
+                    bottlenecks: getListItems('bottlenecks-list'),
+                    rootCauses: getListItems('root-causes-list'),
+                    timeline: getListItems('timeline-list'),
+                    costs: getCostListItems()
+                },
+                pathways: getLogicPathways()
+            };
+            document.querySelectorAll('input.editable, div.editable, textarea.editable').forEach(el => {
+                if (el.id) {
+                    data.inputs[el.id] = el.innerText || el.value;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') data.inputs[el.id] = el.value;
+                }
+            });
+            const totalVal = document.getElementById('total-value');
+            if (totalVal) data.inputs['total-value'] = totalVal.value;
+            Object.keys(selections).forEach(cat => { data.selections[cat] = Array.from(selections[cat]); });
+
+            const json = JSON.stringify(data);
+
+            let adminKey = localStorage.getItem('airtable_api_key');
+            if (!adminKey) {
+                adminKey = prompt("Enter functionality requires an Airtable Admin API Key (with Write Access). It will be saved locally.");
+                if (adminKey) localStorage.setItem('airtable_api_key', adminKey);
+                else return;
+            }
+
+            const btn = document.querySelector('button[onclick="saveToCloud()"]');
+            const originalText = btn.innerText;
+            btn.innerText = "SAVING...";
+
+            try {
+                const BASE = 'appXDaiiOppZ1urX7';
+                const TABLE = 'tblh9ieavUXk5DbAT';
+                const url = `https://api.airtable.com/v0/${BASE}/${TABLE}`;
+
+                const clientName = data.inputs['input-0'] || 'Untitled';
+                const today = new Date().toISOString().split('T')[0];
+
+                const resp = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${adminKey}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fields: { "Name": clientName, "Content": json, "Date": today } })
+                });
+
+                if (!resp.ok) throw new Error(await resp.text());
+
+                const record = await resp.json();
+                const recordId = record.id;
+
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('recordId', recordId);
+                newUrl.searchParams.set('simplified', 'true');
+                newUrl.hash = '';
+
+                await navigator.clipboard.writeText(newUrl.toString());
+
+                btn.innerText = "Saved & Copied!";
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-green-500');
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-green-500');
+                    btn.classList.add('bg-blue-600');
+                }, 2000);
+
+                const browserUrl = new URL(window.location.href);
+                browserUrl.searchParams.set('recordId', recordId);
+                browserUrl.searchParams.delete('simplified');
+                browserUrl.hash = '';
+                history.pushState(null, null, browserUrl.toString());
+
+            } catch (err) {
+                console.error(err);
+                alert("Save Failed: " + err.message);
+                btn.innerText = originalText;
+            }
+        }
+
+        // --- Sorting Logic ---
+        function reorderServiceGrid() {
+            const container = document.getElementById('service-grid-left');
+            const items = Array.from(container.children);
+            const grayCats = new Set(["Internal Comms", "Office Suite", "Finance"]);
+
+            // Buckets
+            const managedActive = [];
+            const managedInactive = [];
+            const unmanagedActive = [];
+            const unmanagedInactive = [];
+
+            // Canonical Sort Order (Default Hierarchy)
+            const CANONICAL_ORDER = [
+                "Core Database",
+                "Automation",
+                "Interfaces/Apps",
+                "LLM / AI",
+                "Docs & Forms",
+                "Voice/Text",
+                "Internal Comms",
+                "Office Suite",
+                "Finance"
+            ];
+
+            // Helper to get sort index
+            const getSortIndex = (cat) => CANONICAL_ORDER.indexOf(cat);
+
+            items.forEach(div => {
+                const cat = div.dataset.category;
+                const isActive = selections[cat] && selections[cat].size > 0;
+                const isGray = grayCats.has(cat);
+
+                if (isGray) {
+                    if (isActive) unmanagedActive.push(div);
+                    else unmanagedInactive.push(div);
+                } else {
+                    if (isActive) managedActive.push(div);
+                    else managedInactive.push(div);
+                }
+            });
+
+            // Sort within buckets to restore hierarchy
+            const sorter = (a, b) => getSortIndex(a.dataset.category) - getSortIndex(b.dataset.category);
+
+            managedActive.sort(sorter);
+            managedInactive.sort(sorter);
+            unmanagedActive.sort(sorter);
+            unmanagedInactive.sort(sorter);
+
+            // Re-append in order: Active (Managed -> Unmanaged) -> Inactive (Managed -> Unmanaged)
+            // This prioritizes "In Use" status above all else, while keeping colors above grays within that status.
+            const newOrder = [...managedActive, ...unmanagedActive, ...managedInactive, ...unmanagedInactive];
+            newOrder.forEach(div => container.appendChild(div));
+        }
+
+        // Global Paste Listener for Plain Text
+        document.addEventListener('paste', function (e) {
+            if (e.target.isContentEditable || e.target.classList.contains('editable')) {
+                e.preventDefault();
+                const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                document.execCommand('insertText', false, text);
+            }
+        });
+
+        function getListItems(id) {
+            const list = document.getElementById(id);
+            if (!list) return [];
+            // Use innerText to capture simple text, trim to avoid whitespace issues
+            return Array.from(list.children).map(item => {
+                const editable = item.querySelector('.editable');
+                return editable ? editable.innerText.trim() : "";
+            }).filter(text => text.length > 0);
+        }
+
+        function getCostListItems() {
+            const list = document.getElementById('cost-list');
+            if (!list) return [];
+            return Array.from(list.children).map(item => {
+                const label = item.querySelector('.editable').innerText.trim();
+                const cost = item.querySelector('.cost-input').value;
+                return { label, cost };
+            });
+        }
+
+        function getLogicPathways() {
+            const list = document.getElementById('logic-pathways-list');
+            if (!list) return [];
+
+            return Array.from(list.children).map(item => {
+                const explanationDiv = item.querySelector('.editable');
+                const pathwayContainer = item.querySelector('.pathway-container');
+
+                const nodes = [];
+                if (pathwayContainer) {
+                    Array.from(pathwayContainer.children).forEach(child => {
+                        if (child.classList.contains('logic-node')) {
+                            // Extract full HTML or just text/class? 
+                            // We need color class and content.
+                            // The content might have span with contenteditable.
+                            const clone = child.cloneNode(true);
+                            // Remove event handlers (not that they copy, but good practice to think about data)
+                            // We need the text content, but tricky part is the custom editable span inside
+                            // Let's save the whole innerHTML and the full className to preserve exact styling?
+                            // Or safer: extract components.
+
+                            // Get color class (bg-...)
+                            const colorClass = Array.from(child.classList).find(c => c.startsWith('bg-')) || "";
+                            // We recreate based on class list excluding 'logic-node'
+                            const classes = Array.from(child.classList).filter(c => c !== 'logic-node').join(' ');
+
+                            nodes.push({
+                                type: 'node',
+                                html: child.innerHTML,
+                                classes: classes
+                            });
+                        } else if (child.classList.contains('logic-arrow')) {
+                            // Skip arrows, we auto-insert them? Or save them if structure is complex?
+                            // Logic builder auto-inserts arrows. If we just save nodes, we might lose complex arrow placement?
+                            // Current logic builder puts arrows BETWEEN every node. So just saving nodes is sufficient.
+                        }
+                    });
+                }
+
+                return {
+                    explanation: explanationDiv ? explanationDiv.innerHTML : "", // Use innerHTML to preserve line breaks/formatting
+                    nodes: nodes,
+                    isActive: pathwayContainer.classList.contains('active')
+                };
+            });
+        }
+
+        function restoreLogicPathways(pathwaysData) {
+            const list = document.getElementById('logic-pathways-list');
+            if (!list || !pathwaysData) return;
+
+            list.innerHTML = ''; // Clear defaults
+
+            pathwaysData.forEach(p => {
+                // Create Item
+                const item = document.createElement('div');
+                item.className = 'blueprint-list-item items-start';
+                item.innerHTML = `
+                    <span class="text-teal-700 flex-shrink-0 mt-3" style="line-height: 1.5rem;">•</span>
+                    <div class="flex-grow flex flex-col gap-2 w-full overflow-hidden">
+                        <div class="pathway-container ${p.isActive ? 'active' : ''}" onclick="setActivePathway(this)"></div>
+                        <div contenteditable="true" class="editable text-base text-gray-500 italic editable-multiline" data-placeholder="Explain in plain English..."></div>
+                    </div>
+                    <span class="remove-btn no-print px-1" onclick="this.parentElement.remove()">✕</span>
+                `;
+
+                // Set explanation content separately to avoid placeholder issues
+                const explanationDiv = item.querySelector('.editable');
+                if (explanationDiv && p.explanation) {
+                    explanationDiv.innerHTML = p.explanation;
+                }
+                list.appendChild(item);
+
+                const container = item.querySelector('.pathway-container');
+                if (p.isActive) activePathwayContainer = container;
+
+                // Restore Nodes
+                if (p.nodes && p.nodes.length > 0) {
+                    p.nodes.forEach((nodeData, idx) => {
+                        // Add Arrow if not first
+                        if (idx > 0) {
+                            const arrow = document.createElement('span');
+                            arrow.className = 'logic-arrow';
+                            arrow.innerHTML = '→';
+                            container.appendChild(arrow);
+                        }
+
+                        const node = document.createElement('div');
+                        node.className = `logic-node ${nodeData.classes}`;
+                        node.innerHTML = nodeData.html;
+
+                        // Re-attach listeners
+                        node.onclick = function (e) { removeNode(this); };
+                        node.oncontextmenu = function (e) { modifyNode(e, this); };
+
+                        // Fix enter key on span if exists
+                        const span = node.querySelector('span[contenteditable]');
+                        if (span) {
+                            span.onkeydown = function (e) {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    this.blur();
+                                }
+                            };
+                        }
+
+                        container.appendChild(node);
+                    });
+                }
+            });
+            // If no active container set (e.g. all false), set first
+            if (!activePathwayContainer && list.querySelector('.pathway-container')) {
+                activePathwayContainer = list.querySelector('.pathway-container');
+            }
+        }
+
+        function restoreList(id, items, bullet = '•') {
+            if (!items) return;
+            const list = document.getElementById(id);
+            list.innerHTML = '';
+            items.forEach(text => {
+                addItem(id, ''); // Add empty
+                // Fill content
+                const lastItem = list.lastElementChild;
+                const editable = lastItem.querySelector('.editable');
+                editable.innerText = text; // User innerText to prevent interpreting HTML
+            });
+            // Correction for timeline specific bullet or just usage of addItem defaults?
+            // addItem takes (listId, placeholder, bullet)
+            // But we called addItem above which might use default bullet '•'.
+            // If we need custom bullet for timeline:
+            if (id === 'timeline-list') {
+                // Re-do specific restoration to pass bullet
+                list.innerHTML = '';
+                items.forEach(text => {
+                    const item = document.createElement('div');
+                    item.className = 'blueprint-list-item';
+                    item.innerHTML = `
+                        <span class="text-teal-900 flex-shrink-0" style="line-height: 1.5rem;">${bullet}</span>
+                        <div contenteditable="true" class="editable text-base editable-multiline flex-grow" 
+                             data-placeholder="Add a milestone...">${text}</div>
+                        <span class="remove-btn no-print px-1" onclick="this.parentElement.remove()">✕</span>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+        }
+
+        function restoreCostList(id, items) {
+            if (!items) return;
+            const list = document.getElementById(id);
+            list.innerHTML = '';
+            items.forEach(item => {
+                // Manually add cost item since addCostItem isn't parameterized
+                const div = document.createElement('div');
+                div.className = 'blueprint-list-item items-center';
+                div.innerHTML = `
+                    <div contenteditable="true" class="editable text-base flex-grow" data-placeholder="Label">${item.label}</div>
+                    <input type="text" class="editable text-base w-24 text-right cost-input font-bold" value="${item.cost}" oninput="updateCost(this)" onblur="formatInput(this)">
+                    <span class="remove-btn no-print px-1" onclick="this.parentElement.remove(); calculateROI();">✕</span>
+                 `;
+                list.appendChild(div);
+            });
+        }
+
+        calculateROI();
+
+        // --- Access Control ---
+        async function checkAccess() {
+            const url = new URL(window.location.href);
+            // If viewing a record (Client View), bypass Check
+            if (url.searchParams.has('recordId')) {
+                document.getElementById('passcode-overlay').classList.add('hidden');
+                return;
+            }
+
+            // Auto-check stored passcode
+            const stored = localStorage.getItem('admin_passcode');
+            if (stored) {
+                const valid = await verifyPasscodeAPI(stored);
+                if (valid) {
+                    document.getElementById('passcode-overlay').classList.add('hidden');
+                    return;
+                }
+            }
+            // Otherwise, overlay remains visible (default)
+        }
+
+        async function verifyAccess() {
+            const input = document.getElementById('admin-passcode-input');
+            const code = input.value;
+            const btn = input.nextElementSibling;
+            const originalText = btn.innerText;
+            btn.innerText = "VERIFYING...";
+
+            const valid = await verifyPasscodeAPI(code);
+            if (valid) {
+                localStorage.setItem('admin_passcode', code);
+                document.getElementById('passcode-overlay').classList.add('hidden');
+            } else {
+                document.getElementById('access-error').classList.remove('hidden');
+                btn.innerText = originalText;
+            }
+        }
+
+        async function verifyPasscodeAPI(code) {
+            try {
+                const res = await fetch('/api/verify-passcode', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ passcode: code })
+                });
+                return res.ok;
+            } catch (e) { console.error(e); return false; }
+        }
+    </script>
+
+    <script type="module" src="./main.js"></script>
+</body>
