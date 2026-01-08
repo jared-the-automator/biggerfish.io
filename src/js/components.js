@@ -7,7 +7,23 @@ document.addEventListener('DOMContentLoaded', function () {
 // Initialize header dropdown behavior
 function initializeHeader() {
     // Fix for Anchor Scrolling within Snap Container
-    // Standard browser anchor scrolling now handled by CSS scroll-behavior: smooth
+    // Fix: Explicit JS Smooth Scroll for Navigation
+    // This allows page load to be instant (no stutter) while nav clicks are smooth
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                // Optional: Update URL without jumping
+                history.pushState(null, null, '#' + targetId);
+            }
+        });
+    });
 
     // Existing Mobile/Dropdown Logic (if any elements exist)
     const dropdown = document.querySelector('.nav-dropdown');

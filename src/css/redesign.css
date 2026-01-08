@@ -8,9 +8,7 @@
     --white: #FFFFFF;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+
 
 /* Snap Scroll Container - Renamed to Main Container logic but keeping class for back-compat */
 .snap-container {
