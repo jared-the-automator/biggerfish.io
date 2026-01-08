@@ -8,6 +8,10 @@
     --white: #FFFFFF;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Snap Scroll Container - Renamed to Main Container logic but keeping class for back-compat */
 .snap-container {
     /* height: 100vh;  Removed to allow natural document flow */
