@@ -127,6 +127,25 @@
     /* User didn't ask for this active right now, simplify */
 }
 
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hamburger-line {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--black-green);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
 /* Dropdown Styles */
 .nav-item-dropdown {
     position: relative;
@@ -296,8 +315,8 @@
 }
 
 .hero-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
     height: 100%;
     width: 100%;
     max-width: 1400px;
@@ -843,16 +862,33 @@
     }
 
     .command-module.reverse {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .header {
         padding: 1rem;
     }
 
+    .nav-toggle {
+        display: flex;
+    }
+
     .nav-menu {
         display: none;
-        /* Hide nav on mobile for now - fast iteration */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid var(--teal-blue);
+        gap: 1.5rem;
+    }
+
+    .nav-menu.active {
+        display: flex;
     }
 
     .footer-content {
