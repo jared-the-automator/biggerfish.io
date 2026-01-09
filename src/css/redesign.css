@@ -15,7 +15,7 @@
     /* height: 100vh;  Removed to allow natural document flow */
     /* overflow-y: scroll; Removed */
     /* scroll-snap-type: y mandatory; Removed */
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; Removed */
     min-height: 100vh;
 }
 
@@ -342,7 +342,7 @@
 .hero-visual-side {
     position: relative;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: center;
     overflow: visible;
     min-height: 50vh;
