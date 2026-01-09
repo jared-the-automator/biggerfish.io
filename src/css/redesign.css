@@ -853,7 +853,11 @@
     }
 
     .hero-visual-side {
-        min-height: 400px;
+        min-height: auto;
+    }
+
+    .hero-section {
+        padding-bottom: 6rem;
     }
 
     .command-module.reverse {
