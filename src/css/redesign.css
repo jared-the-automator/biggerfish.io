@@ -83,8 +83,8 @@ body {
     font-size: 1.25rem;
     margin-left: 0.5rem;
     color: var(--teal-blue);
-    /* Refined Shimmer: Teal/Mint Spectrum (No Black) */
-    background: linear-gradient(90deg, #0087ca 0%, #9ffcdf 50%, #0087ca 100%);
+    /* Refined Shimmer: Mint -> Teal -> Purple Spectrum */
+    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
