@@ -81,8 +81,21 @@ body {
 .brand-name {
     font-weight: 700;
     font-size: 1.25rem;
-    color: var(--black-green);
     margin-left: 0.5rem;
+    color: var(--black-green);
+    /* Shimmer Effect */
+    background: linear-gradient(90deg, #1F271B 0%, #FFE066 25%, #FF9EAA 50%, #90E0FF 75%, #1F271B 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 8s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 .header-brand {
