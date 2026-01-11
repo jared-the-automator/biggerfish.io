@@ -15,25 +15,56 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Grid Highlight Initialized');
 
     let isVisible = false;
+    let lastTarget = null;
+    let shouldShow = false;
 
     document.addEventListener('mousemove', (e) => {
-        // 1. Hide Over Content Logic
-        const isStrictContent = e.target.closest('a, button, input, select, textarea, img, h1, h2, h3, h4, h5, h6, p, span, label, strong, em, code, .brand-logo');
+        const target = e.target;
 
-        if (isStrictContent) {
+        // Optimization: Check if target changed to avoid expensive style checks
+        if (target !== lastTarget) {
+            lastTarget = target;
+
+            // 1. Whitelist: Grid Containers (Always Show)
+            // Note: .hero-section and others are grid containers.
+            const isGridContainer = target.matches('body, section, .hero-section, .snap-section, .blueprint-grid, .w-view');
+
+            if (isGridContainer) {
+                shouldShow = true;
+            } else {
+                // 2. Blacklist: Content Elements (Always Hide)
+                const isContent = target.matches('p, h1, h2, h3, h4, h5, h6, span, img, svg, input, button, a, select, textarea, label, li, td, th, strong, em, code, .brand-logo, .nav-link, .w-nav-brand, .footer-link, .card');
+
+                if (isContent) {
+                    shouldShow = false;
+                } else {
+                    // 3. Opacity Check: If opaque background, Hide.
+                    const style = window.getComputedStyle(target);
+                    const bg = style.backgroundColor;
+                    // Check for non-transparent (alpha > 0)
+                    // standard format: rgba(r, g, b, a) or rgb(r, g, b)
+                    const isTransparent = bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent';
+
+                    shouldShow = isTransparent;
+                }
+            }
+        }
+
+        if (!shouldShow) {
             highlight.style.display = 'none';
             isVisible = false;
             return;
         }
 
-        // Show if previously hidden
+        // Show (if logic allows)
         if (!isVisible) {
             highlight.style.display = 'block';
             isVisible = true;
         }
 
-        // 2. Alignment Logic
-        const section = e.target.closest('section, .hero-section, .snap-section, footer, header, .header, .navbar');
+        // 4. Alignment Logic
+        // Find the background context (Section or Body) to snap correctly
+        const section = target.closest('section, .hero-section, .snap-section, footer, header, .header, .navbar');
 
         let originX = 0;
         let originY = 0;
