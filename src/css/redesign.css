@@ -83,22 +83,22 @@ body {
     font-size: 1.25rem;
     margin-left: 0.5rem;
     color: var(--black-green);
-    /* Refined Shimmer: Dark base with narrow pastel band */
-    background: linear-gradient(110deg, #1F271B 35%, #FFE066 45%, #FF9EAA 50%, #90E0FF 55%, #1F271B 65%);
-    background-size: 400% 100%;
+    /* Refined Shimmer: Blue/Green Wave */
+    background: linear-gradient(90deg, #1F271B 20%, #0087ca 40%, #9ffcdf 50%, #0087ca 60%, #1F271B 80%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 15s linear infinite;
+    animation: shine 6s linear infinite;
 }
 
 @keyframes shine {
     0% {
-        background-position: 100% 0;
+        background-position: -200% 0;
     }
 
     100% {
-        background-position: -20% 0;
+        background-position: 0% 0;
     }
 }
 
