@@ -2,19 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run on pages with blueprint-grid
     if (!document.body.classList.contains('blueprint-grid')) return;
 
-    const gridSize = 60; // Must match CSS
+    const gridSize = 30; // Must match CSS
 
     // Create Highlight Element
     const highlight = document.createElement('div');
     highlight.classList.add('grid-highlight-box');
 
     // Explicit styles to ensure visibility over everything (except mouse)
-    highlight.style.position = 'fixed'; // Use fixed to handle scrolling easier? No, absolute + page coords is better if grid scrolls.
-    // CSS .grid-highlight-box handles position absolute.
-    // We'll trust CSS but ensure z-index in CSS is high.
+    highlight.style.position = 'absolute';
+    // Fixed vs Absolute: Grid is background of Body (Scrolls). 
+    // e.pageX is absolute. So position absolute is correct.
 
     document.body.appendChild(highlight);
-    console.log('Grid Highlight Initialized'); // Debug log
+    console.log('Grid Highlight Initialized');
 
     let isVisible = false;
 
