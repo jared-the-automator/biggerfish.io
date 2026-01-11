@@ -1725,3 +1725,75 @@ body.blueprint-grid {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== Who Page Styles ===== */
+.who-container {
+    max-width: 1000px;
+    margin: 100px auto 0;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .who-container {
+        flex-direction: column;
+        margin-top: 60px;
+    }
+}
+
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 60px 15px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
+    transform: rotate(-2deg);
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.polaroid-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    color: black;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.dossier-section {
+    flex: 1;
+}
+
+.dossier-title {
+    color: #1C6E8C;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    line-height: 1.1;
+}
+
+.dossier-text {
+    color: #E2E8F0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-family: sans-serif;
+}
+
+.dossier-text p {
+    margin-bottom: 1.5rem;
+}
