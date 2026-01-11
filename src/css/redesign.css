@@ -1732,7 +1732,7 @@ body.blueprint-grid {
     margin: 100px auto 0;
     display: flex;
     gap: 60px;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
     position: relative;
     z-index: 10;
@@ -1753,6 +1753,7 @@ body.blueprint-grid {
     position: relative;
     width: 100%;
     max-width: 350px;
+    margin-top: 2rem;
 }
 
 .polaroid-frame img {
@@ -1779,12 +1780,20 @@ body.blueprint-grid {
 }
 
 .dossier-title {
-    color: #1C6E8C;
+    /* Refined Shimmer: Mint -> Teal -> Purple Spectrum */
+    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 10s linear infinite;
+
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
     line-height: 1.1;
+    font-weight: 800;
 }
 
 .dossier-text {

@@ -25,27 +25,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target !== lastTarget) {
             lastTarget = target;
 
-            // 1. Whitelist: Grid Containers (Always Show)
-            // Note: .hero-section and others are grid containers.
-            const isGridContainer = target.matches('body, section, .hero-section, .snap-section, .blueprint-grid, .w-view');
+            // Check Explicit Exclusions First (Nav, Footer, etc.)
+            const isExplicitlyExcluded = target.closest('nav, footer, .header, .footer, .navbar, .nav-menu');
 
-            if (isGridContainer) {
-                shouldShow = true;
+            if (isExplicitlyExcluded) {
+                shouldShow = false;
             } else {
-                // 2. Blacklist: Content Elements (Always Hide)
-                const isContent = target.matches('p, h1, h2, h3, h4, h5, h6, span, img, svg, input, button, a, select, textarea, label, li, td, th, strong, em, code, .brand-logo, .nav-link, .w-nav-brand, .footer-link, .card');
+                // 1. Whitelist: Grid Containers (Always Show)
+                // Note: .hero-section and others are grid containers.
+                const isGridContainer = target.matches('body, section, .hero-section, .snap-section, .blueprint-grid, .w-view');
 
-                if (isContent) {
-                    shouldShow = false;
+                if (isGridContainer) {
+                    shouldShow = true;
                 } else {
-                    // 3. Opacity Check: If opaque background, Hide.
-                    const style = window.getComputedStyle(target);
-                    const bg = style.backgroundColor;
-                    // Check for non-transparent (alpha > 0)
-                    // standard format: rgba(r, g, b, a) or rgb(r, g, b)
-                    const isTransparent = bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent';
+                    // 2. Blacklist: Content Elements (Always Hide)
+                    // Use closest to catch children of content elements
+                    const isContent = target.closest('p, h1, h2, h3, h4, h5, h6, span, img, svg, input, button, a, select, textarea, label, li, td, th, strong, em, code, .brand-logo, .nav-link, .w-nav-brand, .footer-link, .card');
 
-                    shouldShow = isTransparent;
+                    if (isContent) {
+                        shouldShow = false;
+                    } else {
+                        // 3. Opacity Check: If opaque background, Hide.
+                        const style = window.getComputedStyle(target);
+                        const bg = style.backgroundColor;
+                        // Check for non-transparent (alpha > 0)
+                        const isTransparent = bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent';
+
+                        shouldShow = isTransparent;
+                    }
                 }
             }
         }
