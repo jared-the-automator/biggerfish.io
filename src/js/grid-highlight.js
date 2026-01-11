@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Explicit styles to ensure visibility over everything (except mouse)
     highlight.style.position = 'absolute';
-    // Fixed vs Absolute: Grid is background of Body (Scrolls). 
-    // e.pageX is absolute. So position absolute is correct.
 
     document.body.appendChild(highlight);
     console.log('Grid Highlight Initialized');
@@ -19,17 +17,48 @@ document.addEventListener('DOMContentLoaded', () => {
     let isVisible = false;
 
     document.addEventListener('mousemove', (e) => {
-        // Show only if within body bounds (usually always)
+        // 1. Hide Over Content Logic
+        const isStrictContent = e.target.closest('a, button, input, select, textarea, img, h1, h2, h3, h4, h5, h6, p, span, label, strong, em, code, .brand-logo');
+
+        if (isStrictContent) {
+            highlight.style.display = 'none';
+            isVisible = false;
+            return;
+        }
+
+        // Show if previously hidden
         if (!isVisible) {
             highlight.style.display = 'block';
             isVisible = true;
         }
 
-        // Snap to Grid (Page Coordinates)
-        const snapX = Math.floor(e.pageX / gridSize) * gridSize;
-        const snapY = Math.floor(e.pageY / gridSize) * gridSize;
+        // 2. Alignment Logic
+        const section = e.target.closest('section, .hero-section, .snap-section, footer, header, .header, .navbar');
 
-        highlight.style.transform = `translate(${snapX}px, ${snapY}px)`;
+        let originX = 0;
+        let originY = 0;
+
+        if (section) {
+            const rect = section.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            originY = rect.top + scrollTop;
+            originX = rect.left + scrollLeft;
+        }
+
+        // Calculate relative position to the origin
+        const relX = e.pageX - originX;
+        const relY = e.pageY - originY;
+
+        // Snap relative coord
+        const snapRelX = Math.floor(relX / gridSize) * gridSize;
+        const snapRelY = Math.floor(relY / gridSize) * gridSize;
+
+        // Convert back to absolute page coord
+        const finalX = originX + snapRelX;
+        const finalY = originY + snapRelY;
+
+        highlight.style.transform = `translate(${finalX}px, ${finalY}px)`;
     });
 
     // Optional: Hide if mouse leaves window
