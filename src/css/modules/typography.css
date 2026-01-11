@@ -1,0 +1,47 @@
+/* Typography System */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+p {
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    /* Fix for lost spacing */
+}
+
+a {
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.2s ease;
+}
+
+/* Specific Classes */
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    color: var(--black-green);
+}
+
+.section-title.text-white {
+    color: var(--white);
+}
+
+.section-intro {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.6;
+    max-width: 800px;
+    margin-bottom: 3rem;
+    color: var(--black-green);
+}
