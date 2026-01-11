@@ -82,23 +82,24 @@ body {
     font-weight: 700;
     font-size: 1.25rem;
     margin-left: 0.5rem;
-    color: var(--black-green);
-    /* Refined Shimmer: Blue/Green Wave */
-    background: linear-gradient(90deg, #1F271B 20%, #0087ca 40%, #9ffcdf 50%, #0087ca 60%, #1F271B 80%);
+    color: var(--teal-blue);
+    /* Refined Shimmer: Teal/Mint Spectrum (No Black) */
+    background: linear-gradient(90deg, #0087ca 0%, #9ffcdf 50%, #0087ca 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 6s linear infinite;
+    animation: shine 10s linear infinite;
 }
 
 @keyframes shine {
     0% {
-        background-position: -200% 0;
+        background-position: 0% 0;
     }
 
     100% {
-        background-position: 0% 0;
+        /* Move Left */
+        background-position: -200% 0;
     }
 }
 
