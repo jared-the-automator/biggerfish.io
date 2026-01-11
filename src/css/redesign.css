@@ -1017,8 +1017,32 @@ body {
     background-image:
         linear-gradient(rgba(28, 110, 140, 0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(28, 110, 140, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-size: 60px 60px;
     min-height: 100vh;
+    position: relative;
+    /* Context for absolute highlight */
+}
+
+/* Grid Highlight Box */
+.grid-highlight-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(159, 252, 223, 0.05);
+    /* Mint Green Glow */
+    border: 1px solid rgba(159, 252, 223, 0.2);
+    box-shadow: 0 0 15px rgba(159, 252, 223, 0.1);
+    pointer-events: none;
+    z-index: 1;
+    /* Just above background */
+    display: none;
+    /* Hidden until JS activates */
+}
+
+body.blueprint-grid .grid-highlight-box {
+    display: block;
 }
 
 body.blueprint-grid {
