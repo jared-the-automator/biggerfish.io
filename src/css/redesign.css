@@ -1030,15 +1030,15 @@ body {
     left: 0;
     width: 60px;
     height: 60px;
-    background-color: rgba(159, 252, 223, 0.05);
-    /* Mint Green Glow */
-    border: 1px solid rgba(159, 252, 223, 0.2);
-    box-shadow: 0 0 15px rgba(159, 252, 223, 0.1);
+    background-color: rgba(159, 252, 223, 0.15);
+    /* Increased opacity */
+    border: 1px solid rgba(159, 252, 223, 0.4);
+    box-shadow: 0 0 15px rgba(159, 252, 223, 0.2);
     pointer-events: none;
-    z-index: 1;
-    /* Just above background */
+    z-index: 9999;
+    /* Force Top */
     display: none;
-    /* Hidden until JS activates */
+    transition: transform 0.05s linear;
 }
 
 body.blueprint-grid .grid-highlight-box {

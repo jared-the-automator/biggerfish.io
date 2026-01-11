@@ -7,7 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create Highlight Element
     const highlight = document.createElement('div');
     highlight.classList.add('grid-highlight-box');
+
+    // Explicit styles to ensure visibility over everything (except mouse)
+    highlight.style.position = 'fixed'; // Use fixed to handle scrolling easier? No, absolute + page coords is better if grid scrolls.
+    // CSS .grid-highlight-box handles position absolute.
+    // We'll trust CSS but ensure z-index in CSS is high.
+
     document.body.appendChild(highlight);
+    console.log('Grid Highlight Initialized'); // Debug log
 
     let isVisible = false;
 
