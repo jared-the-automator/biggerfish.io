@@ -568,3 +568,244 @@
         margin-top: 60px;
     }
 }
+/* System Overview (Outcome Engineer) */
+.system-overview-container {
+    max-width: 900px;
+    margin: 120px auto 60px;
+    padding: 0 2rem;
+    flex: 1;
+}
+
+.system-overview-container h1,
+.system-overview-container h2,
+.system-overview-container h3 {
+    color: #9FFCDF;
+    font-weight: 700;
+}
+
+.system-overview-container h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.system-overview-container p,
+.system-overview-container li {
+    color: #E0E0E0;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.system-overview-container strong {
+    color: #FFFFFF;
+}
+
+.overview-header {
+    margin-bottom: 4rem;
+    border-left: 4px solid #9FFCDF;
+    padding-left: 2rem;
+}
+
+.overview-header .subhead {
+    font-size: 1.5rem;
+    color: #E0E0E0;
+    margin: 0;
+}
+
+.overview-section {
+    margin-bottom: 5rem;
+}
+
+.overview-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(159, 252, 223, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.workflow-image {
+    width: 100%;
+    margin: 2rem 0;
+    border: 1px solid rgba(159, 252, 223, 0.2);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.workflow-steps-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.workflow-steps-list li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid #9FFCDF;
+}
+
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.system-overview-container .pricing-card {
+    background: rgba(31, 39, 27, 0.6);
+    border: 1px solid #1C6E8C;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.pricing-card h3 {
+    color: #9FFCDF;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-cost {
+    font-size: 2rem;
+    color: #9FFCDF;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.pricing-details {
+    white-space: pre-line;
+    color: #E0E0E0;
+}
+
+.overview-cta {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .pricing-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* System Overview (Outcome Engineer) - Restored */
+.system-overview-container {
+    max-width: 900px;
+    margin: 120px auto 60px;
+    padding: 0 2rem;
+    flex: 1;
+}
+
+.system-overview-container h1,
+.system-overview-container h2,
+.system-overview-container h3 {
+    color: #9FFCDF;
+    font-weight: 700;
+}
+
+.system-overview-container h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.system-overview-container p,
+.system-overview-container li {
+    color: #E0E0E0;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.system-overview-container strong {
+    color: #FFFFFF;
+}
+
+.overview-header {
+    margin-bottom: 4rem;
+    border-left: 4px solid #9FFCDF;
+    padding-left: 2rem;
+}
+
+.overview-header .subhead {
+    font-size: 1.5rem;
+    color: #E0E0E0;
+    margin: 0;
+}
+
+.overview-section {
+    margin-bottom: 5rem;
+}
+
+.overview-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(159, 252, 223, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.workflow-image {
+    width: 100%;
+    margin: 2rem 0;
+    border: 1px solid rgba(159, 252, 223, 0.2);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.workflow-steps-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.workflow-steps-list li {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid #9FFCDF;
+}
+
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.system-overview-container .pricing-card {
+    background: rgba(31, 39, 27, 0.6);
+    border: 1px solid #1C6E8C;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.pricing-card h3 {
+    color: #9FFCDF;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-cost {
+    font-size: 2rem;
+    color: #9FFCDF;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.pricing-details {
+    white-space: pre-line;
+    color: #E0E0E0;
+}
+
+.overview-cta {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .pricing-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
