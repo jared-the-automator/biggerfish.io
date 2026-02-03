@@ -46,17 +46,27 @@
                 padding-top: 0 !important;
             }
 
+            /* Hide navigation header in print */
+            nav.header,
+            .header {
+                display: none !important;
+            }
+
             .page-container {
                 margin: 0;
                 box-shadow: none;
                 width: 14in !important;
                 min-width: 14in !important;
+                max-width: 14in !important;
                 /* Use zoom for correct print pagination on Chrome/WebKit */
                 zoom: 0.8;
                 min-height: 100vh;
+                max-height: 100vh;
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
                 overflow: hidden;
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
 
             .no-print {
@@ -1306,8 +1316,25 @@
                     return;
                 }
 
-                if (!resp.ok) throw new Error(await resp.text());
-                const record = await resp.json();
+                if (!resp.ok) {
+                    const errorText = await resp.text();
+                    throw new Error(errorText || 'Save failed');
+                }
+
+                // Parse JSON response with error handling
+                const responseText = await resp.text();
+                if (!responseText || responseText.trim() === '') {
+                    throw new Error('Empty response from server');
+                }
+
+                let record;
+                try {
+                    record = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('JSON Parse Error:', parseError);
+                    console.error('Response text:', responseText);
+                    throw new Error('Invalid server response format');
+                }
 
                 // Link Generation
                 const newUrl = new URL(window.location.href);
