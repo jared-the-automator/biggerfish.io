@@ -38,7 +38,7 @@
         @media print {
             @page {
                 size: letter landscape;
-                margin: 0;
+                margin: 0.5in 0.25in;
             }
 
             body {
@@ -53,24 +53,24 @@
             }
 
             .page-container {
-                margin: 0;
+                margin: 0 !important;
                 box-shadow: none;
-                width: 14in !important;
-                min-width: 14in !important;
-                max-width: 14in !important;
-                /* Use zoom for correct print pagination on Chrome/WebKit */
-                zoom: 0.8;
-                min-height: 100vh;
-                max-height: 100vh;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: auto !important;
+                /* Slightly smaller zoom to ensure content fits */
+                zoom: 0.75;
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
-                overflow: hidden;
-                page-break-after: avoid;
-                page-break-inside: avoid;
             }
 
             .no-print {
                 display: none !important;
+            }
+
+            /* Ensure content doesn't overflow */
+            .diagnostic-grid {
+                overflow: visible !important;
             }
         }
 
