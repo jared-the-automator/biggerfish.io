@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Load environment variables locally
-dotenv.config({ path: path.resolve(process.cwd(), '../../.env') });
+dotenv.config();
 
 setInterval(() => {
     // Keep alive
@@ -23,8 +23,8 @@ app.use((req, res, next) => {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const AIRTABLE_BASE_ID = 'appXDaiiOppZ1urX7';
-const AIRTABLE_TABLE_ID = 'tblh9ieavUXk5DbAT';
+const AIRTABLE_BASE_ID = 'appJMqQ5FmP2MkQ7z';
+const AIRTABLE_TABLE_ID = 'tbl2OzYFfFk4cb8aK';
 
 // API: Get Blueprint
 app.get('/api/get-blueprint', async (req, res) => {
