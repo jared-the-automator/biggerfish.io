@@ -72,19 +72,31 @@ app.post('/api/verify-passcode', (req, res) => {
 
 // API: Save Blueprint (Passcode Protected)
 app.post('/api/save-blueprint', async (req, res) => {
+    console.log('[Save Blueprint] Request received');
     const { passcode, payload } = req.body;
 
     // Check Passcode (Default 123456 for dev)
     const CORRECT_CODE = process.env.ADMIN_PASSCODE || '123456';
+    console.log(`[Save Blueprint] Passcode check: ${passcode === CORRECT_CODE ? 'PASS' : 'FAIL'}`);
+
     if (passcode !== CORRECT_CODE) {
+        console.log('[Save Blueprint] Invalid passcode');
         return res.status(401).json({ error: 'Invalid Passcode' });
     }
 
     const apiKey = process.env.AIRTABLE_API_KEY;
-    if (!apiKey) return res.status(500).json({ error: 'Server API Key not configured' });
+    console.log(`[Save Blueprint] API Key present: ${!!apiKey}`);
+
+    if (!apiKey) {
+        console.log('[Save Blueprint] No API key configured');
+        return res.status(500).json({ error: 'Server API Key not configured' });
+    }
 
     try {
         const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_ID}`;
+        console.log(`[Save Blueprint] Calling Airtable: ${url}`);
+        console.log(`[Save Blueprint] Payload:`, JSON.stringify(payload).substring(0, 200));
+
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -94,13 +106,20 @@ app.post('/api/save-blueprint', async (req, res) => {
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) throw new Error(await response.text());
+        console.log(`[Save Blueprint] Airtable response status: ${response.status}`);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('[Save Blueprint] Airtable error:', errorText);
+            return res.status(response.status).json({ error: errorText || 'Airtable request failed' });
+        }
 
         const record = await response.json();
-        res.json(record);
+        console.log(`[Save Blueprint] Success! Record ID: ${record.id}`);
+        return res.json(record);
     } catch (err) {
-        console.error('Save Error:', err);
-        res.status(500).json({ error: 'Airtable Save Failed' });
+        console.error('[Save Blueprint] Exception:', err);
+        return res.status(500).json({ error: err.message || 'Airtable Save Failed' });
     }
 });
 
