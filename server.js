@@ -111,14 +111,24 @@ app.post('/api/save-blueprint', async (req, res) => {
         if (!response.ok) {
             const errorText = await response.text();
             console.error('[Save Blueprint] Airtable error:', errorText);
+            res.setHeader('Content-Type', 'application/json');
             return res.status(response.status).json({ error: errorText || 'Airtable request failed' });
         }
 
         const record = await response.json();
-        console.log(`[Save Blueprint] Success! Record ID: ${record.id}`);
-        return res.json(record);
+        console.log(`[Save Blueprint] Success! Record:`, JSON.stringify(record).substring(0, 200));
+
+        if (!record || !record.id) {
+            console.error('[Save Blueprint] Invalid record received:', record);
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(500).json({ error: 'Invalid record received from Airtable' });
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json(record);
     } catch (err) {
         console.error('[Save Blueprint] Exception:', err);
+        res.setHeader('Content-Type', 'application/json');
         return res.status(500).json({ error: err.message || 'Airtable Save Failed' });
     }
 });
