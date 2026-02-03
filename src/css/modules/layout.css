@@ -1,0 +1,202 @@
+/* Layout Structures */
+
+/* Main Containers */
+.snap-container {
+    min-height: 100vh;
+}
+
+.snap-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-content {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Blueprint Grid Background */
+.blueprint-grid {
+    background-color: #1F271B;
+    background-image:
+        linear-gradient(rgba(28, 110, 140, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 110, 140, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    /* For Sticky Footer */
+    flex-direction: column;
+}
+
+/* Grid Highlight Box */
+.grid-highlight-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(159, 252, 223, 0.15);
+    border: 1px solid rgba(159, 252, 223, 0.4);
+    box-shadow: 0 0 15px rgba(159, 252, 223, 0.2);
+    pointer-events: none;
+    z-index: 10;
+    display: none;
+    transition: transform 0.05s linear;
+}
+
+body.blueprint-grid .grid-highlight-box {
+    display: block;
+}
+
+/* ===== Navigation Bar ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--teal-blue);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--black-green);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--deep-purple);
+    /* Shimmer Effect */
+    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 10s linear infinite;
+}
+
+.brand-tagline {
+    font-size: 0.8rem;
+    color: var(--teal-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== Footer ===== */
+.footer {
+    background-color: var(--black-green);
+    color: var(--light-gray);
+    padding: 1rem 3rem;
+    border-top: none !important;
+    margin-top: auto;
+    /* Sticky Footer Logic */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    /* Inherit */
+}
+
+.footer-company {
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.footer-tagline {
+    color: var(--light-gray);
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-link {
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+}
+
+.footer-link:hover {
+    color: var(--mint-green);
+}
+
+.footer-separator {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-copyright {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 0;
+    border-top: none;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+/* Mobile Tweaks for Layout */
+@media (max-width: 900px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

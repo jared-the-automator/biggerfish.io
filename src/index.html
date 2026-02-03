@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bigger Fish | Digital Foreman for Trade Agencies</title>
+    <title>Bigger Fish Intelligent Automation</title>
     <meta
         content="We build automated operations engines for trade agencies, contractors, and service operators. Let us handle the net-work—you've got bigger fish to fry."
         name="description">
@@ -11,17 +11,13 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
     <!-- <link href="css/jareds-radical-site-fc1a91.webflow.css" rel="stylesheet" type="text/css"> -->
-    <link href="css/redesign.css?v=1.4" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-    <script
-        type="text/javascript">WebFont.load({ google: { families: ["Outfit:100,200,300,regular,500,600,700,800,900"] } });</script>
+    <link href="css/redesign.css?v=2.2" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 
-<body>
+<body class="blueprint-grid">
     <nav class="header">
         <a href="index.html" class="header-brand">
             <img src="images/biggerfish-logo.png" loading="lazy" width="40" alt="Bigger Fish Logo" class="brand-logo">
@@ -44,8 +40,9 @@
                     <a href="outcome-engineer.html" class="dropdown-link outcome">Outcome Engineer</a>
                 </div>
             </li>
+            <li><a href="who.html" class="nav-link">Who</a></li>
             <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
-                    rel="noopener noreferrer">When?</a></li>
+                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">When?</a></li>
         </ul>
     </nav>
 
@@ -214,10 +211,10 @@
 
         <footer class="footer">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-company">Bigger Fish Intelligent Automation</div>
-                    <div class="footer-tagline">Smart Systems for Hard Work</div>
-                </div>
+                <a href="index.html" class="footer-brand" style="text-decoration: none;">
+                <div class="footer-company">Bigger Fish Intelligent Automation</div>
+                <div class="footer-tagline">You've got bigger fish to fry.</div>
+            </a>
                 <div class="footer-links">
                     <a href="login.html" class="footer-link">Client Login</a>
                     <span class="footer-separator">|</span>

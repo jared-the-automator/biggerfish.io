@@ -1,0 +1,20 @@
+:root {
+    --deep-purple: #540D6E;
+    --light-gray: #D0CCD0;
+    --mint-green: #9FFCDF;
+    --teal-blue: #1C6E8C;
+    --black-green: #1F271B;
+    --white: #FFFFFF;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    color: var(--black-green);
+    -webkit-font-smoothing: antialiased;
+}
