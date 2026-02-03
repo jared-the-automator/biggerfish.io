@@ -315,8 +315,8 @@
 }
 
 .hero-split {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     height: 100%;
     width: 100%;
     max-width: 1400px;

@@ -177,7 +177,7 @@
             /* Mint tint */
         }
 
-        .blueprint-grid {
+        .diagnostic-content-grid {
             height: 100%;
         }
 
@@ -477,7 +477,7 @@
             </div>
 
             <!-- Main 3-Column Grid -->
-            <div class="blueprint-grid flex flex-1">
+            <div class="diagnostic-content-grid flex flex-1 flex-row">
 
                 <!-- Col 1: Current State -->
                 <section class="w-1/4 col-current px-5 py-6 border-r border-gray-200">
@@ -977,6 +977,50 @@
             return "Unknown";
         }
 
+        function addCustomRow(list) {
+            const serviceName = prompt("Enter custom service name:");
+            if (!serviceName || !serviceName.trim()) return;
+
+            const costInput = prompt("Enter monthly cost (e.g., 25):");
+            const cost = parseFloat(costInput) || 0;
+
+            const clientPaysInput = prompt("Is this a client-paid subscription? (yes/no):", "no");
+            const clientPays = clientPaysInput && clientPaysInput.toLowerCase().startsWith('y');
+
+            // Create a unique ID for this custom service
+            const customId = 'custom-' + Date.now();
+
+            // Create the service object
+            const customService = {
+                id: customId,
+                name: serviceName.trim(),
+                cost: cost,
+                unit: 'mo',
+                clientPays: clientPays
+            };
+
+            // Find the category from the list element's ID
+            let category = "Unknown";
+            for (const [cat, services] of Object.entries(SERVICES_DB)) {
+                const listId = `list-${cat.replace(/\W/g, '')}`;
+                if (list.id === listId) {
+                    category = cat;
+                    break;
+                }
+            }
+
+            // Add to selections
+            if (!selections[category]) selections[category] = new Set();
+            selections[category].add(customId);
+
+            // Add the row to the UI
+            addServiceRow(list, customService, category);
+
+            // Update calculations
+            calculateROI();
+            reorderServiceGrid();
+        }
+
         // ---------------------------------------------------------
         // (Old Add Item/Mermaid Code Removed)
         // ---------------------------------------------------------
@@ -1096,9 +1140,9 @@
 
             // 7. Update Partner Retainers, Upfront Build & % TCI
             const partners = [
-                { suffix: 'a', retainerMult: 1.40, upfrontMult: 0.8 }, // Maintenance
-                { suffix: 'b', retainerMult: 1.80, upfrontMult: 0.6 }, // Growth
-                { suffix: 'c', retainerMult: 2.20, upfrontMult: 0.4 }  // Investment
+                { suffix: 'a', retainerMult: 1.40, upfrontMult: 0.9 }, // The Operator (90% of Client-Managed Build)
+                { suffix: 'b', retainerMult: 1.80, upfrontMult: 0.8 }, // The Fabricator (80% of Client-Managed Build)
+                { suffix: 'c', retainerMult: 2.20, upfrontMult: 0.7 }  // The Architect (70% of Client-Managed Build)
             ];
 
             partners.forEach(p => {
