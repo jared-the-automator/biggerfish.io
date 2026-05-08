@@ -128,13 +128,13 @@
 
 /* How Section */
 .how-section {
-    background-color: #f4f4f4;
+    background: transparent;
 }
 
 .how-subhead {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 600;
-    color: var(--teal-blue);
+    color: var(--mint-green);
     margin-bottom: 3rem;
     text-align: center;
 }
@@ -148,18 +148,22 @@
 
 .how-philosophy {
     text-align: center;
+    border-left: 1px solid rgba(159, 252, 223, 0.2);
+    border-right: 1px solid rgba(159, 252, 223, 0.2);
+    padding: 0 2rem;
 }
 
 .how-body {
     font-size: 1.3rem;
     line-height: 1.7;
-    color: #555;
+    color: var(--light-gray);
     font-weight: 500;
 }
 
 .engagement-card {
-    background: var(--white);
-    border: 2px solid var(--teal-blue);
+    background: rgba(31, 39, 27, 0.85);
+    border: 1px solid rgba(28, 110, 140, 0.5);
+    box-shadow: 0 0 20px rgba(159, 252, 223, 0.08);
     padding: 2.5rem 2rem;
     border-radius: 4px;
     text-align: center;
@@ -167,12 +171,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .engagement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(28, 110, 140, 0.2);
+    border-color: var(--mint-green);
+    box-shadow: 0 0 30px rgba(159, 252, 223, 0.15);
 }
 
 .centered-title {
@@ -194,40 +198,22 @@
     color: transparent;
 }
 
-.card-project-build .card-icon {
-    background: var(--deep-purple);
-    text-shadow: 0 0 0 var(--mint-green);
-}
-
-.card-project-build .engagement-title {
-    background: var(--mint-green);
-    color: var(--deep-purple);
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
-}
-
+.card-project-build .card-icon,
 .card-digital-foreman .card-icon {
-    background: var(--mint-green);
-    text-shadow: 0 0 0 var(--deep-purple);
-}
-
-.card-digital-foreman .engagement-title {
-    background: var(--deep-purple);
-    color: var(--mint-green);
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
+    background: transparent;
 }
 
 .engagement-title {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--mint-green);
 }
 
 .engagement-copy {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #444;
+    color: var(--light-gray);
 }
 
 /* Solution Section */
