@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run on pages with blueprint-grid
     if (!document.body.classList.contains('blueprint-grid')) return;
 
-    const gridSize = 30; // Must match CSS
+    const gridSize = 32; // Must match CSS background-size
 
     // Create Highlight Element
     const highlight = document.createElement('div');
@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const relX = e.pageX - originX;
         const relY = e.pageY - originY;
 
-        // Snap relative coord
-        const snapRelX = Math.floor(relX / gridSize) * gridSize;
-        const snapRelY = Math.floor(relY / gridSize) * gridSize;
+        // Snap relative coord — offset by 1px to match background-position: -1px -1px
+        const snapRelX = Math.floor((relX + 1) / gridSize) * gridSize - 1;
+        const snapRelY = Math.floor((relY + 1) / gridSize) * gridSize - 1;
 
         // Convert back to absolute page coord
         const finalX = originX + snapRelX;
