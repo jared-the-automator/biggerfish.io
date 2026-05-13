@@ -1,47 +1,77 @@
-/* Typography System */
+/* Blueprint Room / Typography */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     margin-top: 0;
+    color: var(--paper);
+    letter-spacing: -0.01em;
 }
 
 p {
-    font-family: 'Outfit', sans-serif;
-    margin-bottom: 1.5rem;
+    font-family: 'Source Serif 4', Georgia, serif;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
     line-height: 1.6;
-    letter-spacing: 0.01em;
-    /* Fix for lost spacing */
+    color: var(--paper-soft);
 }
 
 a {
-    font-family: 'Outfit', sans-serif;
-    transition: all 0.2s ease;
+    font-family: inherit;
+    color: var(--cyan-rule);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-/* Specific Classes */
+a:hover {
+    color: var(--paper);
+}
+
+/* Plate-style section title */
 .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
-    color: var(--black-green);
+    color: var(--paper);
 }
 
 .section-title.text-white {
-    color: var(--white);
+    color: var(--paper);
 }
 
 .section-intro {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.15rem;
     line-height: 1.6;
-    max-width: 800px;
+    max-width: 62ch;
     margin-bottom: 3rem;
-    color: var(--black-green);
+    color: var(--pencil-grey);
+}
+
+/* Plate label notch (top-left of every plate) */
+.plate-label {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--cyan-rule);
+    text-transform: uppercase;
+}
+
+/* Revision notch (top-right of every plate) */
+.plate-revision {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pencil-grey);
+    text-transform: uppercase;
+}
+
+/* Mono utility */
+.mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }

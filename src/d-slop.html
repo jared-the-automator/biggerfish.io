@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plate / The Outcome Engineer | Bigger Fish</title>
+    <title>Plate / D-slop | Bigger Fish</title>
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
     <link href="css/redesign.css?v=3.0" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
                     <a href="d-slop.html" class="dropdown-link">D-slop</a>
                 </div>
             </li>
-            <li class="nav-item"><a href="who.html" class="nav-link">Who</a></li>
+            <li><a href="who.html" class="nav-link">Who</a></li>
             <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
                     rel="noopener noreferrer">Book it</a></li>
         </ul>
@@ -48,91 +48,83 @@
 
     <main class="system-overview-container">
         <div class="overview-strip">
-            <span>Bigger Fish / Outcome Engineer</span>
+            <span>Bigger Fish / D-slop</span>
             <span>Plate / Concept brief / Rev. A. 2026</span>
         </div>
 
         <section class="overview-plate">
-            <span class="reality-plate-notch">Plate / The Outcome Engineer</span>
+            <span class="reality-plate-notch">Plate / D-slop</span>
             <span class="reality-plate-rev">Rev. A. 2026</span>
 
             <header class="overview-header">
-                <h1>The Outcome Engineer</h1>
-                <p class="subhead">Concept and logic brief for the review-routing system.</p>
+                <h1>D-slop</h1>
+                <p class="subhead">A browser extension for reclaiming the pre-slop internet.</p>
             </header>
 
             <section class="overview-section">
-                <h2>1. Why this exists</h2>
-                <p>The most common question we get: "My reservation platform already collects feedback. Why is this better?"</p>
-                <p>The answer is one word. <strong>Traffic.</strong></p>
-                <p>When a guest searches for a place to eat, they use Google, not a reservation app. A 5-star review inside OpenTable or Resy is invisible to that search. It helps the platform, not you.</p>
-                <p><strong>The risk.</strong> A single 1-star review acts as a heavy drag on your overall rating. The math usually requires twelve 5-star reviews to neutralize the average damage of one 1-star.</p>
-                <p><strong>The system.</strong> The Outcome Engineer filters the stream. Happy guests get pushed to Google, where their review drives revenue. Unhappy guests get diverted to a private channel, where you can fix what went wrong before it goes public.</p>
+                <h2>1. What it is</h2>
+                <p>The web filled up with AI-generated text somewhere around 2023. Most of it sounds the same: confident, polished, and completely hollow.</p>
+                <p>D-slop is a browser extension that detects it and lets you choose what to do with it. Flag it with a colored border. Fold it out of view. Remove it from the page entirely.</p>
+                <p>The check runs locally. Nothing leaves your browser. No account, no telemetry, no tracking.</p>
+                <p>This is a free, open-source tool. A donation to humanity. Pre-slop internet, on demand.</p>
             </section>
 
             <section class="overview-section">
-                <h2>2. The workflow</h2>
-                <img src="./images/outcome_engineer.webp" alt="Workflow logic diagram" class="workflow-image">
-                <p>The system runs in the background. On the real-time tier, the only staff action required is the standard step of closing the table in your terminal.</p>
+                <h2>2. How detection works</h2>
+                <p>The extension scores each text block of 50 words or more against five signals. The individual scores combine into a confidence reading. Anything that clears the threshold gets flagged.</p>
 
                 <ol class="workflow-steps-list">
-                    <li><strong>The trigger.</strong> The guest departs.</li>
-                    <li><strong>The contact.</strong> The system sends a plain-text, personal email from the GM asking, "Did you enjoy your experience with us?"</li>
-                    <li><strong>The filter.</strong> A "yes" click redirects the guest to Google Reviews, public. A "no" click redirects to a private feedback form, with a management alert attached.</li>
+                    <li><strong>Phrase matching.</strong> Known AI verbal tics tracked as a list: "delve into", "it's worth noting", "tapestry of", "as an AI language model", "in conclusion". Hundreds of entries, updated by an autonomous agent.</li>
+                    <li><strong>Burstiness.</strong> AI prose is unnaturally uniform in sentence length. Real writing varies.</li>
+                    <li><strong>Punctuation density.</strong> Overuse of em dashes, semicolons, and parallel comma structures characteristic of LLM output.</li>
+                    <li><strong>List uniformity.</strong> Bulleted and numbered lists where every item lands within 10% of the mean length. Human lists don't do that.</li>
+                    <li><strong>Conclusion markers.</strong> Structural tells: "In conclusion", "To summarize", standalone TL;DR sections.</li>
                 </ol>
+
+                <p>Scoring is a pure function. Same text, same rules, same result every time. Not 100% reliable, and that's stated plainly. The goal is catching the obvious majority, not building a forensic tool.</p>
             </section>
 
             <section class="overview-section">
-                <h2>3. Ingestion tiers and pricing</h2>
-                <div class="pricing-cards-grid">
-                    <div class="pricing-card">
-                        <h3>Real-Time Ingestion (Standard)</h3>
-                        <span class="pricing-cost">$0.10 / reservation</span>
-                        <p class="pricing-details"><strong>Best for.</strong> SevenRooms, Toast, Tock.<br>
-                            <strong>Mechanism.</strong> Direct API or webhook.<br>
-                            <strong>Speed.</strong> Instant on table close.</p>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Universal Ingestion (Bridge)</h3>
-                        <span class="pricing-cost">$0.06 / reservation</span>
-                        <p class="pricing-details"><strong>Best for.</strong> Resy, basic OpenTable, legacy POS.<br>
-                            <strong>Mechanism.</strong> Proprietary email parsing.<br>
-                            <strong>Speed.</strong> Next morning following the visit.</p>
-                    </div>
-                </div>
+                <h2>3. Display modes</h2>
+                <p>Three modes, selectable in the extension popup. The choice applies across every page.</p>
+
+                <ol class="workflow-steps-list">
+                    <li><strong>Highlight.</strong> A colored border and a confidence score badge appear on flagged blocks. All content stays visible. Default mode for new installs.</li>
+                    <li><strong>Collapse.</strong> Flagged blocks fold to a single disclosure line: "likely AI-generated, click to reveal." The content is still there. You just choose whether to read it.</li>
+                    <li><strong>Hidden.</strong> A full-page overlay fires before the page renders, showing how many blocks were flagged and a short countdown. A "Show anyway" button lets you through immediately if you want. The overlay clears on its own when the timer runs out.</li>
+                </ol>
+
+                <p>A global toggle in the popup turns the extension fully off. In that state, zero DOM modification happens and pages render completely untouched.</p>
             </section>
 
             <section class="overview-section">
-                <h2>4. Visibility and billing</h2>
-                <ul>
-                    <li><strong>The sentiment dashboard.</strong> A live Google Looker Studio dashboard tracks sentiment trends, feedback volume, and "save rate" (negative reviews caught before going public).</li>
-                    <li><strong>Usage based.</strong> You are billed only for reservations the system processes.</li>
-                    <li><strong>Walk-ins.</strong> Walk-in guests are not billed unless your staff captures their email and attaches it to a profile.</li>
-                    <li><strong>Non-responsive guests.</strong> The fee applies to every reservation processed with a valid email. The cost covers the digital work to ingest, parse, and verify data.</li>
-                </ul>
+                <h2>4. How rules stay current</h2>
+                <p>Detection phrase lists go stale as AI models evolve. D-slop solves this without requiring a store update for every rule change.</p>
+                <p>An autonomous agent (GitHub Actions and Claude) runs every week against a curated test corpus of AI-generated samples. It tunes phrase lists, signal weights, and detection thresholds. Any proposed change must clear a minimum accuracy check against the corpus before it ships. The extension fetches the latest rules once a day, so new rules reach your browser within 24 hours of any agent push.</p>
+                <p>All agent runs are logged to the public repository. The corpus is open. If you find a miss or a false positive, file a labeled GitHub Issue and the agent will incorporate it on the next run.</p>
             </section>
 
             <section class="overview-section">
-                <h2>5. Implementation</h2>
-                <p><strong>Fee.</strong> $599 one-time. Covers architecture setup, domain authentication, dashboard build, logic configuration.</p>
-                <p><strong>Timeline.</strong> 48 hours. Day 1: system access and domain authentication. Day 2: logic test and go-live.</p>
+                <h2>5. Privacy</h2>
+                <p>No account. No telemetry. No analytics.</p>
+                <p>All text scoring runs inside your browser on your machine. The extension makes one outbound request: a small daily fetch of the rules file from a private endpoint. That is the complete data footprint.</p>
             </section>
 
             <div class="stamp-row">
                 <div class="stamp-signature">Drawn 2026 / J. Fischer / Operator</div>
-                <a href="https://calendar.app.google/vTSz4QaQj9hMAJ67A" class="cta-engineer" target="_blank"
-                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">Book Deployment Call</a>
+                <a href="https://github.com/jared-the-automator/d-slop/releases/latest" class="cta-engineer" target="_blank"
+                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">Install D-slop</a>
             </div>
         </section>
 
         <div class="title-block" aria-hidden="true">
             <div class="title-block-row">
                 <div class="label">Project</div>
-                <div class="value">Outcome Engineer</div>
+                <div class="value">D-slop</div>
             </div>
             <div class="title-block-row">
                 <div class="label">Sheet</div>
-                <div class="value">OE-01 / Concept brief</div>
+                <div class="value">DS-01 / Concept brief</div>
             </div>
             <div class="title-block-row">
                 <div class="label">Revision</div>

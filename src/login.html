@@ -4,149 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Portal | Bigger Fish</title>
+    <title>Client Dock | Bigger Fish</title>
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
-    <link href="css/jareds-radical-site-fc1a91.webflow.css" rel="stylesheet" type="text/css">
-    <link href="css/redesign.css?v=2.2" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css?v=3.0" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
-    <style>
-        /* Specific Styles for Login Page */
-        body.blueprint-grid {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .login-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            background: rgba(31, 39, 27, 0.95);
-            border: 1px solid #1C6E8C;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(28, 110, 140, 0.2);
-            padding: 2.5rem;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .login-header h1 {
-            color: #FFFFFF;
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .login-header p {
-            color: #64748B;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-label {
-            display: block;
-            color: #94A3B8;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        .form-input {
-            width: 100%;
-            background: #0F172A;
-            border: 1px solid #334155;
-            color: #FFFFFF;
-            padding: 0.75rem 1rem;
-            border-radius: 4px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: #1C6E8C;
-        }
-
-        .auth-button {
-            width: 100%;
-            background: #9FFCDF;
-            color: #1F271B;
-            border: none;
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            margin-top: 0.5rem;
-        }
-
-        .auth-button:hover {
-            opacity: 0.9;
-        }
-
-        .auth-button:disabled {
-            background: #475569;
-            color: #94A3B8;
-            cursor: not-allowed;
-        }
-
-        .error-message {
-            color: #EF4444;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            font-weight: 600;
-            min-height: 1.35em;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .error-message.visible {
-            opacity: 1;
-        }
-
-        .forgot-link {
-            display: block;
-            margin-top: 1.5rem;
-            color: #64748B;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .forgot-link:hover {
-            color: #94A3B8;
-        }
-    </style>
 </head>
 
 <body class="blueprint-grid">
 
     <nav class="header">
         <a href="index.html" class="header-brand">
-            <img src="images/biggerfish-logo.png" loading="lazy" width="40" alt="Bigger Fish Logo" class="brand-logo">
+            <img src="images/biggerfish-logo.png" loading="lazy" width="48" alt="Bigger Fish Logo" class="brand-logo">
             <div class="brand-text">
                 <div class="brand-name">Bigger Fish Intelligent Automation</div>
             </div>
@@ -157,25 +30,36 @@
             <span class="hamburger-line"></span>
         </button>
         <ul class="nav-menu">
-            <li><a href="index.html#why" class="nav-link">Why?</a></li>
+            <li><a href="index.html#why" class="nav-link">Why</a></li>
             <li><a href="index.html#how" class="nav-link">How</a></li>
             <li class="nav-item-dropdown">
                 <a href="index.html#what" class="nav-link">What</a>
                 <div class="nav-dropdown-content">
                     <a href="index.html#what" class="dropdown-link">Custom Web Applications</a>
                     <a href="outcome-engineer.html" class="dropdown-link outcome">Outcome Engineer</a>
+                    <a href="https://turingyde.com" class="dropdown-link" target="_blank" rel="noopener noreferrer">Turingyde</a>
+                    <a href="d-slop.html" class="dropdown-link">D-slop</a>
                 </div>
             </li>
+            <li><a href="who.html" class="nav-link">Who</a></li>
             <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
-                    rel="noopener noreferrer">When?</a></li>
+                    rel="noopener noreferrer">Book it</a></li>
         </ul>
     </nav>
 
     <main class="login-container">
-        <div class="login-card">
+        <div class="login-strip">
+            <span>Bigger Fish / Client Dock</span>
+            <span>Restricted access / Rev. A. 2026</span>
+        </div>
+
+        <section class="login-plate">
+            <span class="reality-plate-notch">Plate / Client Dock</span>
+            <span class="reality-plate-rev">Restricted</span>
+
             <div class="login-header">
-                <h1>CLIENT DOCK</h1>
-                <p>Welcome aboard.</p>
+                <h1>Client Dock</h1>
+                <p>Welcome aboard</p>
             </div>
 
             <form id="loginForm" onsubmit="handleAuth(event)">
@@ -189,12 +73,31 @@
                     <input type="password" class="form-input" required autocomplete="off">
                 </div>
 
-                <button type="submit" id="authButton" class="auth-button">AUTHENTICATE</button>
+                <button type="submit" id="authButton" class="auth-button">Authenticate</button>
             </form>
 
             <div id="errorMessage" class="error-message">Access denied. Invalid credentials.</div>
 
-            <a href="#" class="forgot-link">Forgot Credentials?</a>
+            <a href="#" class="forgot-link">Forgot credentials?</a>
+        </section>
+
+        <div class="title-block" aria-hidden="true">
+            <div class="title-block-row">
+                <div class="label">Project</div>
+                <div class="value">biggerfish.io</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Sheet</div>
+                <div class="value">CD-01 / Client Dock</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Revision</div>
+                <div class="value">A. 2026.05</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Drawn by</div>
+                <div class="value">Bigger Fish, studio of one</div>
+            </div>
         </div>
     </main>
 
@@ -206,14 +109,14 @@
             </a>
             <div class="footer-links">
                 <a href="login.html" class="footer-link">Client Login</a>
-                <span class="footer-separator">|</span>
+                <span class="footer-separator">/</span>
                 <a href="privacy-policy.html" class="footer-link">Privacy</a>
-                <span class="footer-separator">|</span>
+                <span class="footer-separator">/</span>
                 <a href="terms-conditions.html" class="footer-link">Terms</a>
             </div>
         </div>
         <div class="footer-copyright">
-            Copyright © 2025 Bigger Fish Intelligent Automation
+            Copyright 2026 / Bigger Fish Intelligent Automation
         </div>
     </footer>
 
@@ -228,21 +131,16 @@
             const btn = document.getElementById('authButton');
             const errorMsg = document.getElementById('errorMessage');
 
-            // Reset state
             errorMsg.classList.remove('visible');
 
-            // Loading state
-            btn.innerText = "VERIFYING...";
+            btn.innerText = "Verifying...";
             btn.disabled = true;
 
-            // Simulate API latency
             setTimeout(() => {
-                // Show Error
                 errorMsg.innerText = "Access denied. Invalid credentials.";
                 errorMsg.classList.add('visible');
 
-                // Reset Button
-                btn.innerText = "AUTHENTICATE";
+                btn.innerText = "Authenticate";
                 btn.disabled = false;
             }, 1500);
         }

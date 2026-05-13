@@ -1,4 +1,6 @@
-/* Navigation Menu */
+/* Blueprint Room / Components */
+
+/* Nav menu */
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -10,160 +12,171 @@
 
 .nav-link {
     text-decoration: none;
-    color: #666;
+    color: var(--pencil-grey);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     position: relative;
-    transition: all 0.3s ease;
-    font-family: 'Outfit', sans-serif;
+    padding: 6px 0;
+    transition: color 0.2s ease;
 }
 
-.nav-link:hover {
-    color: var(--teal-blue);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+.nav-link:hover,
+.nav-link.w--current,
+.nav-link[aria-current="page"] {
+    color: var(--paper);
 }
 
-/* Nav CTA */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--cyan-rule);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.w--current::after,
+.nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+/* Nav CTA / architect's red stamp */
 .nav-cta {
     display: inline-block;
-    padding: 0.6rem 1.5rem;
-    background: var(--teal-blue);
-    color: var(--white);
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--red-pencil);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1px solid var(--red-pencil);
+    transition: background 0.22s ease, color 0.22s ease;
 }
 
 .nav-cta:hover {
-    background: var(--deep-purple);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(28, 110, 140, 0.3);
-    color: var(--white);
+    background: var(--red-pencil);
+    color: var(--paper);
 }
 
-/* Mobile Nav Toggle */
+/* Mobile toggle */
 .nav-toggle {
     display: none;
     background: none;
-    border: none;
+    border: 1px solid var(--cyan-soft);
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 8px;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
 }
 
 .hamburger-line {
     display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--black-green);
-    border-radius: 3px;
-    transition: all 0.3s ease;
+    width: 22px;
+    height: 1px;
+    background-color: var(--cyan-rule);
+    transition: background 0.2s ease;
 }
 
-/* Dropdowns */
+/* Dropdowns / sheet-paper inset */
 .nav-item-dropdown {
     position: relative;
     display: inline-block;
-    height: 100%;
 }
 
 .nav-dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--white);
-    min-width: 260px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: var(--navy-deep);
+    min-width: 240px;
     z-index: 1000;
-    border-radius: 4px;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0.5rem 0;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    margin-top: 10px;
+    margin-top: 18px;
+    border: 1px solid var(--cyan-rule);
 }
 
 .nav-dropdown-content::before {
     content: "";
-    /* Bridge */
     position: absolute;
-    top: -20px;
+    top: -22px;
     left: 0;
     width: 100%;
-    height: 20px;
+    height: 22px;
     background: transparent;
 }
 
 .nav-item-dropdown:hover .nav-dropdown-content {
     display: block;
-    animation: fadeIn 0.2s ease-out;
 }
 
 .dropdown-link {
-    color: var(--black-green);
-    padding: 12px 20px;
+    color: var(--paper-soft);
+    padding: 14px 22px;
     text-decoration: none;
     display: block;
-    font-size: 0.95rem;
-    transition: all 0.2s;
-    border-left: 3px solid transparent;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--cyan-soft);
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.dropdown-link:last-child {
+    border-bottom: none;
 }
 
 .dropdown-link:hover {
-    background-color: #f9f9f9;
-    color: var(--teal-blue);
-    border-left-color: var(--teal-blue);
-    padding-left: 24px;
+    background-color: var(--navy);
+    color: var(--paper);
 }
 
 .dropdown-link.outcome {
-    font-weight: 600;
-    color: var(--deep-purple);
-    background-color: rgba(159, 252, 223, 0.1);
+    color: var(--cyan-rule);
 }
 
 .dropdown-link.outcome:hover {
-    background-color: rgba(159, 252, 223, 0.3);
+    color: var(--paper);
+    background-color: var(--navy);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-/* Buttons */
-.cta-button {
+/* Stamp CTA (architect's red) */
+.cta-button,
+.stamp-cta {
     display: inline-block;
-    padding: 1rem 2.5rem;
-    background: var(--mint-green);
-    color: var(--black-green);
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1rem;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border: 2px solid var(--mint-green);
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
+    color: var(--red-pencil);
     background: transparent;
-    color: var(--mint-green);
+    padding: 18px 32px;
+    text-decoration: none;
+    border: 2px solid var(--red-pencil);
+    transition: background 0.22s ease, color 0.22s ease;
+    cursor: pointer;
 }
 
-/* Mobile Responsive Nav */
+.cta-button:hover,
+.stamp-cta:hover {
+    background: var(--red-pencil);
+    color: var(--paper);
+}
+
+/* Mobile responsive nav */
 @media (max-width: 900px) {
     .nav-toggle {
         display: flex;
@@ -175,15 +188,20 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: var(--white);
+        background: var(--navy-deep);
         flex-direction: column;
-        padding: 2rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid var(--teal-blue);
-        gap: 1.5rem;
+        padding: 24px;
+        border-top: 1px solid var(--cyan-soft);
+        border-bottom: 1px solid var(--cyan-soft);
+        gap: 18px;
+        align-items: flex-start;
     }
 
     .nav-menu.active {
         display: flex;
+    }
+
+    .nav-link {
+        font-size: 12px;
     }
 }

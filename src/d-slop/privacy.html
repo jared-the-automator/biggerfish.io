@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plate / D-slop Privacy Policy | Bigger Fish</title>
+    <link href="../css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="../css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="../css/redesign.css?v=3.0" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="../images/webclip.png" rel="apple-touch-icon">
+</head>
+
+<body class="blueprint-grid">
+    <nav class="header">
+        <a href="../index.html" class="header-brand">
+            <img src="../images/biggerfish-logo.png" loading="lazy" width="48" alt="Bigger Fish Logo" class="brand-logo">
+            <div class="brand-text">
+                <div class="brand-name">Bigger Fish Intelligent Automation</div>
+            </div>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="../index.html#why" class="nav-link">Why</a></li>
+            <li><a href="../index.html#how" class="nav-link">How</a></li>
+            <li class="nav-item-dropdown">
+                <a href="../index.html#what" class="nav-link">What</a>
+                <div class="nav-dropdown-content">
+                    <a href="../index.html#what" class="dropdown-link">Custom Web Applications</a>
+                    <a href="../outcome-engineer.html" class="dropdown-link outcome">Outcome Engineer</a>
+                    <a href="https://turingyde.com" class="dropdown-link" target="_blank" rel="noopener noreferrer">Turingyde</a>
+                    <a href="../d-slop.html" class="dropdown-link">D-slop</a>
+                </div>
+            </li>
+            <li><a href="../who.html" class="nav-link">Who</a></li>
+            <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
+                    rel="noopener noreferrer">Book it</a></li>
+        </ul>
+    </nav>
+
+    <main class="system-overview-container">
+        <div class="overview-strip">
+            <span>Bigger Fish / D-slop / Privacy</span>
+            <span>Plate / Privacy policy / Rev. A. 2026</span>
+        </div>
+
+        <section class="overview-plate">
+            <span class="reality-plate-notch">Plate / D-slop Privacy Policy</span>
+            <span class="reality-plate-rev">Rev. A. 2026</span>
+
+            <header class="overview-header">
+                <h1>D-slop Privacy Policy</h1>
+                <p class="subhead">What the extension stores, what it sends, and what it never touches.</p>
+            </header>
+
+            <section class="overview-section">
+                <h2>1. Scope</h2>
+                <p>This policy covers the D-slop browser extension only. It does not cover the D-slop project website, the GitHub repository, or any third-party sites you visit while using the extension.</p>
+                <p>The short version: the extension does not collect, transmit, or store any information about you or the pages you visit. The only outbound request is a daily fetch of detection rules from a private endpoint. No page content ever leaves your browser.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>2. Data stored on your device</h2>
+                <p>The extension stores six values in your browser's local extension storage (<code>chrome.storage.local</code>). This storage is local to your device. It is not synced to your browser account or any external server.</p>
+
+                <ol class="workflow-steps-list">
+                    <li><strong>Enabled state.</strong> Whether the extension is on or off. A boolean. Default: on.</li>
+                    <li><strong>Display mode.</strong> Your selected mode: Highlight, Collapse, or Hidden. Default: Highlight.</li>
+                    <li><strong>Confidence threshold.</strong> The detection sensitivity you have set. Default: 0.20.</li>
+                    <li><strong>Flag count.</strong> The number of blocks flagged on the current page. Used only to display the count in the popup. Overwritten on every page load.</li>
+                    <li><strong>Cached rules.</strong> The detection rules file fetched from the rules endpoint. Stored so the extension works without a network connection once rules have been fetched at least once.</li>
+                    <li><strong>Rules last fetched.</strong> A timestamp recording when the rules were last downloaded. Used to determine whether a fresh fetch is needed.</li>
+                </ol>
+
+                <p>None of these values contain personal information. None are transmitted anywhere except as described in the next section.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>3. Network requests</h2>
+                <p>The extension makes one type of outbound request: a GET to the rules endpoint at most once every 24 hours.</p>
+
+                <ul>
+                    <li><strong>Endpoint.</strong> <code>https://d-slop-rules.jared-the-automator.workers.dev</code></li>
+                    <li><strong>Frequency.</strong> At most once per 24 hours, on browser startup or install. No request is made if a fetch has already occurred within that window.</li>
+                    <li><strong>Request body.</strong> None. This is a plain GET with no parameters, no cookies, no identifying headers beyond the standard browser User-Agent.</li>
+                    <li><strong>Response.</strong> A JSON file containing phrase lists, signal weights, and detection thresholds. No personal data is returned.</li>
+                    <li><strong>Hosting.</strong> The endpoint is a Cloudflare Worker. Cloudflare retains standard access logs (IP address, timestamp, user agent) per their own privacy policy. D-slop does not receive or store those logs.</li>
+                </ul>
+
+                <p>No other network requests are made. Page content is never transmitted. URLs of pages you visit are never recorded or sent anywhere.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>4. What we do not collect</h2>
+                <ul>
+                    <li>Page content or text from any site you visit</li>
+                    <li>URLs, domain names, or browsing history</li>
+                    <li>Personal information of any kind</li>
+                    <li>Crash reports or diagnostic telemetry</li>
+                    <li>Usage analytics or feature interaction data</li>
+                    <li>Information about which sites triggered detections</li>
+                </ul>
+            </section>
+
+            <section class="overview-section">
+                <h2>5. Questions and corrections</h2>
+                <p>If you believe this policy is inaccurate or have questions about how the extension handles data, open an issue on the <a href="https://github.com/jared-the-automator/d-slop" target="_blank" rel="noopener noreferrer">D-slop GitHub repository</a>. The source code is public and the storage and network behavior described here is fully auditable.</p>
+            </section>
+
+            <div class="stamp-row">
+                <div class="stamp-signature">Drawn 2026 / J. Fischer / Operator</div>
+                <a href="../d-slop.html" class="cta-engineer">Back to D-slop</a>
+            </div>
+        </section>
+
+        <div class="title-block" aria-hidden="true">
+            <div class="title-block-row">
+                <div class="label">Project</div>
+                <div class="value">D-slop</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Sheet</div>
+                <div class="value">DS-02 / Privacy policy</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Revision</div>
+                <div class="value">A. 2026.05</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Drawn by</div>
+                <div class="value">Bigger Fish, studio of one</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../index.html" class="footer-brand" style="text-decoration: none;">
+                <div class="footer-company">Bigger Fish Intelligent Automation</div>
+                <div class="footer-tagline">You've got bigger fish to fry.</div>
+            </a>
+            <div class="footer-links">
+                <a href="../login.html" class="footer-link">Client Login</a>
+                <span class="footer-separator">/</span>
+                <a href="../privacy-policy.html" class="footer-link">Privacy</a>
+                <span class="footer-separator">/</span>
+                <a href="../terms-conditions.html" class="footer-link">Terms</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            Copyright 2026 / Bigger Fish Intelligent Automation
+        </div>
+    </footer>
+
+    <script type="module" src="../main.js"></script>
+</body>
+
+</html>

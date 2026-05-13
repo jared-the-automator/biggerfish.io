@@ -1,10 +1,34 @@
+/* Blueprint Room / Foundation Tokens */
+
 :root {
-    --deep-purple: #540D6E;
-    --light-gray: #D0CCD0;
-    --mint-green: #9FFCDF;
-    --teal-blue: #1C6E8C;
-    --black-green: #1F271B;
-    --white: #FFFFFF;
+    /* Blueprint Room palette */
+    --navy: #0E1B2A;
+    --navy-deep: #0A1422;
+    --cyan-rule: #7AC6E6;
+    --cyan-soft: rgba(122, 198, 230, 0.35);
+    --cyan-fade: rgba(122, 198, 230, 0.18);
+    --paper: #F2EBDB;
+    --paper-soft: rgba(242, 235, 219, 0.94);
+    --graphite: #1F2A33;
+    --red-pencil: #C84A36;
+    --red-pencil-soft: rgba(200, 74, 54, 0.4);
+    --pencil-grey: #8A95A1;
+
+    /* Reserved */
+    --mint-cursor: #9FFCDF;
+    --logo-purple: #540D6E;
+
+    /* Legacy aliases (kept for any straggling references) */
+    --deep-purple: var(--logo-purple);
+    --light-gray: var(--pencil-grey);
+    --mint-green: var(--mint-cursor);
+    --teal-blue: var(--cyan-rule);
+    --black-green: var(--navy);
+    --white: var(--paper);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html {
@@ -14,7 +38,11 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Outfit', sans-serif;
-    color: var(--black-green);
+    background-color: var(--navy);
+    color: var(--paper-soft);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
 }

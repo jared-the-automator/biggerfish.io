@@ -3,8 +3,8 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 // Automatically find all HTML files in the src directory
-const htmlFiles = glob.sync('src/*.html').reduce((acc, file) => {
-  const name = file.split('/').pop().split('.').shift();
+const htmlFiles = glob.sync('src/**/*.html').reduce((acc, file) => {
+  const name = file.replace('src/', '').replace('.html', '').replace(/\//g, '-');
   acc[name] = resolve(__dirname, file);
   return acc;
 }, {});

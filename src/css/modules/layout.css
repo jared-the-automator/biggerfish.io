@@ -1,43 +1,39 @@
-/* Layout Structures */
+/* Blueprint Room / Layout */
 
-/* Main Containers */
+/* Sheet (page container) */
 .snap-container {
     min-height: 100vh;
 }
 
 .snap-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 6rem 2rem;
     position: relative;
     overflow: hidden;
 }
 
 .section-content {
-    max-width: 1200px;
+    max-width: 1280px;
     width: 100%;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
 }
 
-/* Blueprint Grid Background */
+/* Drafting paper grid */
 .blueprint-grid {
-    background-color: #1F271B;
+    background-color: var(--navy);
     background-image:
-        linear-gradient(rgba(28, 110, 140, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(28, 110, 140, 0.1) 1px, transparent 1px);
-    background-size: 30px 30px;
+        linear-gradient(var(--cyan-fade) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyan-fade) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
     min-height: 100vh;
     position: relative;
     display: flex;
-    /* For Sticky Footer */
     flex-direction: column;
 }
 
-/* Grid Highlight Box */
+/* Grid Highlight Box (cursor effect / KEEP EXACT) */
 .grid-highlight-box {
     position: absolute;
     top: 0;
@@ -57,146 +53,170 @@ body.blueprint-grid .grid-highlight-box {
     display: block;
 }
 
-/* ===== Navigation Bar ===== */
+/* ===== Header (sheet bar) ===== */
 .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    padding: 18px 56px;
+    background: var(--navy);
+    border-bottom: 1px solid var(--cyan-soft);
     z-index: 1000;
-    border-bottom: 1px solid var(--teal-blue);
 }
 
 .header-brand {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
     text-decoration: none;
-    color: var(--black-green);
+    color: var(--paper);
+}
+
+/* Square logo frame / angular, blueprint-aware */
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    padding: 6px;
+    background: var(--navy-deep);
+    border: 1px solid var(--cyan-rule);
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
 }
 
 .brand-text {
     display: flex;
     flex-direction: column;
+    gap: 2px;
+}
+
+@keyframes brand-sweep {
+    0%, 20% { background-position: 160% center; }
+    80%, 100% { background-position: -60% center; }
 }
 
 .brand-name {
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     line-height: 1;
     letter-spacing: -0.01em;
-    color: var(--deep-purple);
-    /* Shimmer Effect */
-    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
-    background-size: 200% auto;
+    background: linear-gradient(
+        90deg,
+        var(--paper) 35%,
+        rgba(159, 252, 223, 0.9) 50%,
+        var(--paper) 65%
+    );
+    background-size: 260% auto;
+    background-position: 160% center;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 10s linear infinite;
+    animation: brand-sweep 12s ease-in-out infinite;
+    animation-delay: 2.5s;
 }
 
-.brand-tagline {
-    font-size: 0.8rem;
-    color: var(--teal-blue);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-@keyframes shine {
-    0% {
-        background-position: 0% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* ===== Footer ===== */
+/* ===== Footer (title block) ===== */
 .footer {
-    background-color: var(--black-green);
-    color: var(--light-gray);
-    padding: 1rem 3rem;
-    border-top: none !important;
+    background-color: var(--navy-deep);
+    color: var(--pencil-grey);
+    padding: 32px 56px 28px;
+    border-top: 1px solid var(--cyan-soft);
     margin-top: auto;
-    /* Sticky Footer Logic */
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 2rem;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--cyan-soft);
 }
 
 .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 4px;
     text-decoration: none;
-    /* Inherit */
+    color: var(--paper-soft);
 }
 
 .footer-company {
-    color: var(--white);
-    font-size: 1.1rem;
+    color: var(--paper);
+    font-size: 0.78rem;
     font-weight: 700;
+    letter-spacing: 0.18em;
 }
 
 .footer-tagline {
-    color: var(--light-gray);
+    color: var(--pencil-grey);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    font-family: 'Source Serif 4', Georgia, serif;
+    text-transform: none;
+    letter-spacing: 0.02em;
     font-size: 0.85rem;
+    font-style: italic;
 }
 
 .footer-links {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 18px;
 }
 
 .footer-link {
-    color: var(--light-gray);
+    color: var(--cyan-rule);
     text-decoration: none;
-    transition: color 0.3s;
-    font-size: 0.9rem;
+    transition: color 0.2s ease;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
 }
 
 .footer-link:hover {
-    color: var(--mint-green);
+    color: var(--paper);
 }
 
 .footer-separator {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--cyan-soft);
 }
 
 .footer-copyright {
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
-    padding-top: 0;
-    border-top: none;
-    font-size: 0.85rem;
-    opacity: 0.6;
+    margin-top: 16px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--pencil-grey);
+    text-transform: uppercase;
 }
 
-/* Mobile Tweaks for Layout */
+/* Mobile */
 @media (max-width: 900px) {
     .header {
-        padding: 1rem;
+        padding: 14px 20px;
+    }
+
+    .footer {
+        padding: 24px 20px 20px;
     }
 
     .footer-content {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
     }
 }

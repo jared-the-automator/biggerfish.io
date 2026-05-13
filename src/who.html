@@ -7,8 +7,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
-    <link href="css/redesign.css?v=2.4" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css?v=3.0" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
     <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
@@ -16,7 +18,7 @@
 <body class="blueprint-grid">
     <nav class="header">
         <a href="index.html" class="header-brand">
-            <img src="images/biggerfish-logo.png" loading="lazy" width="40" alt="Bigger Fish Logo" class="brand-logo">
+            <img src="images/biggerfish-logo.png" loading="lazy" width="48" alt="Bigger Fish Logo" class="brand-logo">
             <div class="brand-text">
                 <div class="brand-name">Bigger Fish Intelligent Automation</div>
             </div>
@@ -27,7 +29,7 @@
             <span class="hamburger-line"></span>
         </button>
         <ul class="nav-menu">
-            <li><a href="index.html#why" class="nav-link">Why?</a></li>
+            <li><a href="index.html#why" class="nav-link">Why</a></li>
             <li><a href="index.html#how" class="nav-link">How</a></li>
             <li class="nav-item-dropdown">
                 <a href="index.html#what" class="nav-link">What</a>
@@ -35,37 +37,68 @@
                     <a href="index.html#what" class="dropdown-link">Custom Web Applications</a>
                     <a href="outcome-engineer.html" class="dropdown-link outcome">Outcome Engineer</a>
                     <a href="https://turingyde.com" class="dropdown-link" target="_blank" rel="noopener noreferrer">Turingyde</a>
+                    <a href="d-slop.html" class="dropdown-link">D-slop</a>
                 </div>
             </li>
             <li><a href="who.html" class="nav-link w--current" aria-current="page">Who</a></li>
             <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
-                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">When?</a></li>
+                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">Book it</a></li>
         </ul>
     </nav>
 
-    <div class="who-container">
-        <!-- Left Column: The Polaroid -->
-        <div class="polaroid-frame">
-            <img src="images/jared-profile.webp" alt="Jared Fischer - Operator" class="polaroid-image">
-            <div class="polaroid-caption">OPERATOR: J. FISCHER</div>
+    <main class="who-container">
+        <div class="who-strip">
+            <span>Bigger Fish / Sheet 04 of 05</span>
+            <span>Operator profile / Rev. A. 2026</span>
         </div>
 
-        <!-- Right Column: The Dossier -->
-        <div class="dossier-section">
-            <h1 class="dossier-title">The Foreman</h1>
-            <div class="dossier-text">
-                <p>After a distinguished career as a sommelier in NYC, the pandemic led Jared to take refuge in the
-                    wilds of Maine. In that wine-barren landscape, he pivoted to the high-volume world of industrial
-                    packaging sales.</p>
-                <p>It was there, fighting daily battles with clunky ERPs and bloated CRMs, that he saw the truth: most
-                    business 'systems' are just friction in disguise, and was compelled to rely on a tool that had been
-                    gathering rust since undergrad: Semantics. A degree in philosophy, driven by a love of logic and
-                    relationships between words, turned out to be the perfect incubator for automation.</p>
-                <p>Today, he doesn't just move packages; he commands the little automated army that does the heavy
-                    lifting for you.</p>
+        <section class="who-plate">
+            <span class="reality-plate-notch">Plate 04. The Foreman</span>
+            <span class="reality-plate-rev">Rev. A. 2026</span>
+
+            <!-- Left: Polaroid -->
+            <div class="polaroid-frame">
+                <img src="images/jared-profile.webp" alt="Jared Fischer, Operator" class="polaroid-image">
+                <div class="polaroid-caption">Operator / J. Fischer</div>
+            </div>
+
+            <!-- Right: Dossier -->
+            <div class="dossier-section">
+                <h1 class="dossier-title">The Foreman</h1>
+                <span class="dossier-rule" aria-hidden="true"></span>
+                <div class="dossier-text">
+                    <p>After a distinguished career as a sommelier in NYC, the pandemic led Jared to take refuge in the
+                        wilds of Maine. In that wine-barren landscape, he pivoted to the high-volume world of industrial
+                        packaging sales.</p>
+                    <p>It was there, fighting daily battles with clunky ERPs and bloated CRMs, that he saw the truth: most
+                        business 'systems' are just friction in disguise, and was compelled to rely on a tool that had been
+                        gathering rust since undergrad: Semantics. A degree in philosophy, driven by a love of logic and
+                        relationships between words, turned out to be the perfect incubator for automation.</p>
+                    <p>Today, he doesn't just move packages; he commands the little automated army that does the heavy
+                        lifting for you.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="title-block" aria-hidden="true">
+            <div class="title-block-row">
+                <div class="label">Project</div>
+                <div class="value">biggerfish.io</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Sheet</div>
+                <div class="value">04 / 05. The Foreman</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Revision</div>
+                <div class="value">A. 2026.05</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Drawn by</div>
+                <div class="value">Bigger Fish, studio of one</div>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer class="footer">
         <div class="footer-content">
@@ -75,18 +108,17 @@
             </a>
             <div class="footer-links">
                 <a href="login.html" class="footer-link">Client Login</a>
-                <span class="footer-separator">|</span>
+                <span class="footer-separator">/</span>
                 <a href="privacy-policy.html" class="footer-link">Privacy</a>
-                <span class="footer-separator">|</span>
+                <span class="footer-separator">/</span>
                 <a href="terms-conditions.html" class="footer-link">Terms</a>
             </div>
         </div>
         <div class="footer-copyright">
-            Copyright © 2025 Bigger Fish Intelligent Automation
+            Copyright 2026 / Bigger Fish Intelligent Automation
         </div>
     </footer>
 
-    <!-- Script -->
     <script type="module" src="./main.js"></script>
 </body>
 
