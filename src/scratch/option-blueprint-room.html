@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option A. The Blueprint Room | biggerfish.io preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: oklch(0.22 0.04 245);
+    --navy-deep: oklch(0.16 0.04 245);
+    --cyan-rule: oklch(0.78 0.09 220);
+    --cyan-soft: oklch(0.78 0.09 220 / 0.35);
+    --cyan-fade: oklch(0.78 0.09 220 / 0.18);
+    --paper: oklch(0.94 0.018 80);
+    --paper-soft: oklch(0.94 0.018 80 / 0.94);
+    --graphite: oklch(0.28 0.015 240);
+    --red-pencil: oklch(0.58 0.16 28);
+    --pencil-grey: oklch(0.66 0.012 240);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--navy);
+    color: var(--paper-soft);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--cyan-fade) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cyan-fade) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+
+  .sheet {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 64px 56px 0;
+    position: relative;
+  }
+
+  .sheet-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan-rule);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--cyan-soft);
+    margin-bottom: 80px;
+  }
+
+  .sheet-bar-left { display: flex; gap: 32px; }
+  .sheet-bar-right { display: flex; gap: 24px; color: var(--pencil-grey); }
+  .sheet-bar-right a { color: inherit; text-decoration: none; }
+  .sheet-bar-right a:hover { color: var(--paper); }
+
+  /* Plate */
+  .plate {
+    position: relative;
+    border: 1px solid var(--cyan-rule);
+    padding: 88px 80px 96px;
+    background:
+      linear-gradient(var(--cyan-fade) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cyan-fade) 1px, transparent 1px),
+      var(--navy);
+    background-size: 32px 32px;
+  }
+
+  .plate-notch {
+    position: absolute;
+    top: -1px;
+    left: 48px;
+    background: var(--navy);
+    padding: 0 18px;
+    transform: translateY(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--cyan-rule);
+    text-transform: uppercase;
+  }
+
+  .plate-revision {
+    position: absolute;
+    top: -1px;
+    right: 48px;
+    background: var(--navy);
+    padding: 0 18px;
+    transform: translateY(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pencil-grey);
+    text-transform: uppercase;
+  }
+
+  .plate-headline {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+    color: var(--paper);
+    margin-bottom: 24px;
+    max-width: 22ch;
+  }
+
+  .plate-lede {
+    max-width: 62ch;
+    font-size: 1.15rem;
+    color: var(--pencil-grey);
+    margin-bottom: 88px;
+  }
+
+  .plate-lede em { color: var(--paper-soft); font-style: italic; }
+
+  /* Diagram */
+  .diagram {
+    display: grid;
+    grid-template-columns: 1fr 240px 1fr;
+    column-gap: 56px;
+    align-items: stretch;
+    margin-bottom: 80px;
+  }
+
+  .callout {
+    position: relative;
+    padding: 32px 32px 32px 0;
+    border-top: 1px solid var(--cyan-rule);
+  }
+
+  .callout-right { padding: 32px 0 32px 32px; border-top: 1px solid var(--cyan-rule); }
+
+  .callout-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--red-pencil);
+    margin-bottom: 18px;
+  }
+
+  .callout-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.65rem;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+
+  .callout-body {
+    color: var(--paper-soft);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 38ch;
+    margin-bottom: 24px;
+  }
+
+  .callout-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--cyan-rule);
+    text-transform: uppercase;
+  }
+
+  /* Center diagram column */
+  .diagram-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0;
+    border-left: 1px dashed var(--cyan-soft);
+    border-right: 1px dashed var(--cyan-soft);
+    position: relative;
+  }
+
+  .diagram-svg { width: 100%; height: auto; max-width: 220px; }
+
+  .diagram-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--pencil-grey);
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+
+  /* CTA stamp */
+  .stamp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--cyan-soft);
+  }
+
+  .stamp-cta {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--red-pencil);
+    background: transparent;
+    padding: 18px 32px;
+    text-decoration: none;
+    border: 2px solid var(--red-pencil);
+    transition: background 220ms cubic-bezier(0.22, 1, 0.36, 1), color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .stamp-cta:hover {
+    background: var(--red-pencil);
+    color: var(--paper);
+  }
+
+  /* Title block (bottom-right corner of sheet) */
+  .title-block {
+    margin-top: 96px;
+    margin-bottom: 64px;
+    margin-left: auto;
+    width: 360px;
+    border: 1px solid var(--cyan-rule);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--pencil-grey);
+    background: var(--navy-deep);
+  }
+
+  .title-block-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    border-bottom: 1px solid var(--cyan-soft);
+  }
+
+  .title-block-row:last-child { border-bottom: none; }
+
+  .title-block-row .label {
+    padding: 10px 14px;
+    border-right: 1px solid var(--cyan-soft);
+    color: var(--cyan-rule);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .title-block-row .value {
+    padding: 10px 14px;
+    color: var(--paper-soft);
+    letter-spacing: 0.06em;
+  }
+
+  /* Annotated note in margin */
+  .margin-note {
+    position: absolute;
+    right: -40px;
+    top: 380px;
+    width: 220px;
+    transform: rotate(0deg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--red-pencil);
+    text-transform: uppercase;
+    line-height: 1.5;
+    display: none;
+  }
+
+  /* Hero plate intro (a tiny carry-over) */
+  .hero-strip {
+    margin-bottom: 48px;
+    padding: 24px 0;
+    border-bottom: 1px dashed var(--cyan-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .hero-strip h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-strip span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--pencil-grey);
+  }
+
+  @media (max-width: 880px) {
+    .diagram { grid-template-columns: 1fr; gap: 40px; }
+    .callout, .callout-right { border-left: none; border-right: none; padding: 24px 0; }
+    .diagram-center { border: none; padding: 0; }
+    .plate { padding: 64px 28px 64px; }
+    .sheet { padding: 32px 20px 0; }
+    .title-block { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="sheet-bar">
+    <div class="sheet-bar-left">
+      <span>Bigger Fish Intelligent Automation</span>
+      <span>Sheet 02 of 05</span>
+    </div>
+    <div class="sheet-bar-right">
+      <a href="#">Why</a>
+      <a href="#">How</a>
+      <a href="#">What</a>
+      <a href="#">Who</a>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <h1>Let us handle the net work.</h1>
+    <span>Plate 01 / Hero / Rev. A</span>
+  </div>
+
+  <section class="plate" aria-labelledby="plate-headline">
+    <span class="plate-notch">Plate 02. Engagement Models</span>
+    <span class="plate-revision">Rev. A. 2026</span>
+
+    <h2 id="plate-headline" class="plate-headline">Two ways in.</h2>
+    <p class="plate-lede">Most studios make you flatten your business into their schema. We start by drawing yours, in cyan ink on a single sheet, then decide together what gets built. <em>The drawing is yours either way.</em></p>
+
+    <div class="diagram">
+      <div class="callout">
+        <div class="callout-num">01. Project Build</div>
+        <div class="callout-title">A defined sheet, delivered.</div>
+        <p class="callout-body">Scope is drawn, then built. Hand-off includes the working system and the source. You can take it anywhere. Right for the custom tool you have been needing, or the integration you have been avoiding.</p>
+        <div class="callout-meta">For. one-shot builds</div>
+      </div>
+
+      <div class="diagram-center" aria-hidden="true">
+        <svg class="diagram-svg" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="180" height="200" stroke="oklch(0.78 0.09 220)" stroke-width="1" fill="none"/>
+          <line x1="10" y1="60" x2="190" y2="60" stroke="oklch(0.78 0.09 220 / 0.35)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="10" y1="160" x2="190" y2="160" stroke="oklch(0.78 0.09 220 / 0.35)" stroke-width="1" stroke-dasharray="3 3"/>
+          <circle cx="100" cy="110" r="34" stroke="oklch(0.78 0.09 220)" stroke-width="1.5" fill="none"/>
+          <circle cx="100" cy="110" r="3" fill="oklch(0.58 0.16 28)"/>
+          <text x="100" y="50" text-anchor="middle" fill="oklch(0.78 0.09 220)" font-family="IBM Plex Mono" font-size="9" letter-spacing="2">SYSTEM</text>
+          <text x="100" y="180" text-anchor="middle" fill="oklch(0.78 0.09 220)" font-family="IBM Plex Mono" font-size="9" letter-spacing="2">OPERATOR</text>
+          <line x1="100" y1="76" x2="100" y2="60" stroke="oklch(0.78 0.09 220)" stroke-width="1"/>
+          <line x1="100" y1="144" x2="100" y2="160" stroke="oklch(0.78 0.09 220)" stroke-width="1"/>
+          <line x1="34" y1="110" x2="10" y2="110" stroke="oklch(0.58 0.16 28)" stroke-width="1"/>
+          <line x1="166" y1="110" x2="190" y2="110" stroke="oklch(0.58 0.16 28)" stroke-width="1"/>
+        </svg>
+        <div class="diagram-label">The system fits you</div>
+      </div>
+
+      <div class="callout-right">
+        <div class="callout-num">02. Retained Operations</div>
+        <div class="callout-title">A monthly retainer.</div>
+        <p class="callout-body">We run the system, fix what breaks, and ship new features as your business grows. You stay out of the codebase. Revisions ship with sheet numbers, like everything else we do.</p>
+        <div class="callout-meta">For. ongoing operations</div>
+      </div>
+    </div>
+
+    <div class="stamp-row">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--cyan-rule); text-transform: uppercase;">Drawn 2026 / J. Fischer / Operator</div>
+      <a href="#" class="stamp-cta">Book the Diagnostic</a>
+    </div>
+  </section>
+
+  <div class="title-block" aria-hidden="true">
+    <div class="title-block-row">
+      <div class="label">Project</div>
+      <div class="value">biggerfish.io</div>
+    </div>
+    <div class="title-block-row">
+      <div class="label">Sheet</div>
+      <div class="value">02 / 05. Engagement Models</div>
+    </div>
+    <div class="title-block-row">
+      <div class="label">Revision</div>
+      <div class="value">A. 2026.05</div>
+    </div>
+    <div class="title-block-row">
+      <div class="label">Drawn by</div>
+      <div class="value">Bigger Fish, studio of one</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

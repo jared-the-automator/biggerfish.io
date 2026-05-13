@@ -152,7 +152,7 @@
     background-color: var(--navy);
 }
 
-/* Stamp CTA (architect's red) */
+/* Stamp CTA (working cyan) */
 .cta-button,
 .stamp-cta {
     display: inline-block;
@@ -161,19 +161,19 @@
     font-weight: 500;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--red-pencil);
+    color: var(--cyan-rule);
     background: transparent;
     padding: 18px 32px;
     text-decoration: none;
-    border: 2px solid var(--red-pencil);
+    border: 2px solid var(--cyan-rule);
     transition: background 0.22s ease, color 0.22s ease;
     cursor: pointer;
 }
 
 .cta-button:hover,
 .stamp-cta:hover {
-    background: var(--red-pencil);
-    color: var(--paper);
+    background: var(--cyan-rule);
+    color: var(--navy);
 }
 
 /* Mobile responsive nav */

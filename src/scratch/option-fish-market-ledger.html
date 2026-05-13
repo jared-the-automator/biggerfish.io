@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option C. The Fish Market Ledger | biggerfish.io preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: oklch(0.94 0.018 78);
+    --paper-deep: oklch(0.91 0.020 78);
+    --ink: oklch(0.18 0.012 60);
+    --ink-soft: oklch(0.30 0.012 60);
+    --teal: oklch(0.50 0.058 192);
+    --teal-soft: oklch(0.50 0.058 192 / 0.18);
+    --hairline: oklch(0.84 0.014 78);
+    --margin: oklch(0.52 0.010 60);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Header. Quiet, like a journal masthead. */
+  .masthead {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 56px 28px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .masthead-brand {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .masthead-brand .glitch {
+    display: inline-block;
+    color: var(--ink);
+    transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: inherit;
+  }
+
+  .masthead-brand .glitch.flicker {
+    color: var(--teal);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+  }
+
+  .masthead-nav {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    align-items: baseline;
+  }
+
+  .masthead-nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .masthead-nav a:hover {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+  }
+
+  .masthead-nav a.cta {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  /* Spread layout */
+  .spread {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 56px 120px;
+  }
+
+  /* Chapter divider */
+  .chapter-divider {
+    position: relative;
+    border-top: 1px solid var(--hairline);
+    margin: 80px 0 56px;
+    padding-top: 14px;
+  }
+
+  .chapter-divider .marker {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    background: var(--paper);
+    padding-right: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+  }
+
+  .chapter-divider .meta {
+    position: absolute;
+    top: -8px;
+    right: 0;
+    background: var(--paper);
+    padding-left: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--margin);
+    letter-spacing: 0.06em;
+  }
+
+  /* Carry-over. Two-column essay tail from the previous section. */
+  .carry-over {
+    columns: 2;
+    column-gap: 56px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .carry-over p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 1em;
+    break-inside: avoid;
+  }
+
+  .carry-over p:first-child::first-letter {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.9;
+    padding: 6px 10px 0 0;
+    color: var(--ink);
+  }
+
+  .carry-over em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Ledger entry section */
+  .ledger-headline {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    margin-bottom: 32px;
+    color: var(--ink);
+  }
+
+  .ledger-lede {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin-bottom: 72px;
+    font-weight: 400;
+  }
+
+  .ledger-lede em { color: var(--ink); font-style: italic; }
+
+  .ledger {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 0;
+  }
+
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 96px 1fr 200px;
+    gap: 40px;
+    padding: 36px 0;
+    align-items: baseline;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .ledger-row:last-child { border-bottom: none; }
+
+  .ledger-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 2.4rem;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1;
+    text-align: right;
+  }
+
+  .ledger-body .title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .ledger-body p {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .ledger-body p em { color: var(--ink); font-style: italic; }
+
+  .ledger-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .ledger-meta span { display: block; color: var(--margin); }
+
+  /* CTA */
+  .cta-block {
+    margin-top: 72px;
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .cta-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--margin);
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .cta-link {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 4px;
+    transition: border-bottom-width 220ms cubic-bezier(0.22, 1, 0.36, 1), color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cta-link:hover {
+    color: var(--teal);
+    border-bottom-width: 4px;
+  }
+
+  /* Margin notes (visible on wider screens) */
+  .with-margin {
+    position: relative;
+  }
+
+  .margin-note {
+    position: absolute;
+    left: -200px;
+    top: 0;
+    width: 160px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--margin);
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+
+  @media (max-width: 1180px) {
+    .margin-note { display: none; }
+  }
+
+  @media (max-width: 760px) {
+    .masthead { padding: 28px 24px 20px; flex-wrap: wrap; gap: 16px; }
+    .masthead-nav { gap: 16px; flex-wrap: wrap; }
+    .spread { padding: 56px 24px 80px; }
+    .carry-over { columns: 1; }
+    .ledger-row { grid-template-columns: 56px 1fr; gap: 24px; }
+    .ledger-meta { grid-column: 1 / -1; text-align: left; padding-top: 8px; }
+    .ledger-num { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a href="#" class="masthead-brand">
+    Bigger Fish<span class="glitch" id="glitch"> Intelligent</span> Automation
+  </a>
+  <nav>
+    <ul class="masthead-nav">
+      <li><a href="#why">Why</a></li>
+      <li><a href="#how">How</a></li>
+      <li><a href="#what">What</a></li>
+      <li><a href="#who">Who</a></li>
+      <li><a href="#when" class="cta">Drop a line</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="spread">
+
+  <!-- Carry-over from prior section (the "why" tail) -->
+  <div class="chapter-divider">
+    <span class="marker">// chapter ii. the work</span>
+    <span class="meta">page 06</span>
+  </div>
+
+  <div class="carry-over">
+    <p>The systems most operators inherit were not built for them. They were built for a hundred-thousand-seat customer the operator will never resemble. The workarounds you have invented to make those systems fit your work are a kind of authorship. <em>You are already a designer.</em> We just bring better tools.</p>
+    <p>What follows is the shape of the work, in two ways. One is bounded, drawn, delivered. The other is ongoing, responsive, retained. The studio runs both at once for different clients, and either is a good answer depending on where you are in the year.</p>
+  </div>
+
+  <!-- Ledger entry section -->
+  <section class="ledger-section" id="how">
+    <h2 class="ledger-headline">Two ways in.</h2>
+    <p class="ledger-lede">Most studios make you flatten your business into their schema. We start with how you actually run yours, draw it on a single sheet, and decide together what gets built. <em>The drawing is yours either way.</em></p>
+
+    <div class="ledger">
+      <div class="ledger-row with-margin">
+        <div class="ledger-num">01</div>
+        <div class="ledger-body">
+          <div class="title">Project Build.</div>
+          <p>A defined scope, delivered. Hand-off includes the working system and the source. You can take it anywhere. Right for the custom tool you have been needing, or the integration you have been avoiding. <em>One sheet, one build, one invoice.</em></p>
+        </div>
+        <div class="ledger-meta">
+          one-shot
+          <span>fixed scope</span>
+          <span>source included</span>
+        </div>
+      </div>
+
+      <div class="ledger-row with-margin">
+        <div class="ledger-num">02</div>
+        <div class="ledger-body">
+          <div class="title">Retained Operations.</div>
+          <p>A monthly retainer. We run the system, fix what breaks, and ship new features as your business grows. You stay out of the codebase. <em>The work continues.</em></p>
+        </div>
+        <div class="ledger-meta">
+          ongoing
+          <span>monthly</span>
+          <span>system care</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-eyebrow">// the way to begin either one</div>
+      <a class="cta-link" href="#diagnostic">Book a Systems Diagnostic.</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // The single deliberate "glitch": the brand name's middle word
+  // momentarily swaps to a teal mono variant, every 8 seconds.
+  // Subtle, easily missed. The only cyberpunk evidence.
+  const g = document.getElementById('glitch');
+  if (g) {
+    setInterval(() => {
+      g.classList.add('flicker');
+      setTimeout(() => g.classList.remove('flicker'), 220);
+    }, 8000);
+  }
+</script>
+
+</body>
+</html>

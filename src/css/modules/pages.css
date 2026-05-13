@@ -162,20 +162,6 @@
     max-width: 1280px;
 }
 
-.hero-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    margin-bottom: 48px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pencil-grey);
-}
-
 .hero-split {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -237,7 +223,7 @@
     font-size: clamp(1.1rem, 2vw, 1.4rem);
     font-weight: 400;
     font-style: italic;
-    color: var(--cyan-rule);
+    color: var(--red-pencil);
     margin: 0 0 32px;
     line-height: 1.4;
 }
