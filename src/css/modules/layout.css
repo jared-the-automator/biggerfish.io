@@ -161,7 +161,7 @@ body.blueprint-grid .grid-highlight-box {
 }
 
 .footer-tagline {
-    color: var(--pencil-grey);
+    color: var(--red-pencil);
     font-size: 0.7rem;
     letter-spacing: 0.16em;
     font-family: 'Source Serif 4', Georgia, serif;
