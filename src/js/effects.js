@@ -70,7 +70,11 @@ function initRadarSweep() {
     (function loop() { draw(); requestAnimationFrame(loop); })();
 }
 
-// ── Cursor wake (Kelvin V-wake) ───────────────────────────────────────────────
+// ── Cursor wake (Kelvin V — path-history spread) ──────────────────────────────
+//
+// Each point the cursor passes through is a disturbance that spreads outward
+// over time. Older points have had more time to spread, so their perpendicular
+// width is greater. The accumulated pattern forms the V naturally.
 
 function initCursorWake() {
     if (reducedMotion) return;
@@ -90,66 +94,68 @@ function initCursorWake() {
     let W = window.innerWidth, H = window.innerHeight;
     canvas.width = W;
     canvas.height = H;
-
     window.addEventListener('resize', () => {
-        W = window.innerWidth;
-        H = window.innerHeight;
-        canvas.width = W;
-        canvas.height = H;
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = W; canvas.height = H;
     });
 
-    const particles = [];
-    let prevX = -1, prevY = -1;
+    // Each trail point stores position + the perpendicular direction at that point
+    const trail = [];
+    const MAX_POINTS = 90;   // how far back the wake extends
+    const MAX_SPREAD = 55;   // max perpendicular width at the oldest point
 
-    // Kelvin wake: constant ~19.47° half-angle regardless of speed
-    const WAKE_ANGLE = 19.47 * Math.PI / 180;
-    const cosA = Math.cos(WAKE_ANGLE);
-    const sinA = Math.sin(WAKE_ANGLE);
+    let prevX = -1, prevY = -1;
 
     document.addEventListener('mousemove', (e) => {
         if (prevX < 0) { prevX = e.clientX; prevY = e.clientY; return; }
-
         const dx = e.clientX - prevX;
         const dy = e.clientY - prevY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 6) return;
+        if (dist < 4) return;
 
-        // Backward unit vector
-        const bx = -dx / dist;
-        const by = -dy / dist;
-
-        // Rotate backward by ±WAKE_ANGLE to get the two wake arms
-        const speed = 1.1;
-        particles.push({
-            x: e.clientX, y: e.clientY,
-            vx: (bx * cosA - by * sinA) * speed,
-            vy: (bx * sinA + by * cosA) * speed,
-            alpha: 0.5,
-        });
-        particles.push({
-            x: e.clientX, y: e.clientY,
-            vx: (bx * cosA + by * sinA) * speed,
-            vy: (-bx * sinA + by * cosA) * speed,
-            alpha: 0.5,
-        });
-
+        // Perpendicular unit vector (90° from travel direction)
+        trail.unshift({ x: e.clientX, y: e.clientY, nx: -dy / dist, ny: dx / dist });
+        if (trail.length > MAX_POINTS) trail.pop();
         prevX = e.clientX;
         prevY = e.clientY;
     });
 
     (function loop() {
         ctx.clearRect(0, 0, W, H);
-        for (let i = particles.length - 1; i >= 0; i--) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.alpha -= 0.010;
-            if (p.alpha <= 0) { particles.splice(i, 1); continue; }
+
+        // Faint center trail
+        if (trail.length > 1) {
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(159,252,223,${p.alpha})`;
-            ctx.fill();
+            ctx.moveTo(trail[0].x, trail[0].y);
+            for (let i = 1; i < trail.length; i++) ctx.lineTo(trail[i].x, trail[i].y);
+            ctx.strokeStyle = 'rgba(159,252,223,0.07)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
         }
+
+        // Wake arms: spread grows with age, alpha fades with age
+        trail.forEach((pt, i) => {
+            const t = i / MAX_POINTS;              // 0 = newest, 1 = oldest
+            const spread = t * MAX_SPREAD;
+            const alpha = (1 - t) * 0.5;
+            if (spread < 1.5) return;
+
+            // Wave-crest oscillation along the arms
+            const wave = 1 + 0.3 * Math.sin(i * 0.5);
+            const r = 1.8 * wave;
+            const a = Math.min(alpha * wave, 0.65);
+
+            ctx.beginPath();
+            ctx.arc(pt.x + pt.nx * spread, pt.y + pt.ny * spread, r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(159,252,223,${a})`;
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(pt.x - pt.nx * spread, pt.y - pt.ny * spread, r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(159,252,223,${a})`;
+            ctx.fill();
+        });
+
         requestAnimationFrame(loop);
     })();
 }
