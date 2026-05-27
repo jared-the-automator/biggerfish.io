@@ -56,12 +56,9 @@
     flex-direction: column;
 }
 
-@keyframes brand-char-wave {
-    0%, 15%   { color: var(--surface-text); }
-    28%       { color: #FFE066; }
-    50%       { color: #FF9EAA; }
-    72%       { color: #90E0FF; }
-    85%, 100% { color: var(--surface-text); }
+@keyframes shine {
+    0%   { background-position: 0% 0; }
+    100% { background-position: -200% 0; }
 }
 
 .brand-name {
@@ -70,13 +67,16 @@
     font-size: 1rem;
     line-height: 1;
     letter-spacing: -0.01em;
-    color: var(--surface-text);
+    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .brand-char {
-        display: inline-block;
-        animation: brand-char-wave 9s ease-in-out infinite;
+    .brand-name {
+        animation: shine 10s linear infinite;
     }
 }
 

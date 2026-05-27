@@ -66,28 +66,6 @@ function initRadarSweep() {
     (function loop() { draw(); requestAnimationFrame(loop); })();
 }
 
-// ── Brand name rolling colour wave ────────────────────────────────────────────
-
-function initBrandWave() {
-    if (reducedMotion) return;
-    const el = document.querySelector('.brand-name');
-    if (!el) return;
-
-    const text = el.textContent;
-    el.textContent = '';
-    text.split('').forEach((ch, i) => {
-        if (ch === ' ') {
-            el.appendChild(document.createTextNode(' '));
-        } else {
-            const span = document.createElement('span');
-            span.className = 'brand-char';
-            span.style.animationDelay = `${(i * 0.11).toFixed(2)}s`;
-            span.textContent = ch;
-            el.appendChild(span);
-        }
-    });
-}
-
 // ── Cursor wake (Kelvin V — time-based dissipation) ───────────────────────────
 //
 // Each point the cursor passes through is stamped with a timestamp.
@@ -141,17 +119,6 @@ function initCursorWake() {
         ctx.clearRect(0, 0, W, H);
         const now = performance.now();
 
-        // Faint center trail (only live points)
-        const live = trail.filter(p => now - p.born < LIFETIME);
-        if (live.length > 1) {
-            ctx.beginPath();
-            ctx.moveTo(live[0].x, live[0].y);
-            for (let i = 1; i < live.length; i++) ctx.lineTo(live[i].x, live[i].y);
-            ctx.strokeStyle = 'rgba(159,252,223,0.06)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        }
-
         // Wake arms — age from timestamp, prune expired points
         for (let i = trail.length - 1; i >= 0; i--) {
             const t = (now - trail[i].born) / LIFETIME; // 0=fresh, 1=expired
@@ -203,5 +170,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initRadarSweep();
     initRevealAnimations();
     initCursorWake();
-    initBrandWave();
 });
