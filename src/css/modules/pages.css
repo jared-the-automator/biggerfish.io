@@ -41,7 +41,7 @@
 /* Hero text */
 .hero-signal {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     color: rgba(159, 252, 223, 0.68);
     text-transform: uppercase;
@@ -141,7 +141,7 @@
 
 .pain-card-id {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     color: var(--signal-soft);
     margin-bottom: 16px;
@@ -197,7 +197,7 @@
 
 .engagement-num {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     color: var(--signal-soft);
     margin-bottom: 16px;
@@ -225,7 +225,7 @@
 
 .engagement-meta {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.18em;
     color: var(--signal);
     text-transform: uppercase;
@@ -273,7 +273,7 @@
 
 .module-text .module-num {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     color: var(--signal-soft);
     text-transform: uppercase;
@@ -420,7 +420,7 @@
     color: var(--chart);
     font-weight: 500;
     letter-spacing: 0.22em;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
 }
 
@@ -486,7 +486,7 @@
 
 .captain-log-entry {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.16em;
     color: var(--border-subtle);
     text-align: right;
@@ -537,7 +537,7 @@
 .login-header p {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     color: var(--signal);
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin: 0;
@@ -552,7 +552,7 @@
     display: block;
     color: var(--signal);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.22em;
@@ -625,7 +625,7 @@
     margin-top: 24px;
     color: var(--chart);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
@@ -687,7 +687,7 @@
 
 .legal-container .subhead {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.22em;
     color: var(--signal);
     text-transform: uppercase;
@@ -838,7 +838,7 @@
     left: 18px;
     top: 16px;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.22em;
     color: var(--signal);
 }

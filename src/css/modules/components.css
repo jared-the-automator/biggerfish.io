@@ -15,7 +15,7 @@
     color: var(--chart);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     position: relative;
@@ -57,7 +57,7 @@
     text-decoration: none;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     border: 1px solid var(--signal);
@@ -127,7 +127,7 @@
     text-decoration: none;
     display: block;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     border-bottom: 1px solid var(--border-dim);
@@ -156,14 +156,14 @@
     display: block;
     font-weight: 700;
     color: var(--surface-text);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.14em;
 }
 
 .dropdown-desc {
     display: block;
     font-family: 'Outfit', sans-serif;
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 0.04em;
     text-transform: none;
     font-weight: 400;
@@ -221,6 +221,6 @@
     }
 
     .nav-link {
-        font-size: 12px;
+        font-size: 13px;
     }
 }
