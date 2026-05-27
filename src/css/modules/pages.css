@@ -1,509 +1,251 @@
-/* Blueprint Room / Page Plates */
+/* Deep Water — Page Sections */
 
 /* ========================================================================
-   Plate primitives / used everywhere
-   ======================================================================== */
-
-.plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px 96px;
-    background:
-        linear-gradient(var(--cyan-fade) 1px, transparent 1px),
-        linear-gradient(90deg, var(--cyan-fade) 1px, transparent 1px),
-        var(--navy);
-    background-size: 32px 32px;
-    margin-bottom: 56px;
-}
-
-.plate-notch {
-    position: absolute;
-    top: -1px;
-    left: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--cyan-rule);
-    text-transform: uppercase;
-}
-
-.plate-rev {
-    position: absolute;
-    top: -1px;
-    right: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--paper-soft);
-    text-transform: uppercase;
-}
-
-.plate-headline {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.2rem, 4.4vw, 3.6rem);
-    letter-spacing: -0.01em;
-    line-height: 1.04;
-    color: var(--paper);
-    margin-bottom: 24px;
-    max-width: 22ch;
-}
-
-.plate-lede {
-    max-width: 62ch;
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.15rem;
-    color: var(--paper-soft);
-    margin-bottom: 64px;
-}
-
-.plate-lede em {
-    color: var(--paper-soft);
-    font-style: italic;
-}
-
-/* Sheet bar (small strip above a plate, mono) */
-.sheet-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 16px 0;
-    margin-bottom: 24px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pencil-grey);
-}
-
-/* Title block (lower-right of every page) */
-.title-block {
-    margin: 80px 0 48px auto;
-    width: 360px;
-    border: 1px solid var(--cyan-rule);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    color: var(--paper-soft);
-    background: var(--navy-deep);
-}
-
-.title-block-row {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    border-bottom: 1px solid var(--cyan-soft);
-}
-
-.title-block-row:last-child {
-    border-bottom: none;
-}
-
-.title-block-row .label {
-    padding: 10px 14px;
-    border-right: 1px solid var(--cyan-soft);
-    color: var(--cyan-rule);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-
-.title-block-row .value {
-    padding: 10px 14px;
-    color: var(--paper-soft);
-    letter-spacing: 0.06em;
-}
-
-/* Stamp row (bottom of plates, signature + CTA) */
-.stamp-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    margin-top: 48px;
-    padding-top: 40px;
-    border-top: 1px solid var(--cyan-soft);
-}
-
-.stamp-signature {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    color: var(--cyan-rule);
-    text-transform: uppercase;
-}
-
-/* ========================================================================
-   Sheet wrapper (used on all subpages)
-   ======================================================================== */
-
-.sheet {
-    flex: 1;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 56px 56px 0;
-}
-
-/* ========================================================================
-   Hero plate
+   Hero — full sonar treatment
    ======================================================================== */
 
 .hero-section {
-    background: transparent;
-    padding: 56px 2rem 32px;
+    padding: 80px 2rem 72px;
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
 }
 
 .hero-section .section-content {
-    max-width: 1280px;
-}
-
-.hero-split {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    border: 1px solid var(--cyan-rule);
-    padding: 72px 64px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
     position: relative;
-}
-
-.hero-split::before {
-    content: "PLATE 01. HERO";
-    position: absolute;
-    top: -1px;
-    left: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--cyan-rule);
-}
-
-.hero-split::after {
-    content: "REV. C. 2026.05";
-    position: absolute;
-    top: -1px;
-    right: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--paper-soft);
-}
-
-.hero-text-side {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     z-index: 2;
+}
+
+/* Sonar rings — positioned behind hero content */
+.sonar-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 900px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sonar-rings svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Hero text */
+.hero-signal {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: rgba(159, 252, 223, 0.68);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@keyframes ping-pulse {
+    0%, 100% { box-shadow: 0 0 8px var(--ping), 0 0 18px rgba(159, 252, 223, 0.3); }
+    50% { box-shadow: 0 0 14px var(--ping), 0 0 36px rgba(159, 252, 223, 0.5); }
+}
+
+.ping-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ping);
+    box-shadow: 0 0 10px var(--ping), 0 0 20px rgba(159, 252, 223, 0.4);
+    flex-shrink: 0;
+    animation: ping-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sonar-ring {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.22; }
+}
+
+.ping-ring {
+    animation: sonar-ring 4.5s ease-in-out infinite;
 }
 
 .hero-title {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
     font-weight: 800;
     line-height: 1.04;
-    letter-spacing: -0.015em;
-    margin: 0 0 12px;
-    color: var(--paper);
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--surface-text);
 }
 
 .hero-tagline {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 400;
     font-style: italic;
-    color: var(--red-pencil);
-    margin: 0 0 32px;
+    color: var(--ping);
+    margin: 0 0 28px;
     line-height: 1.4;
 }
 
 .hero-subhead {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--paper);
-    max-width: 46ch;
-    margin: 0 0 36px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    max-width: 52ch;
+    margin: 0 auto 40px;
 }
 
 .hero-cta {
-    align-self: flex-start;
-}
-
-.hero-visual-side {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.visual-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-image {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    max-height: 480px;
-    filter: hue-rotate(180deg) saturate(0.6) brightness(0.95);
-    mix-blend-mode: screen;
-    opacity: 0.92;
+    display: inline-block;
 }
 
 /* ========================================================================
-   Reality plate / numbered annotated list (NOT 3-up cards)
+   Why — clean container, pain cards
    ======================================================================== */
 
-.reality-section {
-    background: transparent;
-    padding: 24px 2rem 24px;
+.pain-section {
+    padding: 3rem 2rem;
 }
 
-.reality-plate {
+.pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
+    margin-top: 0;
+}
+
+.pain-card {
+    background: var(--abyss);
+    padding: 36px 32px;
     position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px 88px;
-    background: var(--navy);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.reality-plate-notch {
-    position: absolute;
-    top: -1px;
-    left: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
+.pain-card:hover {
+    background: var(--deep);
+    box-shadow: inset 3px 0 0 var(--signal);
+}
+
+.pain-card-id {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.22em;
-    color: var(--cyan-rule);
+    color: var(--signal-soft);
+    margin-bottom: 16px;
     text-transform: uppercase;
 }
 
-.reality-plate-rev {
-    position: absolute;
-    top: -1px;
-    right: 48px;
-    background: var(--navy);
-    padding: 0 18px;
-    transform: translateY(-50%);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--paper-soft);
-    text-transform: uppercase;
-}
-
-.reality-list {
-    list-style: none;
-    margin: 56px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-}
-
-.reality-item {
-    display: grid;
-    grid-template-columns: 80px 1fr 200px;
-    column-gap: 32px;
-    align-items: start;
-    padding: 32px 0;
-    border-top: 1px solid var(--cyan-soft);
-}
-
-.reality-item:last-child {
-    border-bottom: 1px solid var(--cyan-soft);
-}
-
-.reality-num {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.9rem;
-    letter-spacing: 0.22em;
-    color: var(--red-pencil);
-    padding-top: 4px;
-}
-
-.reality-body {
-    max-width: 56ch;
-}
-
-.reality-title {
+.pain-card-title {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 1.45rem;
-    color: var(--paper);
-    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: var(--surface-text);
+    margin: 0 0 12px;
     letter-spacing: -0.01em;
     line-height: 1.2;
 }
 
-.reality-copy {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--paper-soft);
+.pain-card-body {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--depth-text);
     margin: 0;
 }
 
-.reality-tag {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--cyan-rule);
-    text-transform: uppercase;
-    text-align: right;
-    padding-top: 10px;
-}
-
 /* ========================================================================
-   How plate / engagement diagram (symmetry mandatory)
+   How — engagement cards
    ======================================================================== */
 
 .how-section {
-    background: transparent;
-    padding: 24px 2rem 24px;
+    padding: 3rem 2rem;
 }
 
-.how-plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px 96px;
-    background: var(--navy);
-}
-
-.how-diagram {
+.engagement-grid {
     display: grid;
-    grid-template-columns: 1fr 240px 1fr;
-    column-gap: 56px;
-    align-items: stretch;
-    margin-top: 56px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 0;
 }
 
-.callout {
-    position: relative;
-    padding: 28px 0;
-    border-top: 1px solid var(--cyan-rule);
+.engagement-card {
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    padding: 40px 36px;
     display: flex;
     flex-direction: column;
+    transition: border-color 0.25s ease, background 0.25s ease;
 }
 
-.callout--right {
-    padding-left: 32px;
+.engagement-card:hover {
+    border-color: rgba(122, 198, 230, 0.45);
+    background: #080F17;
 }
 
-.callout--left {
-    padding-right: 32px;
-    text-align: left;
-}
-
-.callout-num {
+.engagement-num {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.22em;
-    color: var(--red-pencil);
+    color: var(--signal-soft);
     margin-bottom: 16px;
+    text-transform: uppercase;
 }
 
-.callout-title {
+.engagement-title {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    font-size: 1.55rem;
-    color: var(--paper);
-    letter-spacing: -0.01em;
+    font-size: 1.4rem;
+    color: var(--surface-text);
     margin: 0 0 16px;
-    line-height: 1.15;
-    /* Symmetry: clamp to 2 lines so both callouts align */
-    min-height: 3.4rem;
-    display: flex;
-    align-items: flex-start;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 }
 
-.callout-body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    color: var(--paper-soft);
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 38ch;
-    margin: 0 0 20px;
+.engagement-body {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    margin: 0 0 24px;
     flex-grow: 1;
 }
 
-.callout-meta {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: var(--cyan-rule);
-    text-transform: uppercase;
-    padding-top: 16px;
-    border-top: 1px solid var(--cyan-soft);
-}
-
-.diagram-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 0;
-    border-left: 1px dashed var(--cyan-soft);
-    border-right: 1px dashed var(--cyan-soft);
-    position: relative;
-}
-
-.diagram-svg {
-    width: 100%;
-    height: auto;
-    max-width: 200px;
-}
-
-.diagram-label {
+.engagement-meta {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 10px;
-    letter-spacing: 0.24em;
-    color: var(--paper-soft);
+    letter-spacing: 0.18em;
+    color: var(--signal);
     text-transform: uppercase;
-    margin-top: 18px;
-    text-align: center;
-    max-width: 22ch;
-    line-height: 1.5;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-dim);
+    margin-top: auto;
 }
 
 /* ========================================================================
-   Solution / Command Center plate
+   What — command modules (keep structure, update palette)
    ======================================================================== */
 
 .solution-section {
-    background: transparent;
-    padding: 24px 2rem 24px;
-    color: var(--paper);
-}
-
-.solution-plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px 96px;
-    background: var(--navy);
+    padding: 3rem 2rem;
 }
 
 .command-center-grid {
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: 56px;
     margin-top: 48px;
 }
 
@@ -513,7 +255,7 @@
     gap: 48px;
     align-items: center;
     padding-top: 32px;
-    border-top: 1px solid var(--cyan-soft);
+    border-top: 1px solid var(--border-dim);
 }
 
 .command-module:first-child {
@@ -529,35 +271,37 @@
     direction: ltr;
 }
 
+.module-text .module-num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--signal-soft);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+}
+
 .module-text h3 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0 0 12px;
-    color: var(--paper);
+    color: var(--surface-text);
     letter-spacing: -0.01em;
 }
 
 .module-text p {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--paper-soft);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--depth-text);
     margin: 0;
     max-width: 44ch;
 }
 
-.module-text .module-num {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--red-pencil);
-    margin-bottom: 14px;
-}
-
 .module-visual {
-    background: var(--navy-deep);
-    border: 1px solid var(--cyan-rule);
+    background: var(--deep);
+    border: 1px solid var(--border-dim);
     height: 280px;
     position: relative;
     display: flex;
@@ -572,23 +316,15 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: saturate(0.75) brightness(0.92);
+    filter: saturate(0.8) brightness(0.9);
 }
 
 /* ========================================================================
-   Offer plate (Systems Diagnostic)
+   Diagnostic / Offer
    ======================================================================== */
 
 .offer-section {
-    background: transparent;
-    padding: 24px 2rem 24px;
-}
-
-.offer-plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px 96px;
-    background: var(--navy);
+    padding: 3rem 2rem 5rem;
 }
 
 .offer-layout {
@@ -602,86 +338,86 @@
 .offer-visual img {
     width: 100%;
     height: auto;
-    border: 1px solid var(--cyan-rule);
-    background: var(--navy-deep);
-    filter: saturate(0.7) brightness(0.95);
-}
-
-.offer-text h2 {
-    color: var(--paper);
+    border: 1px solid var(--border-dim);
+    background: var(--deep);
+    filter: saturate(0.7) brightness(0.9);
+    display: block;
 }
 
 .offer-copy {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.15rem;
-    line-height: 1.6;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
     margin: 0 0 32px;
-    color: var(--paper-soft);
+    color: var(--depth-text);
     max-width: 42ch;
 }
 
 /* ========================================================================
-   Who page (Foreman dossier)
+   Who page — Captain plate (full sonar treatment)
    ======================================================================== */
 
-.who-container {
+.captain-section {
     flex: 1;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.captain-rings {
+    position: absolute;
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.captain-rings svg {
     width: 100%;
-    max-width: 1100px;
-    margin: 56px auto 0;
-    padding: 0 56px;
-    position: relative;
-    z-index: 5;
+    height: 100%;
 }
 
-.who-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    margin-bottom: 48px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pencil-grey);
-}
-
-.who-plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px;
-    background: var(--navy);
+.captain-plate {
+    background: var(--deep);
+    border: 1px solid var(--border-dim);
+    padding: 72px 80px;
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 300px 1fr;
     gap: 64px;
     align-items: start;
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .polaroid-frame {
-    background: var(--paper);
-    padding: 14px 14px 56px;
-    transform: none;
+    background: var(--deep);
+    padding: 12px 12px 52px;
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     position: relative;
-    border: 1px solid var(--graphite);
+    border: 1px solid var(--border-subtle);
 }
 
 .polaroid-image {
     width: 100%;
     display: block;
+    filter: saturate(0.7) brightness(0.9);
 }
 
 .polaroid-caption {
     position: absolute;
-    bottom: 18px;
+    bottom: 16px;
     left: 0;
     width: 100%;
     text-align: center;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    color: var(--graphite);
+    color: var(--chart);
     font-weight: 500;
     letter-spacing: 0.22em;
     font-size: 10px;
@@ -693,22 +429,22 @@
 }
 
 @keyframes dossier-sweep {
-    0%, 15% { background-position: 160% center; }
+    0%, 15%  { background-position: 160% center; }
     85%, 100% { background-position: -60% center; }
 }
 
 .dossier-title {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+    font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 800;
     letter-spacing: -0.01em;
     line-height: 1.04;
     margin: 0 0 24px;
     background: linear-gradient(
         90deg,
-        var(--paper) 30%,
-        rgba(122, 198, 230, 0.95) 50%,
-        var(--paper) 70%
+        var(--surface-text) 30%,
+        rgba(159, 252, 223, 0.95) 50%,
+        var(--surface-text) 70%
     );
     background-size: 260% auto;
     background-position: 160% center;
@@ -721,238 +457,45 @@
 
 .dossier-rule {
     display: block;
-    width: 64px;
-    height: 2px;
-    background: var(--red-pencil);
-    margin-bottom: 32px;
+    width: 48px;
+    height: 1px;
+    background: var(--signal);
+    margin-bottom: 28px;
 }
 
 .dossier-text {
-    font-family: 'Source Serif 4', Georgia, serif;
-    color: var(--paper-soft);
-    font-size: 1.1rem;
-    line-height: 1.65;
+    font-family: 'Outfit', sans-serif;
+    color: var(--depth-text);
+    font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 .dossier-text p {
     margin-bottom: 1.25rem;
-    color: var(--paper-soft);
+    color: var(--depth-text);
 }
 
-/* ========================================================================
-   Outcome Engineer / System Overview plate
-   ======================================================================== */
-
-.system-overview-container {
-    flex: 1;
-    width: 100%;
+/* Captain title block (lower right) */
+.captain-log {
     max-width: 1100px;
-    margin: 56px auto 0;
-    padding: 0 56px;
-    position: relative;
-    z-index: 5;
+    margin: 40px auto 0;
+    padding: 0 0 0;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.overview-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    margin-bottom: 48px;
+.captain-log-entry {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 10px;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.16em;
+    color: var(--border-subtle);
+    text-align: right;
+    line-height: 1.8;
     text-transform: uppercase;
-    color: var(--pencil-grey);
-}
-
-.overview-plate {
-    position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 88px 80px;
-    background: var(--navy);
-}
-
-.system-overview-container h1,
-.system-overview-container h2,
-.system-overview-container h3 {
-    color: var(--paper);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-}
-
-.system-overview-container h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.05;
-    margin: 0 0 12px;
-    font-weight: 800;
-}
-
-.system-overview-container p,
-.system-overview-container li {
-    color: var(--paper-soft);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.05rem;
-    line-height: 1.65;
-}
-
-.system-overview-container strong {
-    color: var(--paper);
-    font-weight: 600;
-}
-
-.overview-header {
-    margin-bottom: 56px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--cyan-soft);
-}
-
-.overview-header .subhead {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.2rem;
-    color: var(--paper-soft);
-    margin: 8px 0 0;
-    font-style: italic;
-}
-
-.overview-section {
-    margin-bottom: 56px;
-}
-
-.overview-section:last-of-type {
-    margin-bottom: 32px;
-}
-
-.overview-section h2 {
-    font-size: 1.6rem;
-    margin: 0 0 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--cyan-soft);
-    color: var(--cyan-rule);
-}
-
-.workflow-image {
-    width: 100%;
-    margin: 24px 0;
-    border: 1px solid var(--cyan-rule);
-    background: var(--navy-deep);
-    display: block;
-    filter: saturate(0.8);
-}
-
-.workflow-steps-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 24px;
-}
-
-/* Replaces banned side-stripe border with numbered hanging gutter */
-.workflow-steps-list li {
-    margin-bottom: 18px;
-    padding: 16px 20px;
-    background: var(--navy-deep);
-    border: 1px solid var(--cyan-soft);
-    border-left: none;
-    counter-increment: step;
-    position: relative;
-    padding-left: 64px;
-}
-
-.workflow-steps-list {
-    counter-reset: step;
-}
-
-.workflow-steps-list li::before {
-    content: counter(step, decimal-leading-zero);
-    position: absolute;
-    left: 18px;
-    top: 16px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--red-pencil);
-}
-
-.pricing-cards-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 24px;
-}
-
-.system-overview-container .pricing-card {
-    background: var(--navy-deep);
-    border: 1px solid var(--cyan-rule);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-}
-
-.pricing-card h3 {
-    color: var(--paper);
-    font-size: 1.15rem;
-    margin: 0 0 12px;
-    /* Symmetry: keep both pricing card titles the same minimum height */
-    min-height: 3rem;
-    line-height: 1.25;
-}
-
-.pricing-cost {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 1.5rem;
-    color: var(--red-pencil);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 18px;
-    line-height: 1.3;
-}
-
-.pricing-details {
-    color: var(--paper-soft);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 0.98rem;
-    line-height: 1.65;
-    flex: 1;
-}
-
-.overview-cta {
-    text-align: center;
-    margin-top: 64px;
-    padding-top: 40px;
-    border-top: 1px solid var(--cyan-soft);
-}
-
-.cta-engineer {
-    display: inline-block;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.92rem;
-    font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--red-pencil);
-    background: transparent;
-    padding: 18px 32px;
-    text-decoration: none;
-    border: 2px solid var(--red-pencil);
-    transition: background 0.22s ease, color 0.22s ease;
-}
-
-.cta-engineer:hover {
-    background: var(--red-pencil);
-    color: var(--paper);
-}
-
-@media (max-width: 768px) {
-    .pricing-cards-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* ========================================================================
-   Login page
+   Login
    ======================================================================== */
 
 .login-container {
@@ -965,50 +508,35 @@
     flex-direction: column;
 }
 
-.login-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    margin-bottom: 48px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pencil-grey);
-}
-
 .login-plate {
     position: relative;
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
-    background: var(--navy-deep);
-    border: 1px solid var(--cyan-rule);
-    padding: 64px 56px;
+    background: var(--deep);
+    border: 1px solid var(--border-subtle);
+    padding: 56px 48px;
 }
 
 .login-header {
     text-align: left;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
     padding-bottom: 18px;
-    border-bottom: 1px solid var(--cyan-soft);
+    border-bottom: 1px solid var(--border-dim);
 }
 
 .login-header h1 {
-    color: var(--paper);
+    color: var(--surface-text);
     font-family: 'Outfit', sans-serif;
     font-size: 1.75rem;
     margin: 0 0 6px;
     font-weight: 800;
     letter-spacing: -0.01em;
-    text-transform: none;
 }
 
 .login-header p {
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    color: var(--cyan-rule);
+    color: var(--signal);
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1022,7 +550,7 @@
 
 .form-label {
     display: block;
-    color: var(--cyan-rule);
+    color: var(--signal);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.7rem;
     margin-bottom: 8px;
@@ -1033,9 +561,9 @@
 
 .form-input {
     width: 100%;
-    background: var(--navy);
-    border: 1px solid var(--cyan-soft);
-    color: var(--paper);
+    background: var(--abyss);
+    border: 1px solid var(--border-subtle);
+    color: var(--surface-text);
     padding: 12px 14px;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.95rem;
@@ -1045,14 +573,14 @@
 }
 
 .form-input:focus {
-    border-color: var(--cyan-rule);
+    border-color: var(--signal);
 }
 
 .auth-button {
     width: 100%;
     background: transparent;
-    color: var(--red-pencil);
-    border: 2px solid var(--red-pencil);
+    color: var(--signal);
+    border: 1px solid var(--signal);
     padding: 16px;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.85rem;
@@ -1065,19 +593,19 @@
 }
 
 .auth-button:hover {
-    background: var(--red-pencil);
-    color: var(--paper);
+    background: var(--signal);
+    color: var(--abyss);
 }
 
 .auth-button:disabled {
-    border-color: var(--pencil-grey);
-    color: var(--pencil-grey);
+    border-color: var(--chart);
+    color: var(--chart);
     cursor: not-allowed;
     background: transparent;
 }
 
 .error-message {
-    color: var(--red-pencil);
+    color: #e05a4a;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.8rem;
     letter-spacing: 0.18em;
@@ -1095,7 +623,7 @@
 .forgot-link {
     display: block;
     margin-top: 24px;
-    color: var(--pencil-grey);
+    color: var(--chart);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 0.7rem;
     letter-spacing: 0.18em;
@@ -1105,7 +633,7 @@
 }
 
 .forgot-link:hover {
-    color: var(--cyan-rule);
+    color: var(--signal);
 }
 
 /* ========================================================================
@@ -1118,35 +646,19 @@
     max-width: 900px;
     margin: 56px auto 0;
     padding: 0 56px;
-    position: relative;
-    z-index: 5;
-}
-
-.legal-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 18px;
-    border-bottom: 1px dashed var(--cyan-soft);
-    margin-bottom: 48px;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pencil-grey);
 }
 
 .legal-plate {
     position: relative;
-    border: 1px solid var(--cyan-rule);
-    padding: 72px 64px;
-    background: var(--navy);
+    border: 1px solid var(--border-dim);
+    padding: 64px;
+    background: var(--deep);
 }
 
 .legal-container h1,
 .legal-container h2,
 .legal-container h3 {
-    color: var(--paper);
+    color: var(--surface-text);
     font-family: 'Outfit', sans-serif;
 }
 
@@ -1158,18 +670,18 @@
 }
 
 .legal-container h2 {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     margin: 32px 0 12px;
-    color: var(--cyan-rule);
+    color: var(--signal);
     font-weight: 700;
     padding-bottom: 8px;
-    border-bottom: 1px solid var(--cyan-soft);
+    border-bottom: 1px solid var(--border-dim);
 }
 
 .legal-container h3 {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     margin: 24px 0 10px;
-    color: var(--paper);
+    color: var(--surface-text);
     font-weight: 700;
 }
 
@@ -1177,21 +689,22 @@
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 11px;
     letter-spacing: 0.22em;
-    color: var(--cyan-rule);
+    color: var(--signal);
     text-transform: uppercase;
     margin: 0 0 32px;
+    display: block;
 }
 
 .legal-container p,
 .legal-container li {
-    color: var(--paper-soft);
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 1.02rem;
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
     line-height: 1.65;
 }
 
 .legal-container strong {
-    color: var(--paper);
+    color: var(--surface-text);
     font-weight: 600;
 }
 
@@ -1205,126 +718,286 @@
 }
 
 .legal-container a {
-    color: var(--cyan-rule);
+    color: var(--signal);
     text-decoration: none;
-    border-bottom: 1px solid var(--cyan-soft);
+    border-bottom: 1px solid var(--border-subtle);
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .legal-container a:hover {
-    color: var(--paper);
-    border-color: var(--paper);
+    color: var(--surface-text);
+    border-color: var(--surface-text);
 }
 
 .legal-section {
     margin-bottom: 32px;
 }
 
-/* Two-column engagement-model block (replaces side-stripe blocks in terms) */
-.engagement-block {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+/* ========================================================================
+   Outcome Engineer / System Overview
+   ======================================================================== */
+
+.system-overview-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 56px auto 0;
+    padding: 0 56px;
+}
+
+.overview-plate {
+    position: relative;
+    border: 1px solid var(--border-dim);
+    padding: 72px 64px;
+    background: var(--deep);
+}
+
+.system-overview-container h1,
+.system-overview-container h2,
+.system-overview-container h3 {
+    color: var(--surface-text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.system-overview-container h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 12px;
+    font-weight: 800;
+}
+
+.system-overview-container p,
+.system-overview-container li {
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.system-overview-container strong {
+    color: var(--surface-text);
+    font-weight: 600;
+}
+
+.overview-header {
+    margin-bottom: 48px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.overview-header .subhead {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    color: var(--depth-text);
+    margin: 8px 0 0;
+    font-style: italic;
+}
+
+.overview-section {
+    margin-bottom: 48px;
+}
+
+.overview-section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-dim);
+    color: var(--signal);
+}
+
+.workflow-image {
+    width: 100%;
     margin: 24px 0;
+    border: 1px solid var(--border-dim);
+    background: var(--deep);
+    display: block;
+    filter: saturate(0.8);
 }
 
-.engagement-block .engagement-block-card {
-    background: var(--navy-deep);
-    border: 1px solid var(--cyan-soft);
-    padding: 24px;
+.workflow-steps-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+    counter-reset: step;
 }
 
-.engagement-block .engagement-block-card .label {
+.workflow-steps-list li {
+    margin-bottom: 18px;
+    padding: 16px 20px 16px 64px;
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    counter-increment: step;
+    position: relative;
+}
+
+.workflow-steps-list li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 18px;
+    top: 16px;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 11px;
     letter-spacing: 0.22em;
-    color: var(--red-pencil);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    display: block;
+    color: var(--signal);
 }
 
-@media (max-width: 768px) {
-    .engagement-block {
-        grid-template-columns: 1fr;
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.system-overview-container .pricing-card {
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card h3 {
+    color: var(--surface-text);
+    font-size: 1.1rem;
+    margin: 0 0 12px;
+    min-height: 3rem;
+    line-height: 1.25;
+}
+
+.pricing-cost {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 1.4rem;
+    color: var(--signal);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 18px;
+    line-height: 1.3;
+}
+
+.pricing-details {
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    flex: 1;
+}
+
+.overview-cta {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-dim);
+}
+
+.cta-engineer {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--signal);
+    background: transparent;
+    padding: 16px 32px;
+    text-decoration: none;
+    border: 1px solid var(--signal);
+    transition: background 0.22s ease, color 0.22s ease;
+}
+
+.cta-engineer:hover {
+    background: var(--signal);
+    color: var(--abyss);
+}
+
+/* ========================================================================
+   Section container — subtle scanline texture
+   ======================================================================== */
+
+.section-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(122, 198, 230, 0.006) 3px,
+        rgba(122, 198, 230, 0.006) 4px
+    );
+    border-radius: inherit;
+    z-index: 0;
+}
+
+.section-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================================================
+   Reveal animations (IntersectionObserver-driven)
+   ======================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+    .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
     }
 }
 
 /* ========================================================================
-   Mobile responsive plates
+   Mobile responsive
    ======================================================================== */
 
 @media (max-width: 900px) {
-    .sheet,
-    .who-container,
-    .system-overview-container,
-    .legal-container,
-    .login-container {
-        padding: 24px 20px;
-        margin-top: 24px;
+    .hero-section {
+        padding: 60px 1.25rem 56px;
+        min-height: auto;
     }
 
-    .hero-section,
-    .reality-section,
-    .how-section,
-    .solution-section,
-    .offer-section {
-        padding: 16px 20px;
+    .sonar-rings {
+        width: 500px;
+        height: 500px;
+        opacity: 0.4;
     }
 
-    .hero-split,
-    .who-plate,
-    .reality-plate,
-    .how-plate,
-    .solution-plate,
-    .offer-plate,
-    .overview-plate,
-    .legal-plate {
-        padding: 56px 24px 56px;
+    .hero-section .section-content {
+        text-align: left;
     }
 
-    .hero-split,
-    .who-plate {
+    .hero-signal {
+        justify-content: flex-start;
+    }
+
+    .hero-subhead {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .pain-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .engagement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .captain-plate {
         grid-template-columns: 1fr;
         gap: 32px;
+        padding: 40px 24px;
     }
 
-    .reality-item {
-        grid-template-columns: 60px 1fr;
-        row-gap: 8px;
-    }
-
-    .reality-tag {
-        grid-column: 1 / -1;
-        text-align: left;
-        padding-top: 0;
-    }
-
-    .how-diagram {
-        grid-template-columns: 1fr;
-        column-gap: 0;
-        row-gap: 24px;
-    }
-
-    .callout--right {
-        padding-left: 0;
-        border-top: 1px solid var(--cyan-rule);
-    }
-
-    .callout--left {
-        padding-right: 0;
-    }
-
-    .diagram-center {
-        border-left: none;
-        border-right: none;
-        border-top: 1px dashed var(--cyan-soft);
-        border-bottom: 1px dashed var(--cyan-soft);
-        padding: 24px 0;
-    }
-
-    .command-module,
-    .offer-layout {
+    .command-module {
         grid-template-columns: 1fr;
         gap: 24px;
     }
@@ -1333,35 +1006,29 @@
         direction: ltr;
     }
 
-    .stamp-row {
-        flex-direction: column;
-        align-items: flex-start;
+    .offer-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
 
-    .title-block {
-        width: 100%;
-        margin: 56px 0;
+    .system-overview-container,
+    .legal-container,
+    .login-container {
+        padding: 24px 20px;
+        margin-top: 24px;
     }
 
-    .plate-notch,
-    .plate-rev,
-    .reality-plate-notch,
-    .reality-plate-rev,
-    .hero-split::before,
-    .hero-split::after {
-        left: 16px;
-        right: auto;
-        font-size: 10px;
+    .overview-plate,
+    .legal-plate {
+        padding: 40px 24px;
     }
 
-    .plate-rev,
-    .reality-plate-rev,
-    .hero-split::after {
-        left: auto;
-        right: 16px;
+    .pricing-cards-grid {
+        grid-template-columns: 1fr;
     }
 
-    .plate {
-        padding: 56px 24px;
+    .captain-rings {
+        left: -350px;
+        opacity: 0.3;
     }
 }

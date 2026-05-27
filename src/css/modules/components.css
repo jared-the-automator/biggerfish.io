@@ -1,6 +1,6 @@
-/* Blueprint Room / Components */
+/* Deep Water — Components */
 
-/* Nav menu */
+/* ===== Nav menu ===== */
 .nav-menu {
     display: flex;
     gap: 2rem;
@@ -12,7 +12,7 @@
 
 .nav-link {
     text-decoration: none;
-    color: var(--pencil-grey);
+    color: var(--chart);
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-weight: 500;
     font-size: 11px;
@@ -26,7 +26,7 @@
 .nav-link:hover,
 .nav-link.w--current,
 .nav-link[aria-current="page"] {
-    color: var(--paper);
+    color: var(--surface-text);
 }
 
 .nav-link::after {
@@ -36,7 +36,7 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--cyan-rule);
+    background: var(--signal);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 0.2s ease;
@@ -48,32 +48,32 @@
     transform: scaleX(1);
 }
 
-/* Nav CTA / architect's red stamp */
+/* Nav CTA */
 .nav-cta {
     display: inline-block;
     padding: 8px 18px;
     background: transparent;
-    color: var(--cyan-rule);
+    color: var(--signal);
     text-decoration: none;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-weight: 500;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    border: 1px solid var(--cyan-rule);
+    border: 1px solid var(--signal);
     transition: background 0.22s ease, color 0.22s ease;
 }
 
 .nav-cta:hover {
-    background: var(--cyan-rule);
-    color: var(--navy);
+    background: var(--signal);
+    color: var(--abyss);
 }
 
 /* Mobile toggle */
 .nav-toggle {
     display: none;
     background: none;
-    border: 1px solid var(--cyan-soft);
+    border: 1px solid var(--border-subtle);
     cursor: pointer;
     padding: 8px;
     flex-direction: column;
@@ -84,11 +84,11 @@
     display: block;
     width: 22px;
     height: 1px;
-    background-color: var(--cyan-rule);
+    background-color: var(--signal);
     transition: background 0.2s ease;
 }
 
-/* Dropdowns / sheet-paper inset */
+/* Dropdown */
 .nav-item-dropdown {
     position: relative;
     display: inline-block;
@@ -97,14 +97,14 @@
 .nav-dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--navy-deep);
+    background-color: var(--deep);
     min-width: 240px;
     z-index: 1000;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 18px;
-    border: 1px solid var(--cyan-rule);
+    border: 1px solid var(--signal);
 }
 
 .nav-dropdown-content::before {
@@ -122,7 +122,7 @@
 }
 
 .dropdown-link {
-    color: var(--paper-soft);
+    color: var(--depth-text);
     padding: 14px 22px;
     text-decoration: none;
     display: block;
@@ -130,7 +130,7 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--cyan-soft);
+    border-bottom: 1px solid var(--border-dim);
     transition: background 0.18s ease, color 0.18s ease;
 }
 
@@ -139,44 +139,59 @@
 }
 
 .dropdown-link:hover {
-    background-color: var(--navy);
-    color: var(--paper);
+    background-color: var(--abyss);
+    color: var(--surface-text);
 }
 
 .dropdown-link.outcome {
-    color: var(--cyan-rule);
+    color: var(--signal);
 }
 
 .dropdown-link.outcome:hover {
-    color: var(--paper);
-    background-color: var(--navy);
+    color: var(--surface-text);
+    background-color: var(--abyss);
 }
 
-/* Stamp CTA (working cyan) */
+.dropdown-name {
+    display: block;
+}
+
+.dropdown-desc {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--chart);
+    margin-top: 2px;
+    font-style: italic;
+}
+
+/* CTA button */
 .cta-button,
 .stamp-cta {
     display: inline-block;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--cyan-rule);
+    color: var(--signal);
     background: transparent;
-    padding: 18px 32px;
+    padding: 16px 32px;
     text-decoration: none;
-    border: 2px solid var(--cyan-rule);
+    border: 1px solid var(--signal);
     transition: background 0.22s ease, color 0.22s ease;
     cursor: pointer;
 }
 
 .cta-button:hover,
 .stamp-cta:hover {
-    background: var(--cyan-rule);
-    color: var(--navy);
+    background: var(--signal);
+    color: var(--abyss);
 }
 
-/* Mobile responsive nav */
+/* Mobile nav */
 @media (max-width: 900px) {
     .nav-toggle {
         display: flex;
@@ -188,11 +203,11 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: var(--navy-deep);
+        background: var(--deep);
         flex-direction: column;
         padding: 24px;
-        border-top: 1px solid var(--cyan-soft);
-        border-bottom: 1px solid var(--cyan-soft);
+        border-top: 1px solid var(--border-dim);
+        border-bottom: 1px solid var(--border-dim);
         gap: 18px;
         align-items: flex-start;
     }
