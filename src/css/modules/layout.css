@@ -139,7 +139,7 @@
     color: var(--chart);
     text-decoration: none;
     transition: color 0.2s ease;
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     letter-spacing: 0.18em;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .footer-separator {
-    color: var(--border-subtle);
+    color: var(--chart);
 }
 
 .footer-copyright {
@@ -156,9 +156,9 @@
     text-align: center;
     margin-top: 16px;
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.22em;
-    color: var(--border-subtle);
+    color: var(--chart);
     text-transform: uppercase;
 }
 

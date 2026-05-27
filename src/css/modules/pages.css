@@ -488,7 +488,7 @@
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
     font-size: 12px;
     letter-spacing: 0.16em;
-    color: var(--border-subtle);
+    color: var(--chart);
     text-align: right;
     line-height: 1.8;
     text-transform: uppercase;
