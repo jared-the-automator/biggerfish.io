@@ -224,16 +224,3 @@
         font-size: 13px;
     }
 }
-
-/* ===== Rolling text wave ===== */
-@media (prefers-reduced-motion: no-preference) {
-    @keyframes wave-char {
-        0%, 100% { transform: translateY(0); }
-        50%       { transform: translateY(-5px); }
-    }
-
-    .wave-char {
-        display: inline-block;
-        animation: wave-char 2.4s ease-in-out infinite;
-    }
-}

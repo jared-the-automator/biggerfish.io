@@ -70,7 +70,7 @@ function initRadarSweep() {
     (function loop() { draw(); requestAnimationFrame(loop); })();
 }
 
-// ── Cursor wake ───────────────────────────────────────────────────────────────
+// ── Cursor wake (Kelvin V-wake) ───────────────────────────────────────────────
 
 function initCursorWake() {
     if (reducedMotion) return;
@@ -98,55 +98,60 @@ function initCursorWake() {
         canvas.height = H;
     });
 
-    const ripples = [];
-    let lastX = -1, lastY = -1;
+    const particles = [];
+    let prevX = -1, prevY = -1;
+
+    // Kelvin wake: constant ~19.47° half-angle regardless of speed
+    const WAKE_ANGLE = 19.47 * Math.PI / 180;
+    const cosA = Math.cos(WAKE_ANGLE);
+    const sinA = Math.sin(WAKE_ANGLE);
 
     document.addEventListener('mousemove', (e) => {
-        const dx = e.clientX - lastX;
-        const dy = e.clientY - lastY;
-        if (Math.sqrt(dx * dx + dy * dy) > 10) {
-            ripples.push({ x: e.clientX, y: e.clientY, r: 1, alpha: 0.45 });
-            lastX = e.clientX;
-            lastY = e.clientY;
-        }
+        if (prevX < 0) { prevX = e.clientX; prevY = e.clientY; return; }
+
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 6) return;
+
+        // Backward unit vector
+        const bx = -dx / dist;
+        const by = -dy / dist;
+
+        // Rotate backward by ±WAKE_ANGLE to get the two wake arms
+        const speed = 1.1;
+        particles.push({
+            x: e.clientX, y: e.clientY,
+            vx: (bx * cosA - by * sinA) * speed,
+            vy: (bx * sinA + by * cosA) * speed,
+            alpha: 0.5,
+        });
+        particles.push({
+            x: e.clientX, y: e.clientY,
+            vx: (bx * cosA + by * sinA) * speed,
+            vy: (-bx * sinA + by * cosA) * speed,
+            alpha: 0.5,
+        });
+
+        prevX = e.clientX;
+        prevY = e.clientY;
     });
 
     (function loop() {
         ctx.clearRect(0, 0, W, H);
-        for (let i = ripples.length - 1; i >= 0; i--) {
-            const p = ripples[i];
-            p.r += 1.4;
-            p.alpha -= 0.014;
-            if (p.alpha <= 0) { ripples.splice(i, 1); continue; }
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= 0.010;
+            if (p.alpha <= 0) { particles.splice(i, 1); continue; }
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(159,252,223,${p.alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+            ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(159,252,223,${p.alpha})`;
+            ctx.fill();
         }
         requestAnimationFrame(loop);
     })();
-}
-
-// ── Rolling text wave ─────────────────────────────────────────────────────────
-
-function initTextWave(selector) {
-    if (reducedMotion) return;
-    document.querySelectorAll(selector).forEach(el => {
-        const text = el.textContent;
-        el.textContent = '';
-        text.split('').forEach((ch, i) => {
-            if (ch === ' ') {
-                el.appendChild(document.createTextNode(' '));
-            } else {
-                const span = document.createElement('span');
-                span.className = 'wave-char';
-                span.style.animationDelay = `${(i * 0.065).toFixed(3)}s`;
-                span.textContent = ch;
-                el.appendChild(span);
-            }
-        });
-    });
 }
 
 // ── Intersection Observer reveal ──────────────────────────────────────────────
@@ -173,5 +178,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initRadarSweep();
     initRevealAnimations();
     initCursorWake();
-    initTextWave('.brand-name');
 });
