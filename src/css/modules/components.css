@@ -154,17 +154,21 @@
 
 .dropdown-name {
     display: block;
+    font-weight: 700;
+    color: var(--surface-text);
+    font-size: 12px;
+    letter-spacing: 0.14em;
 }
 
 .dropdown-desc {
     display: block;
     font-family: 'Outfit', sans-serif;
     font-size: 10px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     text-transform: none;
+    font-weight: 400;
     color: var(--chart);
-    margin-top: 2px;
-    font-style: italic;
+    margin-top: 4px;
 }
 
 /* CTA button */
