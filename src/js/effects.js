@@ -34,7 +34,6 @@ function initRadarSweep() {
 
     function draw() {
         ctx.clearRect(0, 0, 900, 900);
-
         for (let i = STEPS; i >= 1; i--) {
             const a0 = angle - TRAIL * ((i - 1) / STEPS);
             const a1 = angle - TRAIL * (i / STEPS);
@@ -46,14 +45,12 @@ function initRadarSweep() {
             ctx.fillStyle = `rgba(159,252,223,${alpha})`;
             ctx.fill();
         }
-
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx + Math.cos(angle) * maxR, cy + Math.sin(angle) * maxR);
         ctx.strokeStyle = 'rgba(159,252,223,0.4)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
-
         const tx = cx + Math.cos(angle) * maxR;
         const ty = cy + Math.sin(angle) * maxR;
         const grd = ctx.createRadialGradient(tx, ty, 0, tx, ty, 8);
@@ -63,18 +60,39 @@ function initRadarSweep() {
         ctx.arc(tx, ty, 8, 0, Math.PI * 2);
         ctx.fillStyle = grd;
         ctx.fill();
-
         angle += SPEED;
     }
 
     (function loop() { draw(); requestAnimationFrame(loop); })();
 }
 
-// ── Cursor wake (Kelvin V — path-history spread) ──────────────────────────────
+// ── Brand name rolling colour wave ────────────────────────────────────────────
+
+function initBrandWave() {
+    if (reducedMotion) return;
+    const el = document.querySelector('.brand-name');
+    if (!el) return;
+
+    const text = el.textContent;
+    el.textContent = '';
+    text.split('').forEach((ch, i) => {
+        if (ch === ' ') {
+            el.appendChild(document.createTextNode(' '));
+        } else {
+            const span = document.createElement('span');
+            span.className = 'brand-char';
+            span.style.animationDelay = `${(i * 0.11).toFixed(2)}s`;
+            span.textContent = ch;
+            el.appendChild(span);
+        }
+    });
+}
+
+// ── Cursor wake (Kelvin V — time-based dissipation) ───────────────────────────
 //
-// Each point the cursor passes through is a disturbance that spreads outward
-// over time. Older points have had more time to spread, so their perpendicular
-// width is greater. The accumulated pattern forms the V naturally.
+// Each point the cursor passes through is stamped with a timestamp.
+// Age is derived from wall-clock time, so the wake continues to spread
+// and fade after the cursor stops moving.
 
 function initCursorWake() {
     if (reducedMotion) return;
@@ -99,11 +117,9 @@ function initCursorWake() {
         canvas.width = W; canvas.height = H;
     });
 
-    // Each trail point stores position + the perpendicular direction at that point
-    const trail = [];
-    const MAX_POINTS = 90;   // how far back the wake extends
-    const MAX_SPREAD = 55;   // max perpendicular width at the oldest point
-
+    const trail = [];            // {x, y, nx, ny, born}
+    const LIFETIME = 1400;      // ms each point lives
+    const MAX_SPREAD = 55;      // max perpendicular spread at end-of-life
     let prevX = -1, prevY = -1;
 
     document.addEventListener('mousemove', (e) => {
@@ -112,35 +128,40 @@ function initCursorWake() {
         const dy = e.clientY - prevY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 4) return;
-
-        // Perpendicular unit vector (90° from travel direction)
-        trail.unshift({ x: e.clientX, y: e.clientY, nx: -dy / dist, ny: dx / dist });
-        if (trail.length > MAX_POINTS) trail.pop();
+        trail.push({
+            x: e.clientX, y: e.clientY,
+            nx: -dy / dist, ny: dx / dist,
+            born: performance.now(),
+        });
         prevX = e.clientX;
         prevY = e.clientY;
     });
 
     (function loop() {
         ctx.clearRect(0, 0, W, H);
+        const now = performance.now();
 
-        // Faint center trail
-        if (trail.length > 1) {
+        // Faint center trail (only live points)
+        const live = trail.filter(p => now - p.born < LIFETIME);
+        if (live.length > 1) {
             ctx.beginPath();
-            ctx.moveTo(trail[0].x, trail[0].y);
-            for (let i = 1; i < trail.length; i++) ctx.lineTo(trail[i].x, trail[i].y);
-            ctx.strokeStyle = 'rgba(159,252,223,0.07)';
+            ctx.moveTo(live[0].x, live[0].y);
+            for (let i = 1; i < live.length; i++) ctx.lineTo(live[i].x, live[i].y);
+            ctx.strokeStyle = 'rgba(159,252,223,0.06)';
             ctx.lineWidth = 1;
             ctx.stroke();
         }
 
-        // Wake arms: spread grows with age, alpha fades with age
-        trail.forEach((pt, i) => {
-            const t = i / MAX_POINTS;              // 0 = newest, 1 = oldest
+        // Wake arms — age from timestamp, prune expired points
+        for (let i = trail.length - 1; i >= 0; i--) {
+            const t = (now - trail[i].born) / LIFETIME; // 0=fresh, 1=expired
+            if (t >= 1) { trail.splice(i, 1); continue; }
+
+            const pt = trail[i];
             const spread = t * MAX_SPREAD;
             const alpha = (1 - t) * 0.5;
-            if (spread < 1.5) return;
+            if (spread < 1.5) continue;
 
-            // Wave-crest oscillation along the arms
             const wave = 1 + 0.3 * Math.sin(i * 0.5);
             const r = 1.8 * wave;
             const a = Math.min(alpha * wave, 0.65);
@@ -154,7 +175,7 @@ function initCursorWake() {
             ctx.arc(pt.x - pt.nx * spread, pt.y - pt.ny * spread, r, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(159,252,223,${a})`;
             ctx.fill();
-        });
+        }
 
         requestAnimationFrame(loop);
     })();
@@ -164,7 +185,6 @@ function initCursorWake() {
 
 function initRevealAnimations() {
     if (reducedMotion) return;
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -173,7 +193,6 @@ function initRevealAnimations() {
             }
         });
     }, { threshold: 0.06, rootMargin: '0px 0px -24px 0px' });
-
     document.querySelectorAll('.section-container, .captain-plate').forEach(el => {
         el.classList.add('reveal');
         observer.observe(el);
@@ -184,4 +203,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initRadarSweep();
     initRevealAnimations();
     initCursorWake();
+    initBrandWave();
 });

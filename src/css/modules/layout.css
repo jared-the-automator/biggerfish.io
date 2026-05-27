@@ -56,9 +56,12 @@
     flex-direction: column;
 }
 
-@keyframes brand-sweep {
-    0%, 20%  { background-position: 160% center; }
-    80%, 100% { background-position: -60% center; }
+@keyframes brand-char-wave {
+    0%, 15%   { color: var(--surface-text); }
+    28%       { color: #FFE066; }
+    50%       { color: #FF9EAA; }
+    72%       { color: #90E0FF; }
+    85%, 100% { color: var(--surface-text); }
 }
 
 .brand-name {
@@ -67,19 +70,14 @@
     font-size: 1rem;
     line-height: 1;
     letter-spacing: -0.01em;
-    background: linear-gradient(
-        90deg,
-        var(--surface-text) 35%,
-        rgba(159, 252, 223, 0.9) 50%,
-        var(--surface-text) 65%
-    );
-    background-size: 260% auto;
-    background-position: 160% center;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: brand-sweep 12s ease-in-out infinite;
-    animation-delay: 2.5s;
+    color: var(--surface-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .brand-char {
+        display: inline-block;
+        animation: brand-char-wave 9s ease-in-out infinite;
+    }
 }
 
 /* ===== Footer ===== */
