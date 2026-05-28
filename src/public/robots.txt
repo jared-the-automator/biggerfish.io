@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /thank-you.html
+Disallow: /diagnostic-tool.html
+Disallow: /static-template-slug-1732851306046.html
+
+Sitemap: https://biggerfish.io/sitemap.xml

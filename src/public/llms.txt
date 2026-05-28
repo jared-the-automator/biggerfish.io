@@ -1,0 +1,31 @@
+# Bigger Fish Intelligent Automation
+
+> Custom automation infrastructure for independent operators.
+
+Bigger Fish is a Maine-based automation firm founded in 2024 by Jared Fischer. We build bespoke automation systems — not templates, not subscriptions, not platforms. Each engagement is scoped, built, and handed off (or run on retainer).
+
+## What we build
+
+- **Custom automation systems** — n8n, Make, or code-first pipelines connecting your tools
+- **AI-native applications** — voice, chat, and document-processing workflows powered by Gemini, Claude, and local LLMs
+- **CRM and operational infrastructure** — for independent operators who need real tools, not SaaS bloat
+
+## Products
+
+- [D-slop](https://biggerfish.io/d-slop.html) — Chrome extension that detects and highlights AI-generated content. Free.
+- [Outcome Engineer](https://biggerfish.io/outcome-engineer.html) — Automated review routing for independent restaurants. Positive feedback routes to Google; negative stays private.
+- [Turingyde](https://turingyde.com) — Local-first, subscription-free CRM. Data lives on your device.
+
+## Engagement models
+
+**Project Build** — Fixed scope, fixed fee. We map, build, test, and hand you the keys. You own the code.
+
+**Retained Operations** — Monthly retainer. We run and grow the system. Three tiers: Operator ($X/mo), Fabricator ($X/mo), Architect ($X/mo).
+
+See [terms-conditions.html](https://biggerfish.io/terms-conditions.html) for full details.
+
+## Contact
+
+- Email: info@biggerfish.io
+- [Drop us a line](https://deftpcdacdt.typeform.com/to/XYvx5lZI)
+- Location: Kennebunk, Maine — 43°22'N 070°33'W
