@@ -223,4 +223,29 @@
     .nav-link {
         font-size: 13px;
     }
+
+    /* Dropdown unfolds inline inside the mobile menu; the hover panel
+       is absolutely positioned off a left-edge item and clips off-screen. */
+    .nav-item-dropdown {
+        width: 100%;
+    }
+
+    .nav-dropdown-content {
+        display: block;
+        position: static;
+        transform: none;
+        min-width: 0;
+        margin-top: 12px;
+        border: none;
+        border-left: 1px solid var(--border-dim);
+    }
+
+    .nav-dropdown-content::before {
+        display: none;
+    }
+
+    .dropdown-link {
+        padding: 12px 18px;
+        border-bottom: none;
+    }
 }
