@@ -885,6 +885,72 @@
     flex: 1;
 }
 
+/* Sequential engagement tiers: one row per step, joined by a vertical rule */
+.pricing-steps {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    position: relative;
+}
+
+.pricing-steps::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: var(--signal);
+    opacity: 0.4;
+}
+
+.pricing-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    padding: 32px 32px 32px 48px;
+    margin-left: 0;
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+}
+
+.pricing-step + .pricing-step {
+    margin-top: 16px;
+}
+
+.pricing-step::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 38px;
+    width: 9px;
+    height: 9px;
+    background: var(--signal);
+}
+
+.pricing-step-label {
+    display: block;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 10px;
+}
+
+.pricing-step .pricing-step-head h3 {
+    min-height: 0;
+}
+
+.pricing-step .pricing-cost {
+    margin-bottom: 0;
+}
+
+.pricing-step .pricing-details {
+    margin: 0;
+}
+
 .overview-cta {
     text-align: center;
     margin-top: 56px;
@@ -1025,6 +1091,16 @@
 
     .pricing-cards-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pricing-step {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 24px 20px 24px 40px;
+    }
+
+    .pricing-step .pricing-cost {
+        font-size: 1.15rem;
     }
 
     .captain-rings {
