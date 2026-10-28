@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-slop | Bigger Fish</title>
+    <meta name="description" content="D-slop is a Chrome extension that detects and highlights AI-generated content on any webpage. Highlight it. Hide it. Know what's real.">
+    <link rel="canonical" href="https://biggerfish.io/d-slop.html">
+    <meta property="og:title" content="D-slop | Bigger Fish">
+    <meta property="og:description" content="D-slop is a Chrome extension that detects and highlights AI-generated content on any webpage. Highlight it. Hide it. Know what's real.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://biggerfish.io/d-slop.html">
+    <meta property="og:image" content="https://biggerfish.io/images/webclip.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="D-slop | Bigger Fish">
+    <meta name="twitter:description" content="D-slop is a Chrome extension that detects and highlights AI-generated content on any webpage. Highlight it. Hide it. Know what's real.">
+    <link href="css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="css/webflow.css" rel="stylesheet" type="text/css">
+    <link href="css/redesign.css?v=4.0" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="images/webclip.png" rel="apple-touch-icon">
+</head>
+
+<body class="deep-water">
+    <nav class="header">
+        <a href="index.html" class="header-brand">
+            <img src="images/biggerfish-logo.png" loading="lazy" width="48" alt="Bigger Fish Logo" class="brand-logo">
+            <div class="brand-text">
+                <div class="brand-name">Bigger Fish Intelligent Automation</div>
+            </div>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="index.html#why" class="nav-link">Why</a></li>
+            <li><a href="index.html#how" class="nav-link">How</a></li>
+            <li class="nav-item-dropdown">
+                <a href="index.html#what" class="nav-link">What</a>
+                <div class="nav-dropdown-content">
+                    <a href="index.html#what" class="dropdown-link outcome">Custom Web Applications</a>
+                    <a href="https://turingale.com" class="dropdown-link" target="_blank" rel="noopener noreferrer">
+                        <span class="dropdown-name">Turingale</span>
+                        <span class="dropdown-desc">Voice to CRM from your phone</span>
+                    </a>
+                    <a href="https://turingram.com/" class="dropdown-link" target="_blank" rel="noopener noreferrer">
+                        <span class="dropdown-name">Turingram</span>
+                        <span class="dropdown-desc">Meeting notes, no bot in the call</span>
+                    </a>
+                    <a href="https://turingyde.com" class="dropdown-link" target="_blank" rel="noopener noreferrer">
+                        <span class="dropdown-name">Turingyde</span>
+                        <span class="dropdown-desc">Local-first, subscription-free CRM</span>
+                    </a>
+                    <a href="https://chromewebstore.google.com/detail/d-slop/cnjeckkgbjgfledbphbobjabnfjnheef" class="dropdown-link" target="_blank" rel="noopener noreferrer">
+                        <span class="dropdown-name">D-slop</span>
+                        <span class="dropdown-desc">Highlight or hide gen-AI content</span>
+                    </a>
+                    <a href="outcome-engineer.html" class="dropdown-link">
+                        <span class="dropdown-name">Outcome Engineer</span>
+                        <span class="dropdown-desc">Restaurant review curation service</span>
+                    </a>
+                    <a href="private-ai.html" class="dropdown-link">
+                        <span class="dropdown-name">Private AI</span>
+                        <span class="dropdown-desc">Self-hosted AI on hardware you own</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="who.html" class="nav-link">Who</a></li>
+            <li><a href="https://deftpcdacdt.typeform.com/to/XYvx5lZI?utm_source=header" class="nav-cta" target="_blank"
+                    rel="noopener noreferrer">Drop us a line</a></li>
+        </ul>
+    </nav>
+
+    <main class="system-overview-container">
+
+        <section class="overview-plate">
+            <span class="reality-plate-notch">Plate / D-slop</span>
+            <span class="reality-plate-rev">Rev. B. 2026.05</span>
+
+            <header class="overview-header">
+                <h1>D-slop</h1>
+                <p class="subhead">A browser extension for reclaiming the pre-slop internet.</p>
+            </header>
+
+            <section class="overview-section">
+                <h2>1. What it is</h2>
+                <p>The web filled up with AI-generated text somewhere around 2023. Most of it sounds the same: confident, polished, and completely hollow.</p>
+                <p>D-slop is a browser extension that detects it and lets you choose what to do with it. Flag it with a colored border. Fold it out of view. Remove it from the page entirely.</p>
+                <p>The check runs locally. Nothing leaves your browser. No account, no telemetry, no tracking.</p>
+                <p>This is a free, open-source tool. A donation to humanity. Pre-slop internet, on demand.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>2. How detection works</h2>
+                <p>The extension scores each text block of 50 words or more against five signals. The individual scores combine into a confidence reading. Anything that clears the threshold gets flagged.</p>
+
+                <ol class="workflow-steps-list">
+                    <li><strong>Phrase matching.</strong> Known AI verbal tics tracked as a list: "delve into", "it's worth noting", "tapestry of", "as an AI language model", "in conclusion". Hundreds of entries, updated by an autonomous agent.</li>
+                    <li><strong>Burstiness.</strong> AI prose is unnaturally uniform in sentence length. Real writing varies.</li>
+                    <li><strong>Punctuation density.</strong> Overuse of em dashes, semicolons, and parallel comma structures characteristic of LLM output.</li>
+                    <li><strong>List uniformity.</strong> Bulleted and numbered lists where every item lands within 10% of the mean length. Human lists don't do that.</li>
+                    <li><strong>Conclusion markers.</strong> Structural tells: "In conclusion", "To summarize", standalone TL;DR sections.</li>
+                </ol>
+
+                <p>Scoring is a pure function. Same text, same rules, same result every time. Not 100% reliable, and that's stated plainly. The goal is catching the obvious majority, not building a forensic tool.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>3. Display modes</h2>
+                <p>Three modes, selectable in the extension popup. The choice applies across every page.</p>
+
+                <ol class="workflow-steps-list">
+                    <li><strong>Highlight.</strong> A colored border and a confidence score badge appear on flagged blocks. All content stays visible. Default mode for new installs.</li>
+                    <li><strong>Collapse.</strong> Flagged blocks fold to a single disclosure line: "likely AI-generated, click to reveal." The content is still there. You just choose whether to read it.</li>
+                    <li><strong>Hidden.</strong> A full-page overlay fires before the page renders, showing how many blocks were flagged and a short countdown. A "Show anyway" button lets you through immediately if you want. The overlay clears on its own when the timer runs out.</li>
+                </ol>
+
+                <p>A global toggle in the popup turns the extension fully off. In that state, zero DOM modification happens and pages render completely untouched.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>4. How rules stay current</h2>
+                <p>Detection phrase lists go stale as AI models evolve. D-slop solves this without requiring a store update for every rule change.</p>
+                <p>An autonomous agent (GitHub Actions and Claude) runs every week against a curated test corpus of AI-generated samples. It tunes phrase lists, signal weights, and detection thresholds. Any proposed change must clear a minimum accuracy check against the corpus before it ships. The extension fetches the latest rules once a day, so new rules reach your browser within 24 hours of any agent push.</p>
+                <p>All agent runs are logged to the public repository. The corpus is open. If you find a miss or a false positive, file a labeled GitHub Issue and the agent will incorporate it on the next run.</p>
+            </section>
+
+            <section class="overview-section">
+                <h2>5. Privacy</h2>
+                <p>No account. No telemetry. No analytics.</p>
+                <p>All text scoring runs inside your browser on your machine. The extension makes one outbound request: a small daily fetch of the rules file from a private endpoint. That is the complete data footprint.</p>
+            </section>
+
+            <div class="stamp-row">
+                <div class="stamp-signature">Drawn 2026 / J. Fischer / Operator</div>
+                <a href="https://github.com/jared-the-automator/d-slop/releases/latest" class="cta-engineer" target="_blank"
+                    rel="noopener noreferrer" onclick="window.open(this.href, '_blank'); return false;">Install D-slop</a>
+            </div>
+        </section>
+
+        <div class="title-block" aria-hidden="true">
+            <div class="title-block-row">
+                <div class="label">Project</div>
+                <div class="value">D-slop</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Sheet</div>
+                <div class="value">DS-01 / Concept brief</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Revision</div>
+                <div class="value">A. 2026.05</div>
+            </div>
+            <div class="title-block-row">
+                <div class="label">Drawn by</div>
+                <div class="value">Bigger Fish, studio of one</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="index.html" class="footer-brand" style="text-decoration: none;">
+                <div class="footer-company">Bigger Fish Intelligent Automation</div>
+                <div class="footer-tagline">You've got bigger fish to fry.</div>
+            </a>
+            <div class="footer-links">
+                <a href="login.html" class="footer-link">Client Login</a>
+                <span class="footer-separator">/</span>
+                <a href="privacy-policy.html" class="footer-link">Privacy</a>
+                <span class="footer-separator">/</span>
+                <a href="terms-conditions.html" class="footer-link">Terms</a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            Copyright 2026 / Bigger Fish Intelligent Automation
+        </div>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

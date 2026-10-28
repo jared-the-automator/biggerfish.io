@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run on pages with blueprint-grid
     if (!document.body.classList.contains('blueprint-grid')) return;
 
-    const gridSize = 30; // Must match CSS
+    const gridSize = 32; // Must match CSS background-size
 
     // Create Highlight Element
     const highlight = document.createElement('div');
@@ -70,33 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 4. Alignment Logic
-        // Find the background context (Section or Body) to snap correctly
-        const section = target.closest('section, .hero-section, .snap-section, footer, header, .header, .navbar');
+        // Grid background is on body (background-position: -1px -1px, background-size: 32px 32px)
+        // Snap directly in absolute page coordinates so the phase is consistent across all sections
+        const snapX = Math.floor((e.pageX + 1) / gridSize) * gridSize - 1;
+        const snapY = Math.floor((e.pageY + 1) / gridSize) * gridSize - 1;
 
-        let originX = 0;
-        let originY = 0;
-
-        if (section) {
-            const rect = section.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            originY = rect.top + scrollTop;
-            originX = rect.left + scrollLeft;
-        }
-
-        // Calculate relative position to the origin
-        const relX = e.pageX - originX;
-        const relY = e.pageY - originY;
-
-        // Snap relative coord
-        const snapRelX = Math.floor(relX / gridSize) * gridSize;
-        const snapRelY = Math.floor(relY / gridSize) * gridSize;
-
-        // Convert back to absolute page coord
-        const finalX = originX + snapRelX;
-        const finalY = originY + snapRelY;
-
-        highlight.style.transform = `translate(${finalX}px, ${finalY}px)`;
+        highlight.style.transform = `translate(${snapX}px, ${snapY}px)`;
     });
 
     // Optional: Hide if mouse leaves window

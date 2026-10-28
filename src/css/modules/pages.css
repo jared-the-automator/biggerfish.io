@@ -1,811 +1,1110 @@
-/* Page Specific Styles */
+/* Deep Water — Page Sections */
 
-/* Hero Section */
+/* ========================================================================
+   Hero — full sonar treatment
+   ======================================================================== */
+
 .hero-section {
-    background-color: var(--white);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    padding: 0;
-}
-
-.hero-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.hero-text-side {
-    padding: 8rem 4rem;
+    padding: 80px 2rem 72px;
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+
+.hero-section .section-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
     z-index: 2;
 }
 
+/* Sonar rings — positioned behind hero content */
+.sonar-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 900px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sonar-rings svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Hero text */
+.hero-signal {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: rgba(159, 252, 223, 0.68);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@keyframes ping-pulse {
+    0%, 100% { box-shadow: 0 0 8px var(--ping), 0 0 18px rgba(159, 252, 223, 0.3); }
+    50% { box-shadow: 0 0 14px var(--ping), 0 0 36px rgba(159, 252, 223, 0.5); }
+}
+
+.ping-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ping);
+    box-shadow: 0 0 10px var(--ping), 0 0 20px rgba(159, 252, 223, 0.4);
+    flex-shrink: 0;
+    animation: ping-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sonar-ring {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.22; }
+}
+
+.ping-ring {
+    animation: sonar-ring 4.5s ease-in-out infinite;
+}
+
 .hero-title {
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: 1rem;
-    color: var(--black-green);
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--surface-text);
 }
 
 .hero-tagline {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 400;
-    color: var(--teal-blue);
-    margin-bottom: 2rem;
     font-style: italic;
+    color: var(--ping);
+    margin: 0 0 28px;
+    line-height: 1.4;
 }
 
 .hero-subhead {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: #555;
-    max-width: 600px;
-    margin-bottom: 3rem;
-}
-
-.hero-visual-side {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    min-height: 50vh;
-}
-
-.visual-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6rem;
-}
-
-.hero-image {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    max-height: 600px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    max-width: 52ch;
+    margin: 0 auto 40px;
 }
 
 .hero-cta {
-    align-self: flex-start;
-    padding: 1rem 40px !important;
-    width: auto !important;
     display: inline-block;
 }
 
-/* Reality Section */
-.reality-section {
-    background-color: var(--deep-purple);
-    color: var(--white);
+/* ========================================================================
+   Why — clean container, pain cards
+   ======================================================================== */
+
+.pain-section {
+    padding: 3rem 2rem;
 }
 
-.reality-cards {
+.pain-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 4rem;
+    gap: 1px;
+    background: var(--border-dim);
+    border: 1px solid var(--border-dim);
+    margin-top: 0;
 }
 
-.reality-card {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 4px;
-    color: var(--black-green);
-    transition: transform 0.3s ease;
+.pain-card {
+    background: var(--abyss);
+    padding: 36px 32px;
+    position: relative;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.reality-card:hover {
-    transform: translateY(-5px);
+.pain-card:hover {
+    background: var(--deep);
+    box-shadow: inset 3px 0 0 var(--signal);
 }
 
-.card-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--deep-purple);
-}
-
-.card-concept {
+.pain-card-id {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--signal-soft);
+    margin-bottom: 16px;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    color: var(--teal-blue);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
 }
 
-.card-copy {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #444;
+.pain-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--surface-text);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 }
 
-/* How Section */
+.pain-card-body {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    margin: 0;
+}
+
+/* ========================================================================
+   How — engagement cards
+   ======================================================================== */
+
 .how-section {
-    background-color: #f4f4f4;
+    padding: 3rem 2rem;
 }
 
-.how-subhead {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--teal-blue);
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-.how-three-column {
+.engagement-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.how-philosophy {
-    text-align: center;
-}
-
-.how-body {
-    font-size: 1.3rem;
-    line-height: 1.7;
-    color: #555;
-    font-weight: 500;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 0;
 }
 
 .engagement-card {
-    background: var(--white);
-    border: 2px solid var(--teal-blue);
-    padding: 2.5rem 2rem;
-    border-radius: 4px;
-    text-align: center;
-    height: 100%;
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    padding: 40px 36px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transition: all 0.3s;
+    transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .engagement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(28, 110, 140, 0.2);
+    border-color: rgba(122, 198, 230, 0.45);
+    background: #080F17;
 }
 
-.centered-title {
-    text-align: center;
-    margin-left: 5%;
-    display: block;
-    margin-bottom: 5rem;
-}
-
-.card-icon {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    width: 100px;
-    height: 100px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: transparent;
-}
-
-.card-project-build .card-icon {
-    background: var(--deep-purple);
-    text-shadow: 0 0 0 var(--mint-green);
-}
-
-.card-project-build .engagement-title {
-    background: var(--mint-green);
-    color: var(--deep-purple);
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
-}
-
-.card-digital-foreman .card-icon {
-    background: var(--mint-green);
-    text-shadow: 0 0 0 var(--deep-purple);
-}
-
-.card-digital-foreman .engagement-title {
-    background: var(--deep-purple);
-    color: var(--mint-green);
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
+.engagement-num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--signal-soft);
+    margin-bottom: 16px;
+    text-transform: uppercase;
 }
 
 .engagement-title {
-    font-size: 1.75rem;
+    font-family: 'Outfit', sans-serif;
     font-weight: 700;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: var(--surface-text);
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
 }
 
-.engagement-copy {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
+.engagement-body {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    margin: 0 0 24px;
+    flex-grow: 1;
 }
 
-/* Solution Section */
+.engagement-meta {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--signal);
+    text-transform: uppercase;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-dim);
+    margin-top: auto;
+}
+
+/* ========================================================================
+   What — command modules (keep structure, update palette)
+   ======================================================================== */
+
 .solution-section {
-    background-color: var(--teal-blue);
-    color: var(--white);
-}
-
-.solution-section .section-title {
-    color: var(--white);
-}
-
-.solution-section .section-intro {
-    color: rgba(255, 255, 255, 0.9);
+    padding: 3rem 2rem;
 }
 
 .command-center-grid {
     display: flex;
     flex-direction: column;
-    gap: 6rem;
+    gap: 56px;
+    margin-top: 48px;
 }
 
 .command-module {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 48px;
     align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-dim);
+}
+
+.command-module:first-child {
+    padding-top: 0;
+    border-top: none;
 }
 
 .command-module.reverse {
     direction: rtl;
 }
 
-.command-module.reverse>* {
+.command-module.reverse > * {
     direction: ltr;
 }
 
+.module-text .module-num {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--signal-soft);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+}
+
 .module-text h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--mint-green);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--surface-text);
+    letter-spacing: -0.01em;
 }
 
 .module-text p {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    margin: 0;
+    max-width: 44ch;
 }
 
 .module-visual {
-    background: var(--white);
-    border: 4px solid var(--black-green);
-    height: 300px;
+    background: var(--deep);
+    border: 1px solid var(--border-dim);
+    height: 280px;
     position: relative;
-    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-/* Visual Subclasses */
-.softr-visual .mockup-header {
-    background: var(--deep-purple);
-    color: white;
-    padding: 0.5rem 1rem;
-}
-
-.softr-visual .mockup-body {
-    flex: 1;
-    background: linear-gradient(to bottom, #eee 1px, transparent 1px);
-    background-size: 100% 20px;
-}
-
-.airtable-visual .mockup-grid {
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(#ccc 1px, transparent 1px), linear-gradient(90deg, #ccc 1px, transparent 1px);
-    background-size: 30px 30px;
-}
-
-.make-visual {
-    background: #f9f9f9;
-}
-
-.make-visual .mockup-bubbles {
-    width: 50px;
-    height: 50px;
-    background: var(--deep-purple);
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    box-shadow: 60px 0 0 var(--teal-blue), 120px 0 0 var(--mint-green);
-}
-
-.video-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: var(--black-green);
-}
-
-.visual-video {
+.module-visual img,
+.module-visual .visual-image,
+.module-visual .visual-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 85% center;
     display: block;
+    filter: saturate(0.8) brightness(0.9);
 }
 
-/* Offer Section */
+/* ========================================================================
+   Diagnostic / Offer
+   ======================================================================== */
+
 .offer-section {
-    background-color: var(--black-green);
-    color: var(--white);
+    padding: 3rem 2rem 5rem;
 }
 
 .offer-layout {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 4rem;
+    gap: 56px;
     align-items: center;
+    margin-top: 32px;
 }
 
 .offer-visual img {
     width: 100%;
     height: auto;
-    border: 4px solid var(--white);
-    background: var(--teal-blue);
-}
-
-.offer-text h2 {
-    color: var(--mint-green);
+    border: 1px solid var(--border-dim);
+    background: var(--deep);
+    filter: saturate(0.7) brightness(0.9);
+    display: block;
 }
 
 .offer-copy {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: var(--light-gray);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0 0 32px;
+    color: var(--depth-text);
+    max-width: 42ch;
 }
 
-/* Outcome Engineer Page */
-.outcome-container {
-    max-width: 900px;
-    width: 90%;
-    margin: 120px auto 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-    position: relative;
-    z-index: 10;
+/* ========================================================================
+   Who page — Captain plate (full sonar treatment)
+   ======================================================================== */
+
+.captain-section {
     flex: 1;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.outcome-image {
+.captain-rings {
+    position: absolute;
+    top: 50%;
+    left: -200px;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.captain-rings svg {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    border: 2px solid #9FFCDF;
-    box-shadow: 0 0 20px rgba(159, 252, 223, 0.2);
+    height: 100%;
 }
 
-.outcome-block {
-    background-color: rgba(31, 39, 27, 0.95);
-    border: 1px solid #1C6E8C;
-    padding: 3rem;
-    color: #fff;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.outcome-block h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #fff;
-}
-
-.cta-engineer {
-    display: inline-block;
-    background: #9FFCDF;
-    color: #000;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 1.2rem 3rem;
-    text-decoration: none;
-    border-radius: 4px;
-    border: 2px solid #9FFCDF;
-}
-
-.cta-engineer:hover {
-    background: transparent;
-    color: #9FFCDF;
-    box-shadow: 0 4px 15px rgba(159, 252, 223, 0.2);
-}
-
-/* And all the Spec Sheet stuff (truncated for brevity but I should include if I want to preserve site) */
-/* ... Spec Sheet ... */
-.spec-sheet-container {
-    max-width: 1000px;
-    margin: 120px auto 60px;
-    padding: 0 2rem;
-    flex: 1;
-}
-
-.spec-header h1 {
-    color: #fff;
-    font-size: 2.5rem;
-}
-
-.spec-grid {
+.captain-plate {
+    background: var(--deep);
+    border: 1px solid var(--border-dim);
+    padding: 72px 80px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-}
-
-.spec-col h3 {
-    color: #fff;
-    font-size: 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.spec-footer-cta {
-    margin-top: 6rem;
-    padding: 4rem;
-    background: rgba(28, 110, 140, 0.05);
-    text-align: center;
-    border: 1px solid rgba(28, 110, 140, 0.2);
-}
-
-/* Who Page */
-.who-container {
-    max-width: 1000px;
-    margin: 100px auto 0;
-    display: flex;
-    gap: 60px;
-    align-items: flex-start;
-    padding: 20px;
+    grid-template-columns: 300px 1fr;
+    gap: 64px;
+    align-items: start;
     position: relative;
-    z-index: 10;
-    flex: 1;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .polaroid-frame {
-    background: white;
-    padding: 15px 15px 60px 15px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
-    transform: rotate(-2deg);
+    background: var(--deep);
+    padding: 12px 12px 52px;
     width: 100%;
-    max-width: 350px;
-    margin-top: 5rem;
+    max-width: 300px;
+    position: relative;
+    border: 1px solid var(--border-subtle);
 }
 
-.polaroid-frame img {
+.polaroid-image {
     width: 100%;
     display: block;
+    filter: saturate(0.7) brightness(0.9);
 }
 
 .polaroid-caption {
     position: absolute;
-    bottom: 20px;
+    bottom: 16px;
     left: 0;
     width: 100%;
     text-align: center;
-    font-family: 'Outfit', sans-serif;
-    color: black;
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--chart);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
 .dossier-section {
     flex: 1;
 }
 
+@keyframes dossier-sweep {
+    0%, 15%  { background-position: 160% center; }
+    85%, 100% { background-position: -60% center; }
+}
+
 .dossier-title {
-    background: linear-gradient(90deg, #9ffcdf 0%, #0087ca 25%, #540D6E 50%, #0087ca 75%, #9ffcdf 100%);
-    background-size: 200% auto;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+    margin: 0 0 24px;
+    background: linear-gradient(
+        90deg,
+        var(--surface-text) 30%,
+        rgba(159, 252, 223, 0.95) 50%,
+        var(--surface-text) 70%
+    );
+    background-size: 260% auto;
+    background-position: 160% center;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 10s linear infinite;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1.5rem;
-    font-size: 2.5rem;
-    line-height: 1.1;
-    font-weight: 800;
+    animation: dossier-sweep 8s ease-in-out infinite;
+    animation-delay: 1.2s;
+}
+
+.dossier-rule {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--signal);
+    margin-bottom: 28px;
 }
 
 .dossier-text {
-    color: #E2E8F0;
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-family: 'Outfit', sans-serif;
+    color: var(--depth-text);
+    font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 .dossier-text p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--depth-text);
 }
 
-/* Legal Pages */
+/* Captain title block (lower right) */
+.captain-log {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 0 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.captain-log-entry {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--chart);
+    text-align: right;
+    line-height: 1.8;
+    text-transform: uppercase;
+}
+
+/* ========================================================================
+   Login
+   ======================================================================== */
+
+.login-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-plate {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--deep);
+    border: 1px solid var(--border-subtle);
+    padding: 56px 48px;
+}
+
+.login-header {
+    text-align: left;
+    margin-bottom: 32px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.login-header h1 {
+    color: var(--surface-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    margin: 0 0 6px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.login-header p {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    color: var(--signal);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    color: var(--signal);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    background: var(--abyss);
+    border: 1px solid var(--border-subtle);
+    color: var(--surface-text);
+    padding: 12px 14px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--signal);
+}
+
+.auth-button {
+    width: 100%;
+    background: transparent;
+    color: var(--signal);
+    border: 1px solid var(--signal);
+    padding: 16px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    cursor: pointer;
+    transition: background 0.22s ease, color 0.22s ease;
+    margin-top: 8px;
+}
+
+.auth-button:hover {
+    background: var(--signal);
+    color: var(--abyss);
+}
+
+.auth-button:disabled {
+    border-color: var(--chart);
+    color: var(--chart);
+    cursor: not-allowed;
+    background: transparent;
+}
+
+.error-message {
+    color: #e05a4a;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 18px;
+    min-height: 1.35em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.error-message.visible {
+    opacity: 1;
+}
+
+.forgot-link {
+    display: block;
+    margin-top: 24px;
+    color: var(--chart);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: var(--signal);
+}
+
+/* ========================================================================
+   Legal pages
+   ======================================================================== */
+
 .legal-container {
-    background: #fff;
-    max-width: 800px;
-    width: 90%;
-    margin: 120px auto 60px;
-    padding: 60px;
-    border-top: 5px solid #1C6E8C;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 56px auto 56px;
+    padding: 0 56px;
+}
+
+.legal-plate {
+    position: relative;
+    border: 1px solid var(--border-dim);
+    padding: 64px;
+    background: var(--deep);
+}
+
+.legal-container h1,
+.legal-container h2,
+.legal-container h3 {
+    color: var(--surface-text);
+    font-family: 'Outfit', sans-serif;
+}
+
+.legal-container h1 {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    margin: 0 0 8px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.legal-container h2 {
+    font-size: 1.25rem;
+    margin: 32px 0 12px;
+    color: var(--signal);
+    font-weight: 700;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.legal-container h3 {
+    font-size: 1.05rem;
+    margin: 24px 0 10px;
+    color: var(--surface-text);
+    font-weight: 700;
+}
+
+.legal-container .subhead {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--signal);
+    text-transform: uppercase;
+    margin: 0 0 32px;
+    display: block;
+}
+
+.legal-container p,
+.legal-container li {
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.legal-container strong {
+    color: var(--surface-text);
+    font-weight: 600;
+}
+
+.legal-container ul {
+    padding-left: 22px;
+    margin: 12px 0;
+}
+
+.legal-container li {
+    margin-bottom: 10px;
+}
+
+.legal-container a {
+    color: var(--signal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.legal-container a:hover {
+    color: var(--surface-text);
+    border-color: var(--surface-text);
+}
+
+.legal-section {
+    margin-bottom: 32px;
+}
+
+/* ========================================================================
+   Outcome Engineer / System Overview
+   ======================================================================== */
+
+.system-overview-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 56px auto 0;
+    padding: 0 56px;
+}
+
+.overview-plate {
+    position: relative;
+    border: 1px solid var(--border-dim);
+    padding: 72px 64px;
+    background: var(--deep);
+}
+
+.system-overview-container h1,
+.system-overview-container h2,
+.system-overview-container h3 {
+    color: var(--surface-text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.system-overview-container h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 12px;
+    font-weight: 800;
+}
+
+.system-overview-container p,
+.system-overview-container li {
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.system-overview-container strong {
+    color: var(--surface-text);
+    font-weight: 600;
+}
+
+.overview-header {
+    margin-bottom: 48px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.overview-header .subhead {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    color: var(--depth-text);
+    margin: 8px 0 0;
+    font-style: italic;
+}
+
+.overview-section {
+    margin-bottom: 48px;
+}
+
+.overview-section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-dim);
+    color: var(--signal);
+}
+
+.workflow-image {
+    width: 100%;
+    margin: 24px 0;
+    border: 1px solid var(--border-dim);
+    background: var(--deep);
+    display: block;
+    filter: saturate(0.8);
+}
+
+.workflow-steps-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+    counter-reset: step;
+}
+
+.workflow-steps-list li {
+    margin-bottom: 18px;
+    padding: 16px 20px 16px 64px;
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    counter-increment: step;
+    position: relative;
+}
+
+.workflow-steps-list li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--signal);
+}
+
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.system-overview-container .pricing-card {
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card h3 {
+    color: var(--surface-text);
+    font-size: 1.1rem;
+    margin: 0 0 12px;
+    min-height: 3rem;
+    line-height: 1.25;
+}
+
+.pricing-cost {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 1.4rem;
+    color: var(--signal);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 18px;
+    line-height: 1.3;
+}
+
+.pricing-details {
+    color: var(--depth-text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.65;
     flex: 1;
 }
 
-/* Responsive Pages */
-@media (max-width: 900px) {
+/* Sequential engagement tiers: one row per step, joined by a vertical rule */
+.pricing-steps {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    position: relative;
+}
 
-    .hero-split,
-    .reality-cards,
-    .how-three-column,
-    .command-module,
-    .offer-layout,
-    .spec-grid,
-    .who-container {
-        grid-template-columns: 1fr;
-        flex-direction: column;
-        gap: 3rem;
+.pricing-steps::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: var(--signal);
+    opacity: 0.4;
+}
+
+.pricing-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    padding: 32px 32px 32px 48px;
+    margin-left: 0;
+    background: var(--abyss);
+    border: 1px solid var(--border-dim);
+}
+
+.pricing-step + .pricing-step {
+    margin-top: 16px;
+}
+
+.pricing-step::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 38px;
+    width: 9px;
+    height: 9px;
+    background: var(--signal);
+}
+
+.pricing-step-label {
+    display: block;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 10px;
+}
+
+.pricing-step .pricing-step-head h3 {
+    min-height: 0;
+}
+
+.pricing-step .pricing-cost {
+    margin-bottom: 0;
+}
+
+.pricing-step .pricing-details {
+    margin: 0;
+}
+
+.overview-cta {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-dim);
+}
+
+.cta-engineer {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--signal);
+    background: transparent;
+    padding: 16px 32px;
+    text-decoration: none;
+    border: 1px solid var(--signal);
+    transition: background 0.22s ease, color 0.22s ease;
+}
+
+.cta-engineer:hover {
+    background: var(--signal);
+    color: var(--abyss);
+}
+
+/* ========================================================================
+   Section container — subtle scanline texture
+   ======================================================================== */
+
+.section-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(122, 198, 230, 0.006) 3px,
+        rgba(122, 198, 230, 0.006) 4px
+    );
+    border-radius: inherit;
+    z-index: 0;
+}
+
+.section-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================================================
+   Reveal animations (IntersectionObserver-driven)
+   ======================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+    .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
-    .hero-text-side {
-        padding: 6rem 2rem 0;
+    .reveal.visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ========================================================================
+   Mobile responsive
+   ======================================================================== */
+
+@media (max-width: 900px) {
+    .hero-section {
+        padding: 60px 1.25rem 56px;
+        min-height: auto;
+    }
+
+    .sonar-rings {
+        width: 500px;
+        height: 500px;
+        opacity: 0.4;
+    }
+
+    .hero-section .section-content {
+        text-align: left;
+    }
+
+    .hero-signal {
+        justify-content: flex-start;
+    }
+
+    .hero-subhead {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .pain-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .engagement-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .captain-plate {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 24px;
+    }
+
+    .command-module {
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
 
     .command-module.reverse {
         direction: ltr;
-        flex-direction: column;
     }
 
-    .who-container {
-        margin-top: 60px;
+    .offer-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
-}
-/* System Overview (Outcome Engineer) */
-.system-overview-container {
-    max-width: 900px;
-    margin: 120px auto 60px;
-    padding: 0 2rem;
-    flex: 1;
-}
 
-.system-overview-container h1,
-.system-overview-container h2,
-.system-overview-container h3 {
-    color: #9FFCDF;
-    font-weight: 700;
-}
+    .system-overview-container,
+    .legal-container,
+    .login-container {
+        padding: 24px 20px;
+        margin-top: 24px;
+    }
 
-.system-overview-container h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-}
+    .overview-plate,
+    .legal-plate {
+        padding: 40px 24px;
+    }
 
-.system-overview-container p,
-.system-overview-container li {
-    color: #E0E0E0;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-.system-overview-container strong {
-    color: #FFFFFF;
-}
-
-.overview-header {
-    margin-bottom: 4rem;
-    border-left: 4px solid #9FFCDF;
-    padding-left: 2rem;
-}
-
-.overview-header .subhead {
-    font-size: 1.5rem;
-    color: #E0E0E0;
-    margin: 0;
-}
-
-.overview-section {
-    margin-bottom: 5rem;
-}
-
-.overview-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(159, 252, 223, 0.2);
-    padding-bottom: 0.5rem;
-}
-
-.workflow-image {
-    width: 100%;
-    margin: 2rem 0;
-    border: 1px solid rgba(159, 252, 223, 0.2);
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.workflow-steps-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 2rem;
-}
-
-.workflow-steps-list li {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-    border-left: 2px solid #9FFCDF;
-}
-
-.pricing-cards-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.system-overview-container .pricing-card {
-    background: rgba(31, 39, 27, 0.6);
-    border: 1px solid #1C6E8C;
-    padding: 2rem;
-    border-radius: 8px;
-}
-
-.pricing-card h3 {
-    color: #9FFCDF;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-}
-
-.pricing-cost {
-    font-size: 2rem;
-    color: #9FFCDF;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 1.5rem;
-    line-height: 1.3;
-}
-
-.pricing-details {
-    white-space: pre-line;
-    color: #E0E0E0;
-}
-
-.overview-cta {
-    text-align: center;
-    margin-top: 6rem;
-    margin-bottom: 4rem;
-}
-
-@media (max-width: 768px) {
     .pricing-cards-grid {
         grid-template-columns: 1fr;
     }
-}
 
-/* System Overview (Outcome Engineer) - Restored */
-.system-overview-container {
-    max-width: 900px;
-    margin: 120px auto 60px;
-    padding: 0 2rem;
-    flex: 1;
-}
-
-.system-overview-container h1,
-.system-overview-container h2,
-.system-overview-container h3 {
-    color: #9FFCDF;
-    font-weight: 700;
-}
-
-.system-overview-container h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-}
-
-.system-overview-container p,
-.system-overview-container li {
-    color: #E0E0E0;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-.system-overview-container strong {
-    color: #FFFFFF;
-}
-
-.overview-header {
-    margin-bottom: 4rem;
-    border-left: 4px solid #9FFCDF;
-    padding-left: 2rem;
-}
-
-.overview-header .subhead {
-    font-size: 1.5rem;
-    color: #E0E0E0;
-    margin: 0;
-}
-
-.overview-section {
-    margin-bottom: 5rem;
-}
-
-.overview-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(159, 252, 223, 0.2);
-    padding-bottom: 0.5rem;
-}
-
-.workflow-image {
-    width: 100%;
-    margin: 2rem 0;
-    border: 1px solid rgba(159, 252, 223, 0.2);
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.workflow-steps-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 2rem;
-}
-
-.workflow-steps-list li {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-    border-left: 2px solid #9FFCDF;
-}
-
-.pricing-cards-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.system-overview-container .pricing-card {
-    background: rgba(31, 39, 27, 0.6);
-    border: 1px solid #1C6E8C;
-    padding: 2rem;
-    border-radius: 8px;
-}
-
-.pricing-card h3 {
-    color: #9FFCDF;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-}
-
-.pricing-cost {
-    font-size: 2rem;
-    color: #9FFCDF;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 1.5rem;
-    line-height: 1.3;
-}
-
-.pricing-details {
-    white-space: pre-line;
-    color: #E0E0E0;
-}
-
-.overview-cta {
-    text-align: center;
-    margin-top: 6rem;
-    margin-bottom: 4rem;
-}
-
-@media (max-width: 768px) {
-    .pricing-cards-grid {
+    .pricing-step {
         grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 24px 20px 24px 40px;
+    }
+
+    .pricing-step .pricing-cost {
+        font-size: 1.15rem;
+    }
+
+    .captain-rings {
+        left: -350px;
+        opacity: 0.3;
     }
 }

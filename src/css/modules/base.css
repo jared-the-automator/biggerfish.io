@@ -1,10 +1,48 @@
+/* Deep Water — Foundation Tokens */
+
 :root {
-    --deep-purple: #540D6E;
-    --light-gray: #D0CCD0;
-    --mint-green: #9FFCDF;
-    --teal-blue: #1C6E8C;
-    --black-green: #1F271B;
-    --white: #FFFFFF;
+    --abyss: #06101A;
+    --deep: #0A1620;
+    --surface-text: #E8F4FC;
+    --depth-text: #7AAAC8;
+    --signal: #7AC6E6;
+    --signal-soft: rgba(122, 198, 230, 0.58);
+    --signal-fade: rgba(122, 198, 230, 0.1);
+    --ping: #9FFCDF;
+    --ping-soft: rgba(159, 252, 223, 0.12);
+    --trench: #540D6E;
+    --chart: #5A8AAA;
+    --border-dim: #0F2030;
+    --border-subtle: #1A2E40;
+
+    /* Legacy aliases for any straggling references */
+    --navy: var(--abyss);
+    --navy-deep: var(--deep);
+    --cyan-rule: var(--signal);
+    --cyan-soft: var(--signal-soft);
+    --cyan-fade: var(--signal-fade);
+    --mint-cursor: var(--ping);
+    --logo-purple: var(--trench);
+    --paper: var(--surface-text);
+    --paper-soft: var(--depth-text);
+    --pencil-grey: var(--chart);
+    --red-pencil: var(--signal);
+    --graphite: var(--deep);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
 }
 
 html {
@@ -14,7 +52,11 @@ html {
 
 body {
     margin: 0;
+    background-color: var(--abyss);
+    color: var(--depth-text);
     font-family: 'Outfit', sans-serif;
-    color: var(--black-green);
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
 }

@@ -1,47 +1,74 @@
-/* Typography System */
+/* Deep Water — Typography */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     margin-top: 0;
+    color: var(--surface-text);
+    letter-spacing: -0.01em;
 }
 
 p {
     font-family: 'Outfit', sans-serif;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
-    /* Fix for lost spacing */
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    line-height: 1.65;
+    color: var(--depth-text);
 }
 
 a {
-    font-family: 'Outfit', sans-serif;
-    transition: all 0.2s ease;
+    font-family: inherit;
+    color: var(--signal);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-/* Specific Classes */
+a:hover {
+    color: var(--surface-text);
+}
+
 .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     line-height: 1.1;
-    color: var(--black-green);
+    margin-bottom: 1.25rem;
+    color: var(--surface-text);
 }
 
-.section-title.text-white {
-    color: var(--white);
+.mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
-.section-intro {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
-    line-height: 1.6;
-    max-width: 800px;
-    margin-bottom: 3rem;
-    color: var(--black-green);
+/* Instrument label — CONTACT // SECTION // BRG 000° */
+.section-signal {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--signal-soft);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.section-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.9rem, 3.8vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--surface-text);
+    margin-bottom: 20px;
+}
+
+.section-lede {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--depth-text);
+    max-width: 62ch;
+    margin-bottom: 48px;
 }
